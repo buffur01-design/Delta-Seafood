@@ -1,15 +1,15 @@
 const articles = [
   {
-    published: "2026-06-24",
+    published: "2026-10-17",
     en: {
-      date: "24 June 2026",
+      date: "17 October 2026",
       title: "We are part of the fall market in Tvøroyri",
       image: "á heystimarknaðurin.jpg",
       alt: "Delta on the fall market in Tvøroyri",
       text: `<p> We are proud to be part of the fall market in Tvøroyri, where we showcase our products and connect with the locals and give them the opportunity to try our salted fish products.</p>`
     },
     fo: {
-      date: "24. juni 2026",
+      date: "17. oktobur 2026",
       title: "Vit luttaka á heystimarknaðinum á Tvøroyri",
       image: "á heystimarknaðurin.jpg",
       alt: "Framleiðsluvirkið hjá Delta Seafood",
