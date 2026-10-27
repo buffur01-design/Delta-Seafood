@@ -13,24 +13,26 @@ const articles = [
       title: "Vit luttaka á heystimarknaðinum á Tvøroyri",
       image: "á heystmarknaði.jpg",
       alt: "Framleiðsluvirkið hjá Delta Seafood",
-      text: `<p>Vit eru stolt at vera partur av heystmarknaðinum á Tvøroyri. Vit burturluta saltfiska vørur, og tað er møguligt at keypa saltfiska vørur.</p>`
+      text: `<p>Vit eru errin at vera partur av heystmarknaðinum á Tvøroyri. Vit burturluta saltfiska vørur, og tað er møguligt at keypa saltfiska vørur.</p>`
     }
   },
   {
-    published: "2026-05-10",
+    published: "2026-08-20",
     en: {
-      date: "10 May 2026",
-      title: "Salted fish products",
-      image: "salted-cod.png",
-      alt: "Salted cod products",
+      date: "20 August 2026",
+      title: "Minister of fisheries visits Delta Seafood",
+      image: "Bárður á steig vitjan.jpg",
+      alt: "Minister of fisheries visits Delta Seafood",
       text: `<p>Our salted fish products remain an important part of the Delta Seafood product range. The products are prepared with focus on quality, consistency, and customer requirements.</p><p>Delta Seafood produces different salted fish products for selected markets and customers.</p>`
     },
     fo: {
-      date: "10. mai 2026",
-      title: "Saltfiskaúrdráttir",
-      image: "salted-cod.png",
-      alt: "Saltfiskaúrdráttir",
-      text: `<p>Saltfiskaúrdráttirnir eru framvegis ein týðandi partur av vøruúrvalinum hjá Delta Seafood. Vørurnar verða framleiddar við denti á góðsku, støðufesti og ynskini hjá kundunum.</p><p>Delta Seafood framleiðir ymiskar saltfiskaúrdráttir til útvaldar marknaðir og kundar.</p>`
+      date: "20. august 2026",
+      title: "Landstýrismaðurin í fiskivinnumálum vitjar Delta Seafood",
+      image: "Bárður á steig vitjan.jpg",
+      alt: "Landstýrismaðurin í fiskivinnumálum vitjar Delta Seafood",
+      text: `<p>Í gjár høvdu okur vitjan av landsstýrismanninum Bárður á Steig Nielsen í uttanríkis-og fiskimálaráðnum við umsiting.
+Tosað bleiv um ymisk viðurskifti, sum kunnu geva meira virksemið á virkinum á Tvøroyri.
+Okur takka fyri vitjanina og fegnast um, at landsstýrismaðurin við umsiting kemur út til vinnuna. </p>`
     }
   },
   {
