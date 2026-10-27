@@ -3,17 +3,17 @@ const articles = [
     published: "2026-06-24",
     en: {
       date: "24 June 2026",
-      title: "Production facility update",
-      image: "delta-seafood-building.jpg",
-      alt: "Delta Seafood facility",
-      text: `<p>Delta Seafood continues to develop its production facilities in Tvøroyri. The company is focused on improving efficiency, quality, and capacity while maintaining strong links to the local community.</p><p>The facility plays an important role in processing high-quality seafood products for both local and international markets.</p>`
+      title: "We are part of the fall market in Tvøroyri",
+      image: "á heystimarknaðurin.jpg",
+      alt: "Delta on the fall market in Tvøroyri",
+      text: `<p> We are proud to be part of the fall market in Tvøroyri, where we showcase our products and connect with the locals and give them the opportunity to try our salted fish products.</p>`
     },
     fo: {
       date: "24. juni 2026",
-      title: "Dagføring um framleiðsluvirkið",
-      image: "delta-seafood-building.jpg",
+      title: "Vit luttaka á heystimarknaðinum á Tvøroyri",
+      image: "á heystimarknaðurin.jpg",
       alt: "Framleiðsluvirkið hjá Delta Seafood",
-      text: `<p>Delta Seafood heldur fram við at menna framleiðsluvirkið á Tvøroyri. Dentur verður lagdur á at betra um virkni, góðsku og framleiðsluorku, samstundis sum sterka tilknýtið til lokalsamfelagið verður varðveitt.</p><p>Virkið hevur ein týðandi leiklut í framleiðsluni av góðum fiskavørum til bæði føroyska og altjóða marknaðin.</p>`
+      text: `<p>Vit eru stolt at vera partur av heystmarknaðinum á Tvøroyri. Vit burturluta saltfiska vørur, og tað er møguligt at keypa saltfiska vørur.</p>`
     }
   },
   {
