@@ -120,6 +120,41 @@
       line-height:1.5;
     }
 
+    .home-hero{
+      position:relative;
+      margin:0 0 40px;
+      overflow:hidden;
+    }
+
+    .home-hero::after{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:linear-gradient(90deg, rgba(7,38,56,0.72) 0%, rgba(7,38,56,0.28) 48%, transparent 75%);
+      pointer-events:none;
+    }
+
+    .home-hero img{
+      width:100%;
+      height:auto;
+      display:block;
+    }
+
+    .home-hero h1{
+      position:absolute;
+      z-index:1;
+      left:clamp(24px, 6vw, 96px);
+      bottom:clamp(24px, 7vw, 100px);
+      max-width:52%;
+      margin:0;
+      color:white;
+      font-size:clamp(28px, 4vw, 58px);
+      line-height:1.12;
+      text-align:left;
+      text-wrap:balance;
+      text-shadow:0 3px 18px rgba(0,0,0,0.45);
+    }
+
     /* LATEST UPDATES / ARTICLES */
 
     .updates-section{
@@ -518,6 +553,20 @@
         font-size:22px;
       }
 
+      .home-hero::after{
+        background:linear-gradient(0deg, rgba(7,38,56,0.82) 0%, rgba(7,38,56,0.30) 62%, transparent 100%);
+      }
+
+      .home-hero h1{
+        left:50%;
+        bottom:clamp(18px, 6vw, 28px);
+        width:88%;
+        max-width:none;
+        transform:translateX(-50%);
+        font-size:clamp(20px, 6vw, 30px);
+        text-align:center;
+      }
+
       .updates-section{
         padding:0 25px;
         margin:20px auto 70px;
@@ -606,7 +655,10 @@
 
   <!-- FRONT PAGE CONTENT -->
 
-  <img src="Delta 2.png" alt="Delta Seafood" style="width:100%; height:auto; object-fit:contain; display:block; margin:0 0 40px;">
+  <section class="home-hero" aria-labelledby="heroTagline">
+    <img src="Delta 2.png" alt="Aerial view of Delta Seafood's facility in Tvøroyri">
+    <h1 id="heroTagline">Your supplier of fresh, frozen and salted seafood products</h1>
+  </section>
 
   <!-- LATEST UPDATES / ARTICLES -->
 
@@ -714,6 +766,12 @@
     const updatesGrid = document.querySelector(".updates-grid");
     const currentLanguage = localStorage.getItem("deltaLanguage") === "fo" ? "fo" : "en";
     const latestArticles = getArticlesNewestFirst(articles).slice(0, 3);
+    const heroTagline = document.getElementById("heroTagline");
+
+    heroTagline.textContent = currentLanguage === "fo"
+      ? "Tín veitari av feskum, frystum og saltaðum fiskavørum"
+      : "Your supplier of fresh, frozen and salted seafood products";
+    heroTagline.lang = currentLanguage;
 
     if(currentLanguage === "fo"){
       document.querySelector(".updates-section h2").textContent = "Nýggjastu tíðindi";
