@@ -752,7 +752,7 @@
 
   <!-- JAVASCRIPT FOR ARCHIVE POPUP -->
 
-  <script src="articles.js?v=2"></script>
+  <script src="articles.js?v=3"></script>
   <script>
     const archiveModal = document.getElementById("archiveModal");
     const archiveModalImage = document.getElementById("archiveModalImage");
@@ -762,7 +762,7 @@
     const archiveCloseBtn = document.querySelector(".archive-close-btn");
     const languageButtons = document.querySelectorAll(".language-switcher button");
     const archiveGrid = document.querySelector(".archive-grid");
-    const sortedArticles = [...articles].sort((a, b) => (b.published || "").localeCompare(a.published || ""));
+    const sortedArticles = getArticlesNewestFirst(articles);
 
     archiveGrid.innerHTML = sortedArticles.map(article => `
       <div class="archive-card">

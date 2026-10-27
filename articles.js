@@ -1,5 +1,6 @@
 const articles = [
   {
+    published: "2026-06-24",
     en: {
       date: "24 June 2026",
       title: "Production facility update",
@@ -16,6 +17,7 @@ const articles = [
     }
   },
   {
+    published: "2026-05-10",
     en: {
       date: "10 May 2026",
       title: "Salted fish products",
@@ -32,6 +34,7 @@ const articles = [
     }
   },
   {
+    published: "2026-04-01",
     en: {
       date: "1 April 2026",
       title: "We are attending Seafood Expo Global 2026 in Barcelona",
@@ -48,6 +51,7 @@ const articles = [
     }
   },
   {
+    published: "2025-08-20",
     en: {
       date: "20 August 2025",
       title: "Fridgerd Mortensen work anniversary",
@@ -64,6 +68,7 @@ const articles = [
     }
   },
   {
+    published: "2025-08-20",
     en: {
       date: "20 August 2025",
       title: "Hallur Hentze work anniversary",
@@ -80,6 +85,7 @@ const articles = [
     }
   },
   {
+    published: "2025-08-20",
     en: {
       date: "20 August 2025",
       title: "Danjal Olsen work anniversary",
@@ -96,6 +102,7 @@ const articles = [
     }
   },
   {
+    published: "2025-08-20",
     en: {
       date: "20 August 2025",
       title: "Torfrið Joensen work anniversary",
@@ -112,6 +119,7 @@ const articles = [
     }
   },
   {
+    published: "2025-04-01",
     en: {
       date: "1 April 2025",
       title: "We are attending Seafood Expo Global 2025 in Barcelona",
@@ -128,6 +136,7 @@ const articles = [
     }
   },
   {
+    published: "2024-03-01",
     en: {
       date: "1 March 2024",
       title: "Jónas Øster finishes his apprenticeship as a mechanic",
@@ -144,6 +153,7 @@ const articles = [
     }
   },
   {
+    published: "2015-04-10",
     en: {
       date: "10 April 2015",
       title: "Delta Seafood to run TG Seafood",
@@ -160,3 +170,13 @@ const articles = [
     }
   }
 ];
+
+function getArticlePublishedTime(article){
+  const publishedDate = article.published || (article.en && article.en.date) || "";
+  const timestamp = Date.parse(publishedDate);
+  return Number.isNaN(timestamp) ? 0 : timestamp;
+}
+
+function getArticlesNewestFirst(articleList){
+  return [...articleList].sort((a, b) => getArticlePublishedTime(b) - getArticlePublishedTime(a));
+}

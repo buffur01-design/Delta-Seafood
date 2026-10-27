@@ -703,7 +703,7 @@
 
   <!-- JAVASCRIPT FOR ARTICLE POPUP -->
 
-  <script src="articles.js?v=2"></script>
+  <script src="articles.js?v=3"></script>
   <script>
     const newsModal = document.getElementById("newsModal");
     const newsModalImage = document.getElementById("newsModalImage");
@@ -713,9 +713,7 @@
     const newsCloseBtn = document.querySelector(".news-close-btn");
     const updatesGrid = document.querySelector(".updates-grid");
     const currentLanguage = localStorage.getItem("deltaLanguage") === "fo" ? "fo" : "en";
-    const latestArticles = [...articles]
-      .sort((a, b) => (b.published || "").localeCompare(a.published || ""))
-      .slice(0, 3);
+    const latestArticles = getArticlesNewestFirst(articles).slice(0, 3);
 
     if(currentLanguage === "fo"){
       document.querySelector(".updates-section h2").textContent = "Nýggjastu tíðindi";
