@@ -23,7 +23,7 @@ const articles = [
       title: "Minister of fisheries visits Delta Seafood",
       image: "Bárður á steig vitjan.jpg",
       alt: "Minister of fisheries visits Delta Seafood",
-      text: `<p>Our salted fish products remain an important part of the Delta Seafood product range. The products are prepared with focus on quality, consistency, and customer requirements.</p><p>Delta Seafood produces different salted fish products for selected markets and customers.</p>`
+      text: `<p>Yesterday we had the pleasure of hosting the Minister of foreign affairs and fisheries with this administration. We talked about different topics which could lead to higher utilization of the firm on Tvøroyri. We are gratefull for the visit and are happy that the minister with administration takes it times to visit firm in the industry</p>`
     },
     fo: {
       date: "20. august 2026",
