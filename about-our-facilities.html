@@ -1,0 +1,536 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About us - Delta Seafood</title>
+
+  <style>
+    body{
+      margin:0;
+      font-family:Arial, sans-serif;
+      background:white;
+      color:#1f3c4d;
+      text-align:center;
+    }
+
+    /* NAVBAR */
+
+    .navbar{
+      position:relative;
+      height:120px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      background:linear-gradient(to bottom, #cfe8f3, white);
+      z-index:1000;
+    }
+
+    .logo{
+      position:absolute;
+      left:50%;
+      transform:translateX(-50%);
+      z-index:1001;
+    }
+
+    .logo img{
+      width:170px;
+      display:block;
+    }
+
+    .menu-left{
+      position:absolute;
+      right:calc(50% + 160px);
+      display:flex;
+      gap:50px;
+      align-items:center;
+    }
+
+    .menu-right{
+      position:absolute;
+      left:calc(50% + 160px);
+      display:flex;
+      gap:50px;
+      align-items:center;
+    }
+
+    .navbar a{
+      text-decoration:none;
+      color:black;
+      font-size:20px;
+      font-weight:bold;
+      white-space:nowrap;
+    }
+
+    /* DROPDOWN MENU */
+
+    .nav-item{
+      position:relative;
+      display:inline-block;
+    }
+
+    .dropdown{
+      display:none;
+      position:absolute;
+      top:100%;
+      left:50%;
+      transform:translateX(-50%);
+      background:white;
+      min-width:210px;
+      box-shadow:0 12px 30px rgba(0,0,0,0.15);
+      border-radius:10px;
+      overflow:hidden;
+      z-index:9999;
+    }
+
+    .dropdown a{
+      display:block;
+      padding:14px 18px;
+      font-size:16px;
+      color:black;
+      text-align:left;
+      white-space:nowrap;
+    }
+
+    .dropdown a:hover{
+      background:#f1f7fb;
+    }
+
+    .nav-item:hover .dropdown{
+      display:block;
+    }
+
+    /* PAGE CONTENT */
+
+    .page-title{
+      margin-top:40px;
+      font-size:42px;
+      font-weight:700;
+      letter-spacing:1px;
+      text-transform:uppercase;
+    }
+
+    .content-section{
+      max-width:1080px;
+      margin:40px auto 80px;
+      padding:24px;
+      background:#f7fbff;
+      border-radius:18px;
+      box-shadow:0 18px 40px rgba(37,86,108,0.08);
+      text-align:left;
+    }
+
+    .content-section h2{
+      margin-top:0;
+      font-size:32px;
+      color:#1f3c4d;
+    }
+
+    .content-section p{
+      color:#37586f;
+      font-size:18px;
+      line-height:1.75;
+      margin:18px 0;
+    }
+
+    .facility-links{
+      display:grid;
+      grid-template-columns:repeat(3, minmax(0, 1fr));
+      gap:18px;
+      margin-top:30px;
+    }
+
+    .facility-link{
+      position:relative;
+      display:block;
+      overflow:hidden;
+      padding:0;
+      box-sizing:border-box;
+      color:#1f3c4d;
+      background:#fff;
+      border:1px solid #d6e7f1;
+      border-radius:14px;
+      box-shadow:0 10px 24px rgba(37,86,108,.07);
+      font-size:18px;
+      font-weight:700;
+      text-decoration:none;
+      transition:transform .2s ease, box-shadow .2s ease, background .2s ease;
+    }
+
+    .facility-link::after{
+      content:"→";
+      position:absolute;
+      right:20px;
+      bottom:15px;
+      color:#2f728f;
+      font-size:24px;
+    }
+
+    .facility-link img{
+      display:block;
+      width:100%;
+      height:170px;
+      object-fit:cover;
+    }
+
+    .facility-link span{
+      display:block;
+      padding:17px 52px 17px 20px;
+    }
+
+    .facility-link:hover{
+      transform:translateY(-3px);
+      background:#eef7fb;
+      box-shadow:0 15px 30px rgba(37,86,108,.12);
+    }
+
+    @media(max-width:760px){
+      .facility-links{ grid-template-columns:1fr; }
+    }
+
+    /* FOOTER */
+
+    footer{
+      background:#1f3c4d;
+      color:#f7fbff;
+      padding:36px 0;
+      width:100%;
+      box-sizing:border-box;
+    }
+
+    .footer-wrapper{
+      display:flex;
+      gap:24px;
+      align-items:flex-start;
+      width:100%;
+      max-width:none;
+      margin:0;
+      padding:0 40px;
+      box-sizing:border-box;
+      flex-wrap:wrap;
+    }
+
+    .footer-logo{
+      flex:0 0 160px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+    }
+
+    .footer-logo img{
+      width:140px;
+      height:auto;
+      display:block;
+    }
+
+    .footer-feature-grid{
+      display:grid;
+      grid-template-columns:minmax(240px, 1fr) minmax(240px, 1fr) minmax(240px, 1fr) minmax(240px, 1fr);
+      gap:24px;
+      flex:1;
+      align-items:start;
+    }
+
+    .footer-column h4{
+      margin-bottom:12px;
+      font-size:18px;
+      text-transform:uppercase;
+      letter-spacing:0.05em;
+    }
+
+    .footer-column p,
+    .footer-column a{
+      margin:6px 0;
+      color:#f7fbff;
+      font-size:16px;
+      text-decoration:none;
+      line-height:1.6;
+    }
+
+    .footer-column a:hover{
+      text-decoration:underline;
+    }
+
+    .footer-address-grid{
+      display:grid;
+      grid-template-columns:repeat(2, minmax(140px, 1fr));
+      gap:16px;
+      margin-top:12px;
+    }
+
+    .footer-image-column{
+      display:flex;
+      justify-content:center;
+      align-items:center;
+    }
+
+    .footer-image-column img{
+      width:100%;
+      max-width:220px;
+      border-radius:18px;
+      box-shadow:0 18px 40px rgba(37,86,108,0.12);
+      background:transparent;
+    }
+
+    .footer-msc{
+      display:flex;
+      justify-content:center;
+    }
+
+    .footer-msc-frame{
+      max-width:220px;
+      width:100%;
+      padding:18px;
+      border:1px solid rgba(255,255,255,0.18);
+      border-radius:18px;
+      background:rgba(255,255,255,0.06);
+      box-shadow:inset 0 0 0 1px rgba(255,255,255,0.02);
+      text-align:center;
+    }
+
+    .footer-msc-frame img{
+      max-width:140px;
+      width:100%;
+      height:auto;
+      display:block;
+      margin:0 auto 14px;
+    }
+
+    .footer-note{
+      text-align:center;
+      margin-top:28px;
+      font-size:14px;
+      color:#cfe8f3;
+    }
+
+    /* TABLET */
+
+    @media(max-width:1024px){
+      .menu-left{
+        right:calc(50% + 130px);
+        gap:30px;
+      }
+
+      .menu-right{
+        left:calc(50% + 130px);
+        gap:30px;
+      }
+
+      .navbar a{
+        font-size:18px;
+      }
+
+      .footer-feature-grid{
+        grid-template-columns:repeat(2, minmax(240px, 1fr));
+      }
+    }
+
+    /* MOBILE */
+
+    @media(max-width:780px){
+      .navbar{
+        height:auto;
+        padding:20px;
+        display:flex;
+        flex-direction:column;
+        gap:20px;
+      }
+
+      .logo{
+        position:static;
+        transform:none;
+        order:1;
+      }
+
+      .menu-left,
+      .menu-right{
+        position:static;
+        display:flex;
+        justify-content:center;
+        flex-wrap:wrap;
+        gap:20px;
+      }
+
+      .menu-left{
+        order:2;
+      }
+
+      .menu-right{
+        order:3;
+      }
+
+      .dropdown{
+        position:static;
+        transform:none;
+        margin-top:10px;
+      }
+
+      .footer-wrapper{
+        flex-direction:column;
+        align-items:center;
+      }
+
+      .footer-feature-grid{
+        grid-template-columns:1fr;
+        width:100%;
+      }
+
+      .footer-address-grid{
+        grid-template-columns:1fr;
+      }
+
+      .footer-column h4{
+        text-align:center;
+      }
+    }
+
+    @media(max-width:520px){
+      .page-title{
+        font-size:34px;
+      }
+
+      .content-section{
+        margin:30px 20px 60px;
+        padding:20px;
+      }
+
+      .content-section h2{
+        font-size:28px;
+      }
+
+      .content-section p{
+        font-size:16px;
+      }
+    }
+  </style>
+  <link rel="stylesheet" href="language-switch.css">
+  <link rel="stylesheet" href="footer.css?v=13">
+  <link rel="stylesheet" href="mobile.css?v=5">
+</head>
+
+<body>
+
+  <!-- NAVBAR -->
+
+  <div class="navbar">
+
+    <div class="menu-left">
+      <a href="./">Home</a>
+      <a href="products.html">Products</a>
+    </div>
+
+    <a href="./" class="logo">
+      <img src="delta-bumerki.png" alt="Delta Seafood Logo">
+    </a>
+
+    <div class="menu-right">
+      <div class="nav-item">
+        <a href="about-our-facilities.html">About our facilities</a>
+
+        <div class="dropdown">
+          <a href="delta-seafood.html">Delta Seafood</a>
+          <a href="tg-seafood.html">TG Seafood</a>
+          <a href="lmt.html">LMT</a>
+          <a href="certifications.html">Certifications</a>
+        </div>
+      </div>
+
+      <a href="contact.html">Contact</a>
+    </div>
+
+  </div>
+
+  <!-- PAGE CONTENT -->
+
+  <div class="page-title">About Us</div>
+
+  <div class="content-section">
+    <h2>Our three firms</h2>
+
+    <p>
+      We are a firm that operate in the fishing industry in the Faroe Islands. We have three firms: Delta Seafood, TG Seafood and LMT. All our firms are part of the same conglomerate.
+      This allows us to have control of the entire value chain, from catching to processing and distribution. We are committed to sustainable fishing practices and high-quality seafood products done with the best fish products in the world.
+    </p>
+
+    <nav class="facility-links" aria-label="Our facilities">
+      <a class="facility-link" href="delta-seafood.html">
+        <img src="delta-seafood-building.jpg" alt="Delta Seafood facility" loading="lazy">
+        <span>More about Delta Seafood</span>
+      </a>
+      <a class="facility-link" href="tg-seafood.html">
+        <img src="tg-seafood-bygningur.jpg" alt="TG Seafood facility" loading="lazy">
+        <span>More about TG Seafood</span>
+      </a>
+      <a class="facility-link" href="lmt.html">
+        <img src="Flokkari eystur.JPG" alt="LMT sorting facility" loading="lazy">
+        <span>More about LMT</span>
+      </a>
+    </nav>
+  </div>
+
+  <!-- FOOTER -->
+
+  <footer>
+    <div class="footer-wrapper">
+
+      <div class="footer-logo">
+        <img src="delta-bumerki.png" alt="Delta Seafood Logo">
+      </div>
+
+      <div class="footer-feature-grid">
+
+        <div class="footer-column">
+          <h4>Contact</h4>
+          <div class="footer-contact-entry"><strong>Delta Seafood</strong><a href="mailto:Deltaseafood@deltaseafood.fo">Deltaseafood@deltaseafood.fo</a><span>Telephone +298 208800</span><span>Havnalagið 25, 800 Tvøroyri</span><span>Reg no: 2468</span><span>VAT no.: 448486</span></div>
+          <div class="footer-contact-entry"><strong>TG Seafood</strong><a href="mailto:tgseafood@tgseafood.fo">tgseafood@tgseafood.fo</a><span>Telephone +298 208800</span><span>Á Hamranesi 10, 850 Hvalba</span><span>Reg no: 3670</span><span>VAT no.: 532908</span></div>
+
+          <h4>Address</h4>
+
+          <div class="footer-address-grid">
+            <div>
+              <p>Delta Seafood</p>
+              <p>Havnalagið 25</p>
+              <p>800 Tvøroyri</p>
+            </div>
+
+            <div>
+              <p>TG Seafood</p>
+              <p>Á Hamranesi 10</p>
+              <p>850 Hvalba</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="footer-column footer-image-column">
+          <img src="salted-cod.png" alt="Salted cod">
+        </div>
+
+        <div class="footer-column">
+          <h4>Registration Delta Seafood</h4>
+          <p>Registration no: 2468</p>
+          <p>VAT no.: 448486</p>
+          <h4>Registration TG Seafood</h4>
+          <p>Registration no: 3670</p>
+          <p>VAT no.: 532908</p>
+        </div>
+
+        <div class="footer-column footer-msc">
+          <div class="footer-msc-frame">
+            <img src="msc.svg" alt="MSC Certification">
+            <p>Certified sustainable by MSC for responsible seafood sourcing.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="footer-note">
+      Delta Seafood © 2026. All rights reserved.
+    </div>
+  </footer>
+
+  <script src="page-translations.js?v=10"></script>
+  <script src="language-switch.js?v=2"></script>
+  <script src="mobile-nav.js?v=3"></script>
+</body>
+</html>

@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -6,11 +7,10 @@
   <title>Home - Delta Seafood</title>
 
   <style>
-
     body{
       margin:0;
       font-family:Arial, sans-serif;
-      background:rgb(255, 255, 255);
+      background:white;
       text-align:center;
     }
 
@@ -18,152 +18,558 @@
 
     .navbar{
       position:relative;
+      height:120px;
       display:flex;
-      justify-content:center;
       align-items:center;
-      background: linear-gradient(to bottom, #cfe8f3, white);
-      padding:20px 40px;
+      justify-content:center;
+      background:linear-gradient(to bottom, #cfe8f3, white);
+      z-index:1000;
     }
 
-    .navbar a{
-      text-decoration:none;
-      color:rgb(0, 0, 0);
-      font-size:20px;
-      font-weight:bold;
+    .logo{
+      position:absolute;
+      left:50%;
+      transform:translateX(-50%);
+      z-index:1001;
     }
 
-    .menu{
+    .logo img{
+      width:170px;
+      display:block;
+    }
+
+    .menu-left{
+      position:absolute;
+      right:calc(50% + 160px);
       display:flex;
       gap:50px;
       align-items:center;
     }
 
-    .logo{
+    .menu-right{
       position:absolute;
-      left:40px;
-    }
-
-    .logo img{
-      width:120px;
-    }
-
-    /* PRODUCTS SECTION */
-
-    .page-title{
-      margin-top:40px;
-      font-size:42px;
-      font-weight:bold;
-      color:#1f3c4d;
-    }
-
-    .gallery{
+      left:calc(50% + 160px);
       display:flex;
-      flex-wrap:wrap;
-      justify-content:center;
-      gap:40px;
-      padding:50px;
+      gap:50px;
+      align-items:center;
     }
 
-    .image-box{
-      width:250px;
+    .navbar a{
+      text-decoration:none;
+      color:black;
+      font-size:20px;
+      font-weight:bold;
+      white-space:nowrap;
     }
 
-    .image-box img{
-      width:100%;
+    /* DROPDOWN MENU */
+
+    .nav-item{
+      position:relative;
+      display:inline-block;
+    }
+
+    .dropdown{
+      display:none;
+      position:absolute;
+      top:100%;
+      left:50%;
+      transform:translateX(-50%);
+      background:white;
+      min-width:210px;
+      box-shadow:0 12px 30px rgba(0,0,0,0.15);
       border-radius:10px;
-      cursor:zoom-in;
+      overflow:hidden;
+      z-index:9999;
+    }
+
+    .dropdown a{
       display:block;
-      transition:0.2s;
+      padding:14px 18px;
+      font-size:16px;
+      color:black;
+      text-align:left;
+      white-space:nowrap;
     }
 
-    .image-box img:hover{
-      transform:scale(1.03);
+    .dropdown a:hover{
+      background:#f1f7fb;
     }
 
-    .filename{
-      margin-top:10px;
-      font-size:18px;
+    .nav-item:hover .dropdown{
+      display:block;
+    }
+
+    /* FRONT PAGE */
+
+    .hero{
+      padding:170px 20px 90px;
+    }
+
+    .hero h1{
+      font-size:50px;
+      color:#1f3c4d;
+      margin-bottom:20px;
+    }
+
+    .hero p{
+      font-size:22px;
+      color:#37586f;
+      max-width:800px;
+      margin:0 auto;
+      line-height:1.5;
+    }
+
+    /* LATEST UPDATES / ARTICLES */
+
+    .updates-section{
+      max-width:1200px;
+      margin:30px auto 90px;
+      padding:0 40px;
+      text-align:center;
+    }
+
+    .updates-section h2{
+      font-size:38px;
+      color:#1f3c4d;
+      margin-bottom:35px;
+      text-transform:uppercase;
+      letter-spacing:1px;
+    }
+
+    .updates-grid{
+      display:grid;
+      grid-template-columns:repeat(3, 1fr);
+      gap:30px;
+    }
+
+    .update-card{
+      background:#f7fbff;
+      border-radius:18px;
+      box-shadow:0 18px 40px rgba(37,86,108,0.08);
+      overflow:hidden;
+      cursor:pointer;
+      transition:0.25s ease;
+      text-align:left;
+    }
+
+    .update-card:hover{
+      transform:translateY(-4px);
+      box-shadow:0 22px 45px rgba(37,86,108,0.14);
+    }
+
+    .update-card img{
+      width:100%;
+      height:210px;
+      object-fit:cover;
+      display:block;
+    }
+
+    .update-card-content{
+      padding:24px;
+    }
+
+    .update-date{
+      color:#6b8798;
+      font-size:15px;
+      margin:0 0 10px 0;
+    }
+
+    .update-card h3{
+      color:#1f3c4d;
+      font-size:23px;
+      margin:0 0 12px 0;
+    }
+
+    .update-card p{
+      color:#37586f;
+      font-size:16px;
+      line-height:1.6;
+      margin:0;
+    }
+
+    .update-read-more{
+      display:inline-block;
+      margin-top:18px;
+      background:#1f3c4d;
+      color:white;
+      padding:10px 20px;
+      border-radius:999px;
+      font-size:15px;
       font-weight:bold;
     }
 
-    /* LIGHTBOX */
+    .update-full-text{
+      display:none;
+    }
 
-    #lightbox{
+    /* ARCHIVE LINK */
+
+    .archive-link{
+      margin-top:45px;
+    }
+
+    .archive-link a{
+      display:inline-block;
+      background:#1f3c4d;
+      color:white;
+      padding:13px 26px;
+      border-radius:999px;
+      text-decoration:none;
+      font-weight:bold;
+      font-size:16px;
+      transition:0.2s ease;
+    }
+
+    .archive-link a:hover{
+      background:#2f5f79;
+      transform:translateY(-2px);
+    }
+
+    /* ARTICLE POPUP */
+
+    .news-modal{
       position:fixed;
       inset:0;
-      background:rgba(0,0,0,0.85);
+      background:rgba(0,0,0,0.65);
       display:none;
-      align-items:center;
       justify-content:center;
-      z-index:9999;
-      padding:20px;
+      align-items:center;
+      z-index:99999;
+      padding:40px;
+      box-sizing:border-box;
     }
 
-    #lightbox[aria-hidden="false"]{
+    .news-modal.active{
       display:flex;
     }
 
-    #lightbox img{
-      max-width:100%;
-      max-height:100%;
-      border-radius:8px;
+    .news-modal-box{
+      background:white;
+      width:90%;
+      max-width:950px;
+      max-height:90vh;
+      overflow-y:auto;
+      overflow-x:hidden;
+      border-radius:12px;
+      box-shadow:0 30px 80px rgba(0,0,0,0.35);
+      position:relative;
+      box-sizing:border-box;
     }
 
-    #lightbox .close{
-      position:absolute;
-      top:20px;
-      right:24px;
+    .news-close-btn{
+      position:sticky;
+      top:16px;
+      float:right;
+      width:48px;
+      height:48px;
+      margin:16px 16px 0 0;
+      background:black;
       color:white;
-      font-size:40px;
+      border-radius:50%;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      font-size:34px;
+      font-weight:bold;
       cursor:pointer;
+      z-index:1000;
+      border:4px solid white;
+      line-height:1;
+      box-sizing:border-box;
     }
 
-    footer { background:#1f3c4d; color:#f7fbff; padding:36px 20px; }
-    .footer-wrapper { display:flex; gap:24px; align-items:flex-start; max-width:1100px; margin:0 auto; flex-wrap:wrap; }
-    .footer-logo { flex:0 0 160px; display:flex; align-items:center; justify-content:center; }
-    .footer-logo img { width:140px; height:auto; display:block; }
-    .footer-feature-grid { display:grid; grid-template-columns: minmax(240px,1fr) minmax(240px,1fr) minmax(240px,1fr) minmax(240px,1fr); gap:24px; flex:1; align-items:start; }
-    .footer-column h4 { margin-bottom:12px; font-size:18px; text-transform:uppercase; letter-spacing:0.05em; }
-    .footer-column p, .footer-column a { margin:6px 0; color:#f7fbff; font-size:16px; text-decoration:none; line-height:1.6; }
-    .footer-column a:hover { text-decoration:underline; }
-    .footer-address-grid { display:grid; grid-template-columns: repeat(2, minmax(140px,1fr)); gap:16px; margin-top:12px; }
-    .footer-image-column { display:flex; justify-content:center; align-items:center; }
-    .footer-image-column img { width:100%; max-width:220px; border-radius:18px; box-shadow:0 18px 40px rgba(37,86,108,0.12); background:transparent; background-color:transparent; }
-    .footer-msc { display:flex; justify-content:center; }
-    .footer-msc-frame { max-width:220px; width:100%; padding:18px; border:1px solid rgba(255,255,255,0.18); border-radius:18px; background:rgba(255,255,255,0.06); box-shadow:inset 0 0 0 1px rgba(255,255,255,0.02); text-align:center; }
-    .footer-msc-frame img { max-width:140px; width:100%; height:auto; display:block; margin:0 auto 14px; }
-    .footer-msc-frame p { margin-bottom:0; }
-    .footer-msc-frame h4 { margin-top:0; }
-    .footer-note { text-align:center; margin-top:28px; font-size:14px; color:#cfe8f3; }
+    .news-close-btn:hover{
+      background:#1f3c4d;
+    }
 
-    @media (max-width:1024px) { .footer-feature-grid { grid-template-columns: repeat(2, minmax(240px,1fr)); } }
-    @media (max-width:780px) { .footer-wrapper { flex-direction:column; align-items:center; } .footer-feature-grid { grid-template-columns:1fr; width:100%; } .footer-address-grid { grid-template-columns:1fr; } .footer-column h4 { text-align:center; } }
+    .news-modal-inner{
+      padding:45px;
+      padding-right:70px;
+      text-align:left;
+      box-sizing:border-box;
+    }
 
-    @media (max-width:520px){
+    #newsModalImage{
+      width:100%;
+      max-height:420px;
+      object-fit:cover;
+      border-radius:14px;
+      margin-bottom:30px;
+      display:block;
+    }
 
-      .image-box{
-        width:45%;
+    #newsModalDate{
+      color:#6b8798;
+      font-size:16px;
+      margin:0 0 10px 0;
+    }
+
+    #newsModalTitle{
+      color:#1f3c4d;
+      font-size:38px;
+      margin:0 0 25px 0;
+    }
+
+    #newsModalText{
+      color:#37586f;
+      font-size:18px;
+      line-height:1.75;
+    }
+
+    #newsModalText p{
+      margin:0 0 22px 0;
+    }
+
+    /* FOOTER */
+
+    footer{
+      background:#1f3c4d;
+      color:#f7fbff;
+      padding:36px 0;
+      margin-top:40px;
+      width:100%;
+      box-sizing:border-box;
+    }
+
+    .footer-wrapper{
+      display:flex;
+      gap:24px;
+      align-items:flex-start;
+      width:100%;
+      max-width:none;
+      margin:0;
+      padding:0 40px;
+      box-sizing:border-box;
+      flex-wrap:wrap;
+    }
+
+    .footer-logo{
+      flex:0 0 160px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+    }
+
+    .footer-logo img{
+      width:140px;
+      height:auto;
+      display:block;
+    }
+
+    .footer-feature-grid{
+      display:grid;
+      grid-template-columns:minmax(240px,1fr) minmax(240px,1fr) minmax(240px,1fr) minmax(240px,1fr);
+      gap:24px;
+      flex:1;
+      align-items:start;
+    }
+
+    .footer-column h4{
+      margin-bottom:12px;
+      font-size:18px;
+      text-transform:uppercase;
+      letter-spacing:0.05em;
+    }
+
+    .footer-column p,
+    .footer-column a{
+      margin:6px 0;
+      color:#f7fbff;
+      font-size:16px;
+      text-decoration:none;
+      line-height:1.6;
+    }
+
+    .footer-column a:hover{
+      text-decoration:underline;
+    }
+
+    .footer-address-grid{
+      display:grid;
+      grid-template-columns:repeat(2, minmax(140px,1fr));
+      gap:16px;
+      margin-top:12px;
+    }
+
+    .footer-image-column{
+      display:flex;
+      justify-content:center;
+      align-items:center;
+    }
+
+    .footer-image-column img{
+      width:100%;
+      max-width:220px;
+      border-radius:18px;
+      box-shadow:0 18px 40px rgba(37,86,108,0.12);
+      background:transparent;
+    }
+
+    .footer-msc{
+      display:flex;
+      justify-content:center;
+    }
+
+    .footer-msc-frame{
+      max-width:220px;
+      width:100%;
+      padding:18px;
+      border:1px solid rgba(255,255,255,0.18);
+      border-radius:18px;
+      background:rgba(255,255,255,0.06);
+      box-shadow:inset 0 0 0 1px rgba(255,255,255,0.02);
+      text-align:center;
+    }
+
+    .footer-msc-frame img{
+      max-width:140px;
+      width:100%;
+      height:auto;
+      display:block;
+      margin:0 auto 14px;
+    }
+
+    .footer-note{
+      text-align:center;
+      margin-top:28px;
+      font-size:14px;
+      color:#cfe8f3;
+    }
+
+    /* TABLET */
+
+    @media(max-width:1024px){
+      .menu-left{
+        right:calc(50% + 130px);
+        gap:30px;
       }
 
+      .menu-right{
+        left:calc(50% + 130px);
+        gap:30px;
+      }
+
+      .navbar a{
+        font-size:22px;
+      }
+
+      .updates-grid{
+        grid-template-columns:repeat(2, 1fr);
+      }
+
+      .footer-feature-grid{
+        grid-template-columns:repeat(2, minmax(240px,1fr));
+      }
+    }
+
+    /* MOBILE */
+
+    @media(max-width:780px){
       .navbar{
-        position:static;
-        flex-direction:column;
-        gap:20px;
+        height:auto;
+        padding:20px;
       }
 
       .logo{
         position:static;
+        transform:none;
+        order:1;
       }
 
-      .menu{
+      .navbar{
+        display:flex;
+        flex-direction:column;
         gap:20px;
-        flex-wrap:wrap;
-        justify-content:center;
       }
 
-    }
+      .menu-left,
+      .menu-right{
+        position:static;
+        display:flex;
+        justify-content:center;
+        flex-wrap:wrap;
+        gap:20px;
+      }
 
+      .menu-left{
+        order:2;
+      }
+
+      .menu-right{
+        order:3;
+      }
+
+      .dropdown{
+        position:static;
+        transform:none;
+        margin-top:10px;
+      }
+
+      .hero{
+        padding:80px 20px 60px;
+      }
+
+      .hero h1{
+        font-size:34px;
+      }
+
+      .hero p{
+        font-size:22px;
+      }
+
+      .updates-section{
+        padding:0 25px;
+        margin:20px auto 70px;
+      }
+
+      .updates-section h2{
+        font-size:30px;
+      }
+
+      .updates-grid{
+        grid-template-columns:1fr;
+      }
+
+      .news-modal{
+        padding:20px;
+      }
+
+      .news-modal-inner{
+        padding:30px;
+      }
+
+      #newsModalTitle{
+        font-size:30px;
+      }
+
+      #newsModalText{
+        font-size:16px;
+      }
+
+      .footer-wrapper{
+        flex-direction:column;
+        align-items:center;
+      }
+
+      .footer-feature-grid{
+        grid-template-columns:1fr;
+        width:100%;
+      }
+
+      .footer-address-grid{
+        grid-template-columns:1fr;
+      }
+
+      .footer-column h4{
+        text-align:center;
+      }
+    }
   </style>
+
+  <link rel="stylesheet" href="language-switch.css">
+  <link rel="stylesheet" href="footer.css?v=13">
+  <link rel="stylesheet" href="mobile.css?v=5">
 </head>
 
 <body>
@@ -171,60 +577,218 @@
   <!-- NAVBAR -->
 
   <div class="navbar">
-    <a href="index.html.html" class="logo">
-      <img src="delta-logo.png.png" alt="Logo">
-    </a>
-    <div class="menu">
-      <a href="index.html.html">Home</a>
-      <a href="products.html.html">Products</a>
-      <a href="facilities.html.html">Facilities</a>
-      <a href="about us.html.html">About us</a>
-      <a href="contact.html.html">Contact</a>
+
+<div class="menu-left">
+      <a href="./">Home</a>
+  <a href="products.html">Products</a>
+</div>
+
+    <a href="./" class="logo">
+  <img src="delta-bumerki.png" alt="Delta Seafood Logo">
+</a>
+
+<div class="menu-right">
+  <div class="nav-item">
+    <a href="about-our-facilities.html">About our facilities</a>
+
+    <div class="dropdown">
+      <a href="delta-seafood.html">Delta Seafood</a>
+      <a href="tg-seafood.html">TG Seafood</a>
+      <a href="lmt.html">LMT</a>
+      <a href="certifications.html">Certifications</a>
     </div>
   </div>
 
+  <a href="contact.html">Contact</a>
+</div>
+
+  </div>
+
+  <!-- FRONT PAGE CONTENT -->
+
+  <img src="Delta 2.png" alt="Delta Seafood" style="width:100%; height:auto; object-fit:contain; display:block; margin:0 0 40px;">
+
+  <!-- LATEST UPDATES / ARTICLES -->
+
+  <section class="updates-section">
+
+<h2>Latest updates</h2>
+
+<div class="updates-grid"></div>
+
+<div class="archive-link">
+  <a href="News-archive.html">More news</a>
+</div>
+
+  </section>
+
+  <!-- ARTICLE POPUP -->
+
+  <div id="newsModal" class="news-modal">
+    <div class="news-modal-box">
+      <span class="news-close-btn">&times;</span>
+
+  <div class="news-modal-inner">
+    <img id="newsModalImage" src="" alt="">
+    <p id="newsModalDate"></p>
+    <h1 id="newsModalTitle"></h1>
+    <div id="newsModalText"></div>
+  </div>
+</div>
+
+  </div>
+
+  <!-- FOOTER -->
+
   <footer>
     <div class="footer-wrapper">
-      <div class="footer-logo">
-        <img src="delta-logo.png.png" alt="Delta Seafood Logo">
-      </div>
-      <div class="footer-feature-grid">
-        <div class="footer-column">
-          <h4>Contact</h4>
-          <p><a href="mailto:info@deltaseafood.example">Deltaseafood@deltaseafood.fo</a></p>
-          <p>Telephone +298 208800</p>
-          <h4>Address</h4>
-          <div class="footer-address-grid">
-            <div>
-              <p>Delta Seafood</p>
-              <p>Havnalagið 25</p>
-              <p>800 Tvøroyri</p>
-            </div>
-            <div>
-              <p>TG Seafood</p>
-              <p>Á Hamranesi 10</p>
-              <p>850 Hvalba</p>
-            </div>
-          </div>
+
+  <div class="footer-logo">
+    <img src="delta-bumerki.png" alt="Delta Seafood Logo">
+  </div>
+
+  <div class="footer-feature-grid">
+
+    <div class="footer-column">
+      <h4>Contact</h4>
+<div class="footer-contact-entry"><strong>Delta Seafood</strong><a href="mailto:Deltaseafood@deltaseafood.fo">Deltaseafood@deltaseafood.fo</a><span>Telephone +298 208800</span><span>Havnalagið 25, 800 Tvøroyri</span><span>Reg no: 2468</span><span>VAT no.: 448486</span></div>
+<div class="footer-contact-entry"><strong>TG Seafood</strong><a href="mailto:tgseafood@tgseafood.fo">TGseafood@tgseafood.fo</a><span>Telephone +298 208800</span><span>Á Hamranesi 10, 850 Hvalba</span><span>Reg no: 3670</span><span>VAT no.: 532908</span></div>
+
+      <h4>Address</h4>
+
+      <div class="footer-address-grid">
+        <div>
+          <p>Delta Seafood</p>
+          <p>Havnalagið 25</p>
+          <p>800 Tvøroyri</p>
         </div>
-        <div class="footer-column footer-image-column">
-          <img src="salted-cod.png.png" alt="Saltaður Toskur">
-        </div>
-        <div class="footer-column">
-          <h4>Registration</h4>
-          <p>Registration no: 12345678</p>
-          <p>VAT no.: DK12345678</p>
-        </div>
-        <div class="footer-column footer-msc">
-          <div class="footer-msc-frame">
-            <img src="msc.png.png" alt="MSC Certification">
-            <p>Certified sustainable by MSC for responsible seafood sourcing.</p>
-          </div>
+
+        <div>
+          <p>TG Seafood</p>
+          <p>Á Hamranesi 10</p>
+          <p>850 Hvalba</p>
         </div>
       </div>
     </div>
-    <div class="footer-note">Delta Seafood © 2026. All rights reserved.</div>
+
+    <div class="footer-column footer-image-column">
+      <img src="salted-cod.png" alt="Salted cod">
+    </div>
+
+    <div class="footer-column">
+      <h4>Registration Delta Seafood</h4>
+      <p>Registration no: 2468</p>
+      <p>VAT no.: 448486</p>
+      <h4>Registration TG Seafood</h4>
+      <p>Registration no: 3670</p>
+      <p>VAT no.: 532908</p>
+
+    </div>
+
+    <div class="footer-column footer-msc">
+      <div class="footer-msc-frame">
+            <img src="msc.svg" alt="MSC Certification">
+        <p>Certified sustainable by MSC for responsible seafood sourcing.</p>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div class="footer-note">
+  Delta Seafood © 2026. All rights reserved.
+</div>
+
   </footer>
 
+  <!-- JAVASCRIPT FOR ARTICLE POPUP -->
+
+  <script src="articles.js?v=2"></script>
+  <script>
+    const newsModal = document.getElementById("newsModal");
+    const newsModalImage = document.getElementById("newsModalImage");
+    const newsModalDate = document.getElementById("newsModalDate");
+    const newsModalTitle = document.getElementById("newsModalTitle");
+    const newsModalText = document.getElementById("newsModalText");
+    const newsCloseBtn = document.querySelector(".news-close-btn");
+    const updatesGrid = document.querySelector(".updates-grid");
+    const currentLanguage = localStorage.getItem("deltaLanguage") === "fo" ? "fo" : "en";
+    const latestArticles = [...articles]
+      .sort((a, b) => (b.published || "").localeCompare(a.published || ""))
+      .slice(0, 3);
+
+    if(currentLanguage === "fo"){
+      document.querySelector(".updates-section h2").textContent = "Nýggjastu tíðindi";
+      document.querySelector(".archive-link a").textContent = "Fleiri tíðindi";
+    }
+
+    function articleSummary(html){
+      const container = document.createElement("div");
+      container.innerHTML = html;
+      const text = container.querySelector("p")?.textContent.trim() || "";
+      return text.length > 135 ? `${text.slice(0, 132).trim()}...` : text;
+    }
+
+    updatesGrid.innerHTML = latestArticles.map(article => {
+      const content = article[currentLanguage];
+      return `
+      <div class="update-card">
+        <img src="${content.image}" alt="${content.alt}" loading="lazy">
+        <div class="update-card-content">
+          <p class="update-date">${content.date}</p>
+          <h3>${content.title}</h3>
+          <p>${articleSummary(content.text)}</p>
+          <span class="update-read-more">${currentLanguage === "fo" ? "Les meira" : "Read more"}</span>
+          <div class="update-full-text">${content.text}</div>
+        </div>
+      </div>
+    `;
+    }).join("");
+
+    function closeNewsModal(){
+      newsModal.classList.remove("active");
+      document.body.style.overflow = "auto";
+    }
+
+    document.querySelectorAll(".update-card").forEach(card => {
+      card.addEventListener("click", () => {
+        const image = card.querySelector("img").src;
+        const imageAlt = card.querySelector("img").alt;
+        const date = card.querySelector(".update-date").innerText;
+        const title = card.querySelector("h3").innerText;
+        const fullText = card.querySelector(".update-full-text");
+
+        newsModalImage.src = image;
+        newsModalImage.alt = imageAlt;
+        newsModalDate.innerText = date;
+        newsModalTitle.innerText = title;
+        newsModalText.innerHTML = fullText ? fullText.innerHTML : "";
+
+        newsModal.classList.add("active");
+        document.body.style.overflow = "hidden";
+      });
+    });
+
+    newsCloseBtn.addEventListener("click", function(e){
+      e.stopPropagation();
+      closeNewsModal();
+    });
+
+    newsModal.addEventListener("click", function(e){
+      if(e.target === newsModal){
+        closeNewsModal();
+      }
+    });
+
+    document.addEventListener("keydown", function(e){
+      if(e.key === "Escape"){
+        closeNewsModal();
+      }
+    });
+  </script>
+
+  <script src="page-translations.js?v=10"></script>
+  <script src="language-switch.js?v=2"></script>
+  <script src="mobile-nav.js?v=3"></script>
 </body>
 </html>

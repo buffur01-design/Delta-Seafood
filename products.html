@@ -1,0 +1,1475 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Products - Delta Seafood</title>
+
+  <style>
+    body{
+      margin:0;
+      font-family:Arial, sans-serif;
+      background:white;
+      text-align:center;
+    }
+
+    /* NAVBAR */
+
+    .navbar{
+      position:relative;
+      height:120px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      background:linear-gradient(to bottom, #cfe8f3, white);
+      z-index:1000;
+    }
+
+    .logo{
+      position:absolute;
+      left:50%;
+      transform:translateX(-50%);
+      z-index:1001;
+    }
+
+    .logo img{
+      width:170px;
+      display:block;
+    }
+
+    .menu-left{
+      position:absolute;
+      right:calc(50% + 160px);
+      display:flex;
+      gap:50px;
+      align-items:center;
+    }
+
+    .menu-right{
+      position:absolute;
+      left:calc(50% + 160px);
+      display:flex;
+      gap:50px;
+      align-items:center;
+    }
+
+    .navbar a{
+      text-decoration:none;
+      color:black;
+      font-size:20px;
+      font-weight:bold;
+      white-space:nowrap;
+    }
+
+    /* DROPDOWN MENU */
+
+    .nav-item{
+      position:relative;
+      display:inline-block;
+    }
+
+    .dropdown{
+      display:none;
+      position:absolute;
+      top:100%;
+      left:50%;
+      transform:translateX(-50%);
+      background:white;
+      min-width:210px;
+      box-shadow:0 12px 30px rgba(0,0,0,0.15);
+      border-radius:10px;
+      overflow:hidden;
+      z-index:9999;
+    }
+
+    .dropdown a{
+      display:block;
+      padding:14px 18px;
+      font-size:16px;
+      color:black;
+      text-align:left;
+      white-space:nowrap;
+    }
+
+    .dropdown a:hover{
+      background:#f1f7fb;
+    }
+
+    .nav-item:hover .dropdown{
+      display:block;
+    }
+
+    /* PAGE TITLE */
+
+    .page-title{
+      margin-top:40px;
+      font-size:42px;
+      font-weight:bold;
+      color:#1f3c4d;
+    }
+
+    /* PRODUCTS */
+
+    .gallery{
+      display:grid;
+      grid-template-columns:repeat(2, minmax(260px, 1fr));
+      gap:40px;
+      padding:50px;
+      max-width:1300px;
+      margin:0 auto;
+    }
+
+    .product-card{
+      background:#f7fbff;
+      border-radius:18px;
+      box-shadow:0 18px 40px rgba(37,86,108,0.08);
+      cursor:pointer;
+      transition:0.25s ease;
+      height:390px;
+      display:flex;
+      flex-direction:column;
+      justify-content:flex-start;
+      gap:18px;
+      align-items:center;
+      padding:30px;
+      box-sizing:border-box;
+    }
+
+    .product-card:hover{
+      transform:translateY(-4px);
+      box-shadow:0 22px 45px rgba(37,86,108,0.14);
+    }
+
+    .image-box{
+      height:210px;
+      width:100%;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+    }
+
+    .image-box img{
+      max-width:90%;
+      max-height:190px;
+      width:auto;
+      height:auto;
+      object-fit:contain;
+      display:block;
+      transition:0.2s ease;
+    }
+
+    .product-card:hover img{
+      transform:scale(1.03);
+    }
+
+    .product-details{
+      min-height:130px;
+      display:flex;
+      flex-direction:column;
+      justify-content:flex-start;
+      align-items:center;
+    }
+
+    .title{
+      font-size:30px;
+      font-weight:900;
+      color:#1f3c4d;
+      margin-bottom:8px;
+    }
+
+    .subtitle{
+      font-size:24px;
+      color:#37586f;
+      font-style:italic;
+      margin-bottom:18px;
+    }
+
+    .see-products{
+      display:inline-block;
+      background:#1f3c4d;
+      color:white;
+      padding:12px 24px;
+      border-radius:999px;
+      font-size:17px;
+      font-weight:bold;
+      letter-spacing:0.02em;
+      transition:0.2s ease;
+    }
+
+    .product-card:hover .see-products{
+      background:#2f5f79;
+      transform:translateY(-2px);
+    }
+
+    .modal-description{
+      display:none;
+    }
+
+    /* MODAL */
+
+    .modal{
+      position:fixed;
+      inset:0;
+      background:rgba(0,0,0,0.65);
+      display:none;
+      justify-content:center;
+      align-items:center;
+      z-index:99999;
+      padding:40px;
+      box-sizing:border-box;
+      overflow:hidden;
+    }
+
+    .modal.active{
+      display:flex;
+    }
+
+    .modal-box{
+      background:white;
+      width:90%;
+      max-width:1150px;
+      max-height:90vh;
+      overflow-y:auto;
+      overflow-x:hidden;
+      position:relative;
+      animation:modalOpen 0.25s ease;
+      box-shadow:0 30px 80px rgba(0,0,0,0.35);
+      border-radius:12px;
+      box-sizing:border-box;
+    }
+
+    .modal-inner{
+      padding:40px;
+      padding-right:70px;
+      text-align:left;
+      box-sizing:border-box;
+      overflow-x:hidden;
+    }
+
+    #modalTitle{
+      font-size:44px;
+      margin:0 0 12px 0;
+      color:black;
+      font-weight:900;
+    }
+
+    #modalSubtitle{
+      font-size:22px;
+      font-style:italic;
+      font-weight:400;
+      color:#555;
+      margin:0 0 35px 0;
+    }
+
+    #modalImage{
+      width:100%;
+      max-width:900px;
+      max-height:380px;
+      object-fit:contain;
+      display:block;
+      margin:0 auto 40px auto;
+    }
+
+    #modalText{
+      font-size:20px;
+      line-height:1.45;
+      color:#333;
+      max-width:850px;
+      margin:0 auto;
+      overflow-wrap:anywhere;
+      word-break:normal;
+    }
+
+    #modalText strong{
+      font-weight:900;
+      color:#000;
+      display:block;
+      margin-top:24px;
+      margin-bottom:8px;
+    }
+
+    #modalText ul{
+      margin-top:0;
+      margin-bottom:24px;
+      padding-left:28px;
+      list-style-type:disc;
+    }
+
+    #modalText li{
+      margin-bottom:6px;
+    }
+
+    .close-btn{
+      position:sticky;
+      top:16px;
+      float:right;
+      width:48px;
+      height:48px;
+      margin:16px 16px 0 0;
+      background:black;
+      color:white;
+      border-radius:50%;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      font-size:34px;
+      font-weight:bold;
+      cursor:pointer;
+      z-index:1000;
+      border:4px solid white;
+      line-height:1;
+      box-sizing:border-box;
+    }
+
+    .close-btn:hover{
+      background:#1f3c4d;
+    }
+
+    /* SHARED PRODUCT DETAIL MODAL */
+
+    .modal-box.product-detail-modal{
+      max-width:1020px;
+      border-radius:16px;
+    }
+
+    .product-detail-modal .modal-inner{
+      display:grid;
+      grid-template-columns:minmax(280px, 1fr) minmax(220px, .72fr);
+      grid-template-areas:
+        "image title"
+        "image subtitle"
+        "details details";
+      align-items:center;
+      column-gap:46px;
+      padding:28px 64px 34px;
+    }
+
+    .product-detail-modal #modalImage{
+      grid-area:image;
+      width:100%;
+      max-width:460px;
+      max-height:180px;
+      margin:0;
+    }
+
+    .product-detail-modal #modalTitle{
+      grid-area:title;
+      align-self:end;
+      margin:0 0 6px;
+      color:#1f3c4d;
+      font-size:38px;
+    }
+
+    .product-detail-modal #modalSubtitle{
+      grid-area:subtitle;
+      align-self:start;
+      margin:0;
+      color:#37586f;
+      font-size:19px;
+    }
+
+    .product-detail-modal #modalText{
+      grid-area:details;
+      width:100%;
+      max-width:none;
+      margin-top:6px;
+      font-size:15px;
+      line-height:1.4;
+    }
+
+    .cod-sections{
+      display:grid;
+      grid-template-columns:repeat(2, minmax(0, 1fr));
+      gap:16px;
+    }
+
+    .cod-section{
+      padding:18px 20px;
+      background:linear-gradient(135deg, #f6fbff, #fff);
+      border:1px solid #d6e7f1;
+      border-radius:14px;
+    }
+
+    .cod-section h2{
+      margin:0 0 13px;
+      padding-bottom:10px;
+      border-bottom:1px solid #aebfca;
+      color:#1f3c4d;
+      font-size:19px;
+    }
+
+    .cod-columns{
+      display:grid;
+      grid-template-columns:repeat(2, minmax(0, 1fr));
+      gap:16px;
+    }
+
+    .cod-columns:has(> .cod-column:only-child){
+      grid-template-columns:1fr;
+    }
+
+    .cod-column + .cod-column{
+      padding-left:16px;
+      border-left:1px solid #d6e7f1;
+    }
+
+    .cod-section h3{
+      margin:0 0 7px;
+      padding-bottom:6px;
+      min-height:52px;
+      border-bottom:1px solid #aebfca;
+      color:#1f3c4d;
+      font-size:15px;
+    }
+
+    .cod-section ul{
+      margin:0;
+      padding-left:18px;
+    }
+
+    .cod-section li{
+      margin-bottom:5px;
+    }
+
+    .cod-section p{
+      margin:11px 0 0;
+    }
+
+    .cod-section .cod-rule{
+      padding-top:10px;
+      border-top:1px solid #c6d7e1;
+    }
+
+    .cod-packaging{
+      margin-top:14px;
+      padding:13px 15px;
+      background:#eef6fb;
+      border:1px solid #d6e7f1;
+      border-radius:10px;
+    }
+
+    .cod-packaging p{
+      margin:0;
+    }
+
+    .cod-packaging p + p{
+      margin-top:9px;
+    }
+
+    @keyframes modalOpen{
+      from{
+        opacity:0;
+        transform:scale(0.95);
+      }
+
+      to{
+        opacity:1;
+        transform:scale(1);
+      }
+    }
+
+    /* FOOTER */
+
+    footer{
+      background:#1f3c4d;
+      color:#f7fbff;
+      padding:36px 0;
+      margin-top:40px;
+      width:100%;
+      box-sizing:border-box;
+    }
+
+    .footer-wrapper{
+      display:flex;
+      gap:24px;
+      align-items:flex-start;
+      width:100%;
+      max-width:none;
+      margin:0;
+      padding:0 40px;
+      box-sizing:border-box;
+      flex-wrap:wrap;
+    }
+
+    .footer-logo{
+      flex:0 0 160px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+    }
+
+    .footer-logo img{
+      width:140px;
+      height:auto;
+      display:block;
+    }
+
+    .footer-feature-grid{
+      display:grid;
+      grid-template-columns:minmax(240px,1fr) minmax(240px,1fr) minmax(240px,1fr) minmax(240px,1fr);
+      gap:24px;
+      flex:1;
+      align-items:start;
+    }
+
+    .footer-column h4{
+      margin-bottom:12px;
+      font-size:18px;
+      text-transform:uppercase;
+      letter-spacing:0.05em;
+    }
+
+    .footer-column p,
+    .footer-column a{
+      margin:6px 0;
+      color:#f7fbff;
+      font-size:16px;
+      text-decoration:none;
+      line-height:1.6;
+    }
+
+    .footer-column a:hover{
+      text-decoration:underline;
+    }
+
+    .footer-address-grid{
+      display:grid;
+      grid-template-columns:repeat(2, minmax(140px,1fr));
+      gap:16px;
+      margin-top:12px;
+    }
+
+    .footer-image-column{
+      display:flex;
+      justify-content:center;
+      align-items:center;
+    }
+
+    .footer-image-column img{
+      width:100%;
+      max-width:220px;
+      border-radius:18px;
+      box-shadow:0 18px 40px rgba(37,86,108,0.12);
+      background:transparent;
+    }
+
+    .footer-msc{
+      display:flex;
+      justify-content:center;
+    }
+
+    .footer-msc-frame{
+      max-width:220px;
+      width:100%;
+      padding:18px;
+      border:1px solid rgba(255,255,255,0.18);
+      border-radius:18px;
+      background:rgba(255,255,255,0.06);
+      text-align:center;
+    }
+
+    .footer-msc-frame img{
+      max-width:140px;
+      width:100%;
+      height:auto;
+      display:block;
+      margin:0 auto 14px;
+    }
+
+    .footer-note{
+      text-align:center;
+      margin-top:28px;
+      font-size:14px;
+      color:#cfe8f3;
+    }
+
+    /* TABLET */
+
+    @media(max-width:1024px){
+      .menu-left{
+        right:calc(50% + 130px);
+        gap:30px;
+      }
+
+      .menu-right{
+        left:calc(50% + 130px);
+        gap:30px;
+      }
+
+      .navbar a{
+        font-size:18px;
+      }
+
+      .footer-feature-grid{
+        grid-template-columns:repeat(2, minmax(240px,1fr));
+      }
+    }
+
+    /* MOBILE */
+
+    @media(max-width:780px){
+      .navbar{
+        height:auto;
+        padding:20px;
+        display:flex;
+        flex-direction:column;
+        gap:20px;
+      }
+
+      .logo{
+        position:static;
+        transform:none;
+        order:1;
+      }
+
+      .menu-left,
+      .menu-right{
+        position:static;
+        display:flex;
+        justify-content:center;
+        flex-wrap:wrap;
+        gap:20px;
+      }
+
+      .menu-left{
+        order:2;
+      }
+
+      .menu-right{
+        order:3;
+      }
+
+      .dropdown{
+        position:static;
+        transform:none;
+        margin-top:10px;
+      }
+
+      .gallery{
+        grid-template-columns:1fr;
+        padding:30px;
+      }
+
+      .footer-wrapper{
+        flex-direction:column;
+        align-items:center;
+      }
+
+      .footer-feature-grid{
+        grid-template-columns:1fr;
+        width:100%;
+      }
+
+      .footer-address-grid{
+        grid-template-columns:1fr;
+      }
+
+      .footer-column h4{
+        text-align:center;
+      }
+
+      .product-detail-modal .modal-inner{
+        grid-template-columns:1fr;
+        grid-template-areas:
+          "image"
+          "title"
+          "subtitle"
+          "details";
+        gap:0;
+        padding:28px;
+      }
+
+      .product-detail-modal #modalImage{
+        max-width:400px;
+        margin:0 auto 15px;
+      }
+
+      .product-detail-modal #modalTitle,
+      .product-detail-modal #modalSubtitle{
+        text-align:center;
+      }
+
+      .product-detail-modal #modalTitle{
+        margin:0 0 5px;
+      }
+
+      .product-detail-modal #modalSubtitle{
+        grid-area:subtitle;
+        margin:0 0 20px;
+      }
+
+      .cod-sections{
+        grid-template-columns:1fr;
+      }
+    }
+
+    @media(max-width:520px){
+      .page-title{
+        font-size:34px;
+      }
+
+      .product-card{
+        height:350px;
+        padding:22px;
+      }
+
+      .image-box{
+        height:170px;
+      }
+
+      .image-box img{
+        max-height:155px;
+      }
+
+      .title{
+        font-size:26px;
+      }
+
+      .subtitle{
+        font-size:20px;
+      }
+
+      .see-products{
+        font-size:15px;
+        padding:10px 20px;
+      }
+
+      .modal{
+        padding:20px;
+      }
+
+      .modal-inner{
+        padding:25px;
+        padding-right:25px;
+      }
+
+      #modalTitle{
+        font-size:32px;
+      }
+
+      #modalSubtitle{
+        font-size:18px;
+      }
+
+      #modalText{
+        font-size:16px;
+      }
+
+      .close-btn{
+        position:sticky;
+        top:12px;
+        float:right;
+        margin:12px 12px 0 0;
+      }
+
+      .cod-columns{
+        grid-template-columns:1fr;
+      }
+
+      .cod-column + .cod-column{
+        padding-top:12px;
+        padding-left:0;
+        border-top:1px solid #d6e7f1;
+        border-left:0;
+      }
+
+      .cod-section h3{
+        min-height:0;
+      }
+    }
+  </style>
+  <link rel="stylesheet" href="language-switch.css">
+  <link rel="stylesheet" href="footer.css?v=13">
+  <link rel="stylesheet" href="mobile.css?v=5">
+</head>
+
+<body>
+
+  <!-- NAVBAR -->
+
+  <div class="navbar">
+
+    <div class="menu-left">
+      <a href="./">Home</a>
+      <a href="products.html">Products</a>
+    </div>
+
+    <a href="./" class="logo">
+      <img src="delta-bumerki.png" alt="Delta Seafood Logo">
+    </a>
+
+    <div class="menu-right">
+      <div class="nav-item">
+        <a href="about-our-facilities.html">About our facilities</a>
+
+        <div class="dropdown">
+          <a href="delta-seafood.html">Delta Seafood</a>
+          <a href="tg-seafood.html">TG Seafood</a>
+          <a href="lmt.html">LMT</a>
+          <a href="certifications.html">Certifications</a>
+        </div>
+      </div>
+
+      <a href="contact.html">Contact</a>
+    </div>
+
+    <div class="site-language-switcher" aria-label="Choose language">
+      <button type="button" data-lang="en">EN</button>
+      <button type="button" data-lang="fo">FO</button>
+    </div>
+
+  </div>
+
+  <!-- PRODUCTS -->
+
+  <div class="page-title">
+    PRODUCTS
+  </div>
+
+  <div class="gallery">
+
+    <div class="product-card">
+      <div class="image-box">
+        <img src="cod.png" alt="Cod">
+      </div>
+
+      <div class="product-details">
+        <div class="title">Cod</div>
+        <div class="subtitle">Gadus morhua</div>
+        <div class="see-products">See products</div>
+
+        <div class="modal-description cod-description">
+          <div class="cod-sections">
+            <section class="cod-section">
+              <h2>1. Wet salted</h2>
+              <div class="cod-columns">
+                <div class="cod-column">
+                  <h3>Fillets</h3>
+                  <p>100-200 gr</p>
+                  <p>200-400 gr</p>
+                  <p>400-700 gr</p>
+                  <p>700-1000 gr</p>
+                  <p>1000-1500 gr</p>
+                  <p>1500-2000 gr</p>
+                  <p>2000 gr+</p>
+                </div>
+                <div class="cod-column">
+                  <h3>Splitted</h3>
+                  <p>500-800 gr</p>
+                  <p>800-1200 gr</p>
+                  <p>1200-1700 gr</p>
+                  <p>1700-2700 gr</p>
+                  <p>2700-4000 gr</p>
+                  <p>4000 gr+</p>
+                </div>
+              </div>
+              <p class="cod-rule"><b>Quality grades:</b> 1-2 (A), and 3 (B)</p>
+              <p><b>Packaging:</b> All wet salted products are packaged in 20 kilo and 500 kilo boxes</p>
+            </section>
+
+            <section class="cod-section">
+              <h2>2. Light salted</h2>
+              <div class="cod-columns">
+                <div class="cod-column">
+                  <h3>Fillets</h3>
+                  <p>200-500 gr</p>
+                  <p>500-1000 gr</p>
+                  <p>1000-1500 gr</p>
+                  <p>1500-2000 gr</p>
+                  <p>2000-2500 gr</p>
+                  <p>2500 gr+</p>
+                </div>
+              </div>
+              <p class="cod-rule"><b>Packaging:</b> 200-500 gr, 500-1000 gr and 1000-1500 gr light salted products are packaged in 10 kilo boxes</p>
+              <p>1500-2000 gr, 2000-2500 gr and 2500 gr+ light salted products are packaged in 500 kilo boxes</p>
+            </section>
+
+            <section class="cod-section">
+              <h2>3. Frozen interleaved</h2>
+              <ul>
+                <p>Fillets skinless PBO 5-8 oz, 8-16 oz</p>
+                <p>Fillets skinless PBI 5-8 oz, 8-16 oz</p>
+                <p>Fillets skin on 5-8 oz, 8-16 oz</p>
+              </ul>
+              <p class="cod-rule"><b>Packaging:</b> All frozen interleaved products are packaged in 6,81 kilo boxes</p>
+            </section>
+
+            <section class="cod-section">
+              <h2>4. Other products</h2>
+              <ul>
+                <p>Roe</p>
+                <p>Tongue</p>
+                <p>Wings</p>
+              </ul>
+            </section>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <div class="image-box">
+        <img src="ling.png" alt="Ling">
+      </div>
+
+      <div class="product-details">
+        <div class="title">Ling</div>
+        <div class="subtitle">Molva molva</div>
+        <div class="see-products">See products</div>
+
+        <div class="modal-description">
+          <strong>Products:</strong>
+          <ul>
+          <strong>Wet salted:</strong>
+            <li>Fillets, size 400-700 gr,700-1000 gr, 1000-1500 gr, 1500-2000 gr and +2000 gr.</li>
+            <li>Splitted, size -2000 gr, 2000-3000 gr, 2700-4000 gr and +4000 gr.</li>
+            <p>Quality grades 1-2 (A), and 3 (B) </p>
+            <p>All wet salted products are packaged in 20 kilo and 500 kilo boxes</p>
+          <strong>Light salted:</strong>
+            <li>Splitted</li>
+            <li>Fillets</li>
+            <p>Size ungraded</p>
+            <p>All light salted products are packaged in 500 kilo boxes</p>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <div class="image-box">
+        <img src="tusk.png" alt="Tusk">
+      </div>
+
+      <div class="product-details">
+        <div class="title">Tusk</div>
+        <div class="subtitle">Brosme brosme</div>
+        <div class="see-products">See products</div>
+
+        <div class="modal-description">
+          <strong>Products:</strong>
+          <ul>
+          <strong>Wet salted:</strong>
+           <li>Fillets, size 100-200 gr, 200-400 gr, 400-700 gr, +700 gr.</li>
+            <p>Quality grades 1-2 (A), and 3 (B) </p>
+
+            <li>Splitted, size 500-1200 gr, 1200-3000 gr, +3000 gr</li>
+            <p>All wet salted products are packaged in 20 kilo and 500 kilo boxes</p>
+
+          <strong>Light salted:</strong>
+            <li>Fillets sizes from 500-1000 gr, 1000-1500 gr</li>
+            <p>All light salted products are packaged in 10 kilo boxes</p>
+          </ul>
+
+        </div>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <div class="image-box">
+        <img src="greenland-halibut.png" alt="Greenland Halibut">
+      </div>
+
+      <div class="product-details">
+        <div class="title">Greenland Halibut</div>
+        <div class="subtitle">Reinhardtius hippoglossoides</div>
+        <div class="see-products">See products</div>
+
+        <div class="modal-description">
+          <strong> J-cut </strong>
+          <ul>
+
+          <p>1000-2000 gr</p>
+          <p>2000-3000 gr</p>
+          <p>3000+ gr</p>
+           </ul>
+           <p>J-cut products are frozen in 20 kilo boxes</p>
+
+
+          <strong>IQF products:</strong>
+          <ul>
+              <p><b>Headed on gutted with tail</b></p>
+              <p>400-600 gr</p>
+              <p>600-800 gr</p>
+              <p>800-1000 gr</p>
+              <p>1000-1200 gr</p>
+
+          </ul>
+          <p>IQF greenland halibut are packaged in 20 kilo boxes</p>
+
+          <strong>Other products:</strong>
+          <ul>
+            <p>Tails</p>
+            <p>Heads, sizes 300-500 gr and 500+ gr</p>
+
+            </ul>
+            <p>All other products are frozen in 12 kilo blocks and packaged in 24 kilo boxes</p>
+          
+        </div>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <div class="image-box">
+        <img src="saithe.png" alt="Saithe">
+      </div>
+
+      <div class="product-details">
+        <div class="title">Saithe</div>
+        <div class="subtitle">Pollachius virens</div>
+        <div class="see-products">See products</div>
+
+        <div class="modal-description">
+          <strong>Interleaved frozen products:</strong>
+          <ul>
+            <p>Fillets, skinless PBI, 8-16 oz 16-32 oz and 32+ oz </p>
+            <p>Fillets, skin on PBI,  8-16 oz 16-32 oz and 32+ oz</p>
+            <p>Fillets, skinless PBO,  8-16 oz 16-32 oz and 32+ oz</p>
+            <p>All interleaved frozen products are packaged in 6,81 kilo blocks and packaged in 20,43 kilo boxes</p>
+          </ul>
+
+          <strong>IQF products:</strong>
+          <ul>
+          <P>IQF products have a glazing of 5% and are available in comp and non comp</P>
+
+            <p>Portions, skinless, PBO, sizes 80-100 gr, 100-120 gr, 120-140 gr and 140-160 gr</p>
+            <p>Loins, skinless, PBO, sizes 80-100 gr, 100-120 gr, 120-140 gr and 140-160 gr</p>
+            <p>Tails, skinless, PBO, sizes 80-100 gr, 100-120 gr, 120-140 gr and 140-160 gr</p>
+          
+            <P>IQF products are packaged in 5 kilo boxes</P>
+          </ul>
+
+          <strong>Wetsalted products:</strong>
+          <ul>
+            <li>Splitted, size 300-500 gr, 500-800 gr, 800-1200 gr, 1200-1700 gr, 1700-2700 gr, 2700-4000 gr and +4000 gr.</li>
+            <p>Quality grades 1-2 (A), 3 (B)</p>
+            <p>All wet salted products are packaged in 20 kilo and 500 kilo boxes</p>
+          </ul>
+
+          <strong>Light salted products:</strong>
+          <ul>
+            <li>Fillets</li>
+            <p>500-1000 gr</p>
+            <p>1000-1500 gr</p>
+            
+          <p>All light salted products are packaged in 11 kilo boxes</p>          
+
+          </ul>
+
+          <strong>Other products:</strong>
+          <ul>
+            <p>Bits and pieces</p>
+            <p>Mince</p>
+            <p>Skin</p>
+            <p>Roe</p>
+            <p>All other products are packaged in 7,5 kilo blocks</p>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <div class="image-box">
+        <img src="haddock.png" alt="Haddock">
+      </div>
+
+      <div class="product-details">
+        <div class="title">Haddock</div>
+        <div class="subtitle">Melanogrammus aeglefinus</div>
+        <div class="see-products">See products</div>
+
+        <div class="modal-description">
+          <strong>Interleaved frozen products:</strong>
+          <ul>
+            <p>Fillets, skin on, PBI, sizes 100-200 gr, 200-400 gr and 400-900 gr</p>
+            <p>Fillets, skin off, PBI, sizes 100-200 gr, 200-400 gr and 400-900 gr</p>
+          </ul>
+          <p>All interleaved frozen products are packaged in 6,81 kilo blocks and packaged in 20,43 kilo boxes</p>
+
+          <strong>Wet salted:</strong>
+          <ul>
+            <li>Splitted <span class="product-listing-detail">Back bone in</span></li>
+          </ul>
+          <p>Quality grades 1-2 (A)</p>
+          <p>All wet salted products are packaged in 20 kilo and 500 kilo boxes</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <div class="image-box">
+        <img src="blue-ling.png" alt="Blue Ling">
+      </div>
+
+      <div class="product-details">
+        <div class="title">Blue Ling</div>
+        <div class="subtitle">Molva dypterygia</div>
+        <div class="see-products">See products</div>
+
+        <div class="modal-description">
+          <strong>Interleaved frozen products:</strong>
+          <ul>
+            <p>Fillets skin on size +400 gr</p>
+          </ul>
+          <p>All interleaved frozen products are packaged in 6,81 kilo blocks and packaged in 20,43 kilo boxes</p>
+
+          <strong>Wetsalted products:</strong>
+          <ul>
+            <li> Splitted, size -1700 gr, +1700 gr</li>
+          </ul>
+          <p>All wetsalted products are packaged in 20 kilo boxes</p>
+
+          <ul>  
+          <strong>Other products:</strong>
+            <p>Roe</p>
+          </ul>
+
+        </div>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <div class="image-box">
+        <img src="whiting.png" alt="Whiting">
+      </div>
+
+      <div class="product-details">
+        <div class="title">Whiting</div>
+        <div class="subtitle">Merlangius merlangus</div>
+        <div class="see-products">See products</div>
+
+        <div class="modal-description">
+          <strong>Interleaved frozen products:</strong>
+          <ul>
+            <p>Fillets, skinless PBI: sizes 70 gr+</p>
+          </ul>
+          <p>All interleaved frozen products are packaged in 6,81 kilo blocks and packaged in 20,43 kilo boxes</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- PRODUCT MODAL -->
+
+  <div id="productModal" class="modal">
+    <div class="modal-box">
+      <span class="close-btn">&times;</span>
+
+      <div class="modal-inner">
+        <h1 id="modalTitle"></h1>
+        <h3 id="modalSubtitle"></h3>
+        <img id="modalImage" src="" alt="">
+        <div id="modalText"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+
+  <footer>
+    <div class="footer-wrapper">
+
+      <div class="footer-logo">
+        <img src="delta-bumerki.png" alt="Delta Seafood Logo">
+      </div>
+
+      <div class="footer-feature-grid">
+
+        <div class="footer-column">
+          <h4>Contact</h4>
+          <div class="footer-contact-entry"><strong>Delta Seafood</strong><a href="mailto:Deltaseafood@deltaseafood.fo">Deltaseafood@deltaseafood.fo</a><span>Telephone +298 208800</span><span>Havnalagið 25, 800 Tvøroyri</span><span>Reg no: 2468</span><span>VAT no.: 448486</span></div>
+          <div class="footer-contact-entry"><strong>TG Seafood</strong><a href="mailto:tgseafood@tgseafood.fo">tgseafood@tgseafood.fo</a><span>Telephone +298 208800</span><span>Á Hamranesi 10, 850 Hvalba</span><span>Reg no: 3670</span><span>VAT no.: 532908</span></div>
+
+          <h4>Address</h4>
+
+          <div class="footer-address-grid">
+            <div>
+              <p>Delta Seafood</p>
+              <p>Havnalagið 25</p>
+              <p>800 Tvøroyri</p>
+            </div>
+
+            <div>
+              <p>TG Seafood</p>
+              <p>Á Hamranesi 10</p>
+              <p>850 Hvalba</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="footer-column footer-image-column">
+          <img src="salted-cod.png" alt="Saltaður Toskur">
+        </div>
+
+        <div class="footer-column">
+          <h4>Registration Delta Seafood</h4>
+          <p>Registration no: 2468</p>
+          <p>VAT no.: 448486</p>
+          <h4>Registration TG Seafood</h4>
+          <p>Registration no: 3670</p>
+          <p>VAT no.: 532908</p>
+        </div>
+
+        <div class="footer-column footer-msc">
+          <div class="footer-msc-frame">
+            <img src="msc.svg" alt="MSC Certification">
+            <p>Certified sustainable by MSC for responsible seafood sourcing.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="footer-note">
+      Delta Seafood © 2026. All rights reserved.
+    </div>
+  </footer>
+
+  <!-- JAVASCRIPT -->
+
+  <script>
+    const modal = document.getElementById("productModal");
+    const modalTitle = document.getElementById("modalTitle");
+    const modalSubtitle = document.getElementById("modalSubtitle");
+    const modalImage = document.getElementById("modalImage");
+    const modalText = document.getElementById("modalText");
+    const closeBtn = document.querySelector(".close-btn");
+
+    function closeModal(){
+      modal.classList.remove("active");
+      document.body.style.overflow = "auto";
+    }
+
+    function categoryPriority(heading){
+      const name = heading.toLowerCase();
+
+      if(name.includes("light salted") || name.includes("lættsalta")) return 20;
+      if(name.includes("wet salted") || name.includes("wetsalted") || name.includes("saltaðar vørur") || name.includes("saltað")) return 10;
+      if(name.includes("interleav")) return 30;
+      if(name.includes("iqf")) return 40;
+      if(name.includes("j-cut")) return 50;
+      if(name.includes("other") || name.includes("aðrar")) return 90;
+      return 60;
+    }
+
+    function formatSaltedListings(section, heading){
+      const priority = categoryPriority(heading);
+      if(priority !== 10 && priority !== 20) return;
+
+      const content = section.lastElementChild;
+      const items = [...content.querySelectorAll("li")];
+      if(!items.length) return;
+
+      const columns = document.createElement("div");
+      columns.className = "cod-columns";
+      const qualityNotes = [];
+
+      items.forEach(item => {
+        const listingDetail = item.querySelector(".product-listing-detail");
+        const text = [...item.childNodes]
+          .filter(node => node !== listingDetail)
+          .map(node => node.textContent)
+          .join("")
+          .trim();
+        const ungradedMatch = text.match(/(ungraded|óflokkaður)/i);
+        const listingText = text.replace(/\s*(?:ungraded|óflokkaður)\s*/i, "").trim();
+        if(ungradedMatch) qualityNotes.push(ungradedMatch[1]);
+        const match = listingText.match(/^(.+?)(?:,\s*|\s+)(?:sizes?|støddir?|stødd)\s*(?:(?:from|frá)\s+)?(.+)$/i);
+        const column = document.createElement("div");
+        column.className = "cod-column";
+
+        const columnHeading = document.createElement("h3");
+        columnHeading.textContent = match ? match[1].trim() : listingText;
+        column.appendChild(columnHeading);
+
+        if(listingDetail){
+          const detail = document.createElement("p");
+          detail.textContent = listingDetail.textContent.trim();
+          column.appendChild(detail);
+        }
+
+        if(match){
+          match[2]
+            .split(/\s*,\s*|\s+(?:and|og)\s+/i)
+            .map(value => value.trim())
+            .filter(Boolean)
+            .forEach(value => {
+              const weight = document.createElement("p");
+              weight.textContent = value;
+              column.appendChild(weight);
+            });
+        }
+
+        columns.appendChild(column);
+        item.remove();
+      });
+
+      const orderedColumns = [...columns.children].sort((first, second) => {
+        const columnOrder = column => {
+          const name = column.querySelector("h3").textContent.toLowerCase();
+          if(name.includes("fillet") || name.includes("fløk")) return 10;
+          if(name.includes("split") || name.includes("flaktur") || name.includes("kloyvdur")) return 20;
+          return 30;
+        };
+        return columnOrder(first) - columnOrder(second);
+      });
+      columns.replaceChildren(...orderedColumns);
+
+      content.prepend(columns);
+
+      if(qualityNotes.length){
+        const qualityLine = document.createElement("p");
+        qualityLine.className = "cod-rule";
+        const isFaroese = document.documentElement.lang === "fo";
+        qualityLine.innerHTML = `<b>${isFaroese ? "Góðskuflokkur" : "Quality grade"}:</b> ${qualityNotes.join(", ")}`;
+        columns.insertAdjacentElement("afterend", qualityLine);
+      }
+
+      content.querySelectorAll("ul").forEach(list => {
+        while(list.firstChild){
+          list.parentNode.insertBefore(list.firstChild, list);
+        }
+        list.remove();
+      });
+
+      const detailParagraphs = [...content.children].filter(element => {
+        return element.tagName === "P" && !element.closest(".cod-columns");
+      });
+
+      detailParagraphs.forEach((paragraph, index) => {
+        const originalText = paragraph.textContent.trim();
+        paragraph.classList.toggle("cod-rule", index === 0);
+
+        if(/^(quality grades?|góðsku flokkar|góðskuflokkar)/i.test(originalText)){
+          paragraph.innerHTML = originalText.replace(/^(quality grades?|góðsku flokkar|góðskuflokkar)/i, "<b>$1:</b>").replace(/::/, ":");
+        }else if(/^all .*packaged/i.test(originalText) || /products are packaged|pakkað|kassar/i.test(originalText)){
+          const packagingLabel = document.documentElement.lang === "fo" ? "Pakking" : "Packaging";
+          paragraph.innerHTML = `<b>${packagingLabel}:</b> ${originalText}`;
+        }
+      });
+    }
+
+    function createPackagingPanels(container){
+      container.querySelectorAll(".cod-section").forEach(section => {
+        const packagingParagraphs = [...section.querySelectorAll("p")].filter(paragraph => {
+          return /packag(?:e|ed|ing)|pakkað|kassar|(?:frozen|packed|fryst)\s+in.*boxes/i.test(paragraph.textContent);
+        });
+
+        if(!packagingParagraphs.length) return;
+
+        const packagingPanel = document.createElement("div");
+        packagingPanel.className = "cod-packaging";
+        const firstPackagingParagraph = packagingParagraphs[0];
+        firstPackagingParagraph.parentNode.insertBefore(packagingPanel, firstPackagingParagraph);
+
+        packagingParagraphs.forEach((paragraph, index) => {
+          paragraph.classList.remove("cod-rule");
+
+          if(index === 0 && !paragraph.querySelector("b")){
+            const originalText = paragraph.textContent.trim();
+            const packagingLabel = document.documentElement.lang === "fo" ? "Pakking" : "Packaging";
+            paragraph.innerHTML = `<b>${packagingLabel}:</b> ${originalText}`;
+          }
+
+          packagingPanel.appendChild(paragraph);
+        });
+      });
+    }
+
+    function createProductPanels(description){
+      if(description.querySelector(".cod-sections")){
+        return description.innerHTML;
+      }
+
+      const parts = description.innerHTML.split(/<strong[^>]*>([\s\S]*?)<\/strong>/gi);
+      const grid = document.createElement("div");
+      grid.className = "cod-sections";
+      let sectionNumber = 1;
+
+      for(let index = 1; index < parts.length; index += 2){
+        const headingHolder = document.createElement("div");
+        headingHolder.innerHTML = parts[index];
+        const heading = headingHolder.textContent.trim().replace(/:$/, "");
+
+        if(sectionNumber === 1 && /^(products|vørur)$/i.test(heading)){
+          continue;
+        }
+
+        let content = parts[index + 1] || "";
+        content = content
+          .replace(/^\s*<ul[^>]*>\s*/i, "")
+          .replace(/\s*<\/ul>\s*$/i, "");
+
+        const section = document.createElement("section");
+        section.className = "cod-section";
+
+        const sectionHeading = document.createElement("h2");
+        sectionHeading.textContent = `${sectionNumber}. ${heading}`;
+        section.appendChild(sectionHeading);
+
+        const sectionContent = document.createElement("div");
+        sectionContent.innerHTML = content;
+        section.appendChild(sectionContent);
+        formatSaltedListings(section, heading);
+        grid.appendChild(section);
+        sectionNumber += 1;
+      }
+
+      const orderedSections = [...grid.children].sort((first, second) => {
+        return categoryPriority(first.querySelector("h2").textContent) - categoryPriority(second.querySelector("h2").textContent);
+      });
+
+      orderedSections.forEach((section, index) => {
+        const heading = section.querySelector("h2");
+        heading.textContent = `${index + 1}. ${heading.textContent.replace(/^\d+\.\s*/, "")}`;
+      });
+      grid.replaceChildren(...orderedSections);
+
+      return grid.outerHTML;
+    }
+
+    document.querySelectorAll(".product-card").forEach(card => {
+      card.addEventListener("click", () => {
+        const title = card.querySelector(".title").innerText;
+        const subtitle = card.querySelector(".subtitle").innerText;
+        const image = card.querySelector("img").src;
+        const imageAlt = card.querySelector("img").alt;
+        const modalDescription = card.querySelector(".modal-description");
+
+        modal.querySelector(".modal-box").classList.add("product-detail-modal");
+        modalTitle.innerText = title;
+        modalSubtitle.innerText = subtitle;
+        modalImage.src = image;
+        modalImage.alt = imageAlt;
+        modalText.innerHTML = modalDescription ? createProductPanels(modalDescription) : "";
+        createPackagingPanels(modalText);
+        window.translateDeltaSubtree?.(modalText);
+
+        modal.classList.add("active");
+        document.body.style.overflow = "hidden";
+      });
+    });
+
+    closeBtn.addEventListener("click", function(e){
+      e.stopPropagation();
+      closeModal();
+    });
+
+    modal.addEventListener("click", function(e){
+      if(e.target === modal){
+        closeModal();
+      }
+    });
+
+    document.addEventListener("keydown", function(e){
+      if(e.key === "Escape"){
+        closeModal();
+      }
+    });
+  </script>
+
+  <script src="page-translations.js?v=10"></script>
+  <script src="language-switch.js?v=2"></script>
+  <script src="mobile-nav.js?v=3"></script>
+</body>
+</html>

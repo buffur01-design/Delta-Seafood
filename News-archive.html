@@ -1,0 +1,867 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>News from Delta Seafood</title>
+
+  <style>
+    body{
+      margin:0;
+      font-family:Arial, sans-serif;
+      background:white;
+      text-align:center;
+    }
+
+    /* NAVBAR */
+
+    .navbar{
+      position:relative;
+      height:120px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      background:linear-gradient(to bottom, #cfe8f3, white);
+      z-index:1000;
+    }
+
+    .logo{
+      position:absolute;
+      left:50%;
+      transform:translateX(-50%);
+      z-index:1001;
+    }
+
+    .logo img{
+      width:170px;
+      display:block;
+    }
+
+    .menu-left{
+      position:absolute;
+      right:calc(50% + 160px);
+      display:flex;
+      gap:50px;
+      align-items:center;
+    }
+
+    .menu-right{
+      position:absolute;
+      left:calc(50% + 160px);
+      display:flex;
+      gap:50px;
+      align-items:center;
+    }
+
+    .navbar a{
+      text-decoration:none;
+      color:black;
+      font-size:20px;
+      font-weight:bold;
+      white-space:nowrap;
+    }
+
+    /* DROPDOWN MENU */
+
+    .nav-item{
+      position:relative;
+      display:inline-block;
+    }
+
+    .dropdown{
+      display:none;
+      position:absolute;
+      top:100%;
+      left:50%;
+      transform:translateX(-50%);
+      background:white;
+      min-width:210px;
+      box-shadow:0 12px 30px rgba(0,0,0,0.15);
+      border-radius:10px;
+      overflow:hidden;
+      z-index:9999;
+    }
+
+    .dropdown a{
+      display:block;
+      padding:14px 18px;
+      font-size:16px;
+      color:black;
+      text-align:left;
+      white-space:nowrap;
+    }
+
+    .dropdown a:hover{
+      background:#f1f7fb;
+    }
+
+    .nav-item:hover .dropdown{
+      display:block;
+    }
+
+    /* PAGE HEADER */
+
+    .page-header{
+      padding:80px 20px 40px;
+    }
+
+    .page-header h1{
+      font-size:44px;
+      color:#1f3c4d;
+      margin-bottom:16px;
+      text-transform:uppercase;
+    }
+
+    .page-header p{
+      font-size:20px;
+      color:#37586f;
+      max-width:760px;
+      margin:0 auto;
+      line-height:1.6;
+    }
+
+    .language-switcher{
+      position:absolute;
+      top:14px;
+      right:24px;
+      display:inline-flex;
+      gap:4px;
+      padding:4px;
+      background:#e7f2f8;
+      border-radius:999px;
+      z-index:1002;
+    }
+
+    .language-switcher button{
+      border:0;
+      border-radius:999px;
+      padding:9px 16px;
+      background:transparent;
+      color:#1f3c4d;
+      font-size:15px;
+      font-weight:bold;
+      cursor:pointer;
+    }
+
+    .language-switcher button.active{
+      background:#1f3c4d;
+      color:white;
+    }
+
+    @media(min-width:781px){
+      .navbar .menu-left > a{
+        width:140px;
+        text-align:center;
+      }
+
+      .navbar .menu-right > .nav-item{
+        width:220px;
+        text-align:center;
+      }
+
+      .navbar .menu-right > a{
+        width:120px;
+        text-align:center;
+      }
+    }
+
+    /* ARCHIVE CARDS */
+
+    .archive-section{
+      max-width:1200px;
+      margin:30px auto 90px;
+      padding:0 40px;
+      text-align:center;
+    }
+
+    .archive-grid{
+      display:grid;
+      grid-template-columns:repeat(3, 1fr);
+      gap:30px;
+    }
+
+    .archive-card{
+      background:#f7fbff;
+      border-radius:18px;
+      box-shadow:0 18px 40px rgba(37,86,108,0.08);
+      overflow:hidden;
+      cursor:pointer;
+      transition:0.25s ease;
+      text-align:left;
+    }
+
+    .archive-card:hover{
+      transform:translateY(-4px);
+      box-shadow:0 22px 45px rgba(37,86,108,0.14);
+    }
+
+    .archive-card img{
+      width:100%;
+      height:250px;
+      object-fit:cover;
+      display:block;
+    }
+
+    .archive-card img[src="jonas-progv.jpg"]{
+      object-position:center top;
+    }
+
+    .archive-card-content{
+      padding:24px;
+    }
+
+    .archive-date{
+      color:#6b8798;
+      font-size:15px;
+      margin:0 0 10px 0;
+    }
+
+    .archive-card h3{
+      color:#1f3c4d;
+      font-size:23px;
+      margin:0 0 12px 0;
+    }
+
+    .archive-card p{
+      color:#37586f;
+      font-size:16px;
+      line-height:1.6;
+      margin:0;
+    }
+
+    .archive-read-more{
+      display:inline-block;
+      margin-top:18px;
+      background:#1f3c4d;
+      color:white;
+      padding:10px 20px;
+      border-radius:999px;
+      font-size:15px;
+      font-weight:bold;
+    }
+
+    .archive-full-text{
+      display:none;
+    }
+
+    /* ARTICLE POPUP */
+
+    .archive-modal{
+      position:fixed;
+      inset:0;
+      background:rgba(0,0,0,0.65);
+      display:none;
+      justify-content:center;
+      align-items:center;
+      z-index:99999;
+      padding:40px;
+      box-sizing:border-box;
+    }
+
+    .archive-modal.active{
+      display:flex;
+    }
+
+    .archive-modal-box{
+      background:white;
+      width:90%;
+      max-width:950px;
+      max-height:90vh;
+      overflow-y:auto;
+      overflow-x:hidden;
+      border-radius:12px;
+      box-shadow:0 30px 80px rgba(0,0,0,0.35);
+      position:relative;
+      box-sizing:border-box;
+    }
+
+    .archive-close-btn{
+      position:sticky;
+      top:16px;
+      float:right;
+      width:48px;
+      height:48px;
+      margin:16px 16px 0 0;
+      background:black;
+      color:white;
+      border-radius:50%;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      font-size:34px;
+      font-weight:bold;
+      cursor:pointer;
+      z-index:1000;
+      border:4px solid white;
+      line-height:1;
+      box-sizing:border-box;
+    }
+
+    .archive-close-btn:hover{
+      background:#1f3c4d;
+    }
+
+    .archive-modal-inner{
+      padding:45px;
+      padding-right:70px;
+      text-align:left;
+      box-sizing:border-box;
+    }
+
+    #archiveModalImage{
+      width:100%;
+      max-height:420px;
+      object-fit:cover;
+      border-radius:14px;
+      margin-bottom:30px;
+      display:block;
+    }
+
+    #archiveModalImage.jonas-image{
+      width:100%;
+      height:auto;
+      max-width:600px;
+      max-height:60vh;
+      object-fit:contain;
+      margin-left:auto;
+      margin-right:auto;
+    }
+
+    #archiveModalDate{
+      color:#6b8798;
+      font-size:16px;
+      margin:0 0 10px 0;
+    }
+
+    #archiveModalTitle{
+      color:#1f3c4d;
+      font-size:38px;
+      margin:0 0 25px 0;
+    }
+
+    #archiveModalText{
+      color:#37586f;
+      font-size:18px;
+      line-height:1.75;
+    }
+
+    #archiveModalText p{
+      margin:0 0 22px 0;
+    }
+
+    .back-link{
+      margin-top:45px;
+    }
+
+    .back-link a{
+      display:inline-block;
+      background:#1f3c4d;
+      color:white;
+      padding:13px 26px;
+      border-radius:999px;
+      text-decoration:none;
+      font-weight:bold;
+    }
+
+    .back-link a:hover{
+      background:#2f5f79;
+    }
+
+    /* FOOTER */
+
+    footer{
+      background:#1f3c4d;
+      color:#f7fbff;
+      padding:36px 0;
+      margin-top:40px;
+      width:100%;
+      box-sizing:border-box;
+    }
+
+    .footer-wrapper{
+      display:flex;
+      gap:24px;
+      align-items:flex-start;
+      width:100%;
+      max-width:none;
+      margin:0;
+      padding:0 40px;
+      box-sizing:border-box;
+      flex-wrap:wrap;
+    }
+
+    .footer-logo{
+      flex:0 0 160px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+    }
+
+    .footer-logo img{
+      width:140px;
+      height:auto;
+      display:block;
+    }
+
+    .footer-feature-grid{
+      display:grid;
+      grid-template-columns:minmax(240px,1fr) minmax(240px,1fr) minmax(240px,1fr) minmax(240px,1fr);
+      gap:24px;
+      flex:1;
+      align-items:start;
+    }
+
+    .footer-column h4{
+      margin-bottom:12px;
+      font-size:18px;
+      text-transform:uppercase;
+      letter-spacing:0.05em;
+    }
+
+    .footer-column p,
+    .footer-column a{
+      margin:6px 0;
+      color:#f7fbff;
+      font-size:16px;
+      text-decoration:none;
+      line-height:1.6;
+    }
+
+    .footer-column a:hover{
+      text-decoration:underline;
+    }
+
+    .footer-address-grid{
+      display:grid;
+      grid-template-columns:repeat(2, minmax(140px,1fr));
+      gap:16px;
+      margin-top:12px;
+    }
+
+    .footer-image-column{
+      display:flex;
+      justify-content:center;
+      align-items:center;
+    }
+
+    .footer-image-column img{
+      width:100%;
+      max-width:220px;
+      border-radius:18px;
+      box-shadow:0 18px 40px rgba(37,86,108,0.12);
+      background:transparent;
+    }
+
+    .footer-msc{
+      display:flex;
+      justify-content:center;
+    }
+
+    .footer-msc-frame{
+      max-width:220px;
+      width:100%;
+      padding:18px;
+      border:1px solid rgba(255,255,255,0.18);
+      border-radius:18px;
+      background:rgba(255,255,255,0.06);
+      box-shadow:inset 0 0 0 1px rgba(255,255,255,0.02);
+      text-align:center;
+    }
+
+    .footer-msc-frame img{
+      max-width:140px;
+      width:100%;
+      height:auto;
+      display:block;
+      margin:0 auto 14px;
+    }
+
+    .footer-note{
+      text-align:center;
+      margin-top:28px;
+      font-size:14px;
+      color:#cfe8f3;
+    }
+
+    /* TABLET */
+
+    @media(max-width:1024px){
+      .menu-left{
+        right:calc(50% + 130px);
+        gap:30px;
+      }
+
+      .menu-right{
+        left:calc(50% + 130px);
+        gap:30px;
+      }
+
+      .navbar a{
+        font-size:22px;
+      }
+
+      .archive-grid{
+        grid-template-columns:repeat(2, 1fr);
+      }
+
+      .footer-feature-grid{
+        grid-template-columns:repeat(2, minmax(240px,1fr));
+      }
+    }
+
+    /* MOBILE */
+
+    @media(max-width:780px){
+      .navbar{
+        height:auto;
+        padding:20px;
+      }
+
+      .logo{
+        position:static;
+        transform:none;
+        order:1;
+      }
+
+      .navbar{
+        display:flex;
+        flex-direction:column;
+        gap:20px;
+      }
+
+      .menu-left,
+      .menu-right{
+        position:static;
+        display:flex;
+        justify-content:center;
+        flex-wrap:wrap;
+        gap:20px;
+      }
+
+      .menu-left{
+        order:2;
+      }
+
+      .menu-right{
+        order:3;
+      }
+
+      .language-switcher{
+        position:static;
+        order:4;
+      }
+
+      .dropdown{
+        position:static;
+        transform:none;
+        margin-top:10px;
+      }
+
+      .page-header{
+        padding:60px 20px 30px;
+      }
+
+      .page-header h1{
+        font-size:34px;
+      }
+
+      .page-header p{
+        font-size:18px;
+      }
+
+      .archive-section{
+        padding:0 25px;
+        margin:20px auto 70px;
+      }
+
+      .archive-grid{
+        grid-template-columns:1fr;
+      }
+
+      .archive-modal{
+        padding:20px;
+      }
+
+      .archive-modal-inner{
+        padding:30px;
+      }
+
+      #archiveModalTitle{
+        font-size:30px;
+      }
+
+      #archiveModalText{
+        font-size:16px;
+      }
+
+      .footer-wrapper{
+        flex-direction:column;
+        align-items:center;
+      }
+
+      .footer-feature-grid{
+        grid-template-columns:1fr;
+        width:100%;
+      }
+
+      .footer-address-grid{
+        grid-template-columns:1fr;
+      }
+
+      .footer-column h4{
+        text-align:center;
+      }
+    }
+  </style>
+
+  <link rel="stylesheet" href="footer.css?v=13">
+  <link rel="stylesheet" href="mobile.css?v=5">
+</head>
+
+<body>
+
+  <!-- NAVBAR -->
+
+  <div class="navbar">
+
+<div class="menu-left">
+  <a href="./">Home</a>
+  <a href="products.html">Products</a>
+</div>
+
+<a href="./" class="logo">
+  <img src="delta-bumerki.png" alt="Delta Seafood Logo">
+</a>
+
+<div class="menu-right">
+  <div class="nav-item">
+    <a href="about-our-facilities.html">About our facilities</a>
+
+    <div class="dropdown">
+      <a href="delta-seafood.html">Delta Seafood</a>
+      <a href="tg-seafood.html">TG Seafood</a>
+      <a href="lmt.html">LMT</a>
+      <a href="certifications.html">Certifications</a>
+    </div>
+  </div>
+
+  <a href="contact.html">Contact</a>
+</div>
+
+<div class="language-switcher" aria-label="Choose language">
+  <button type="button" class="active" data-lang="en" aria-pressed="true">EN</button>
+  <button type="button" data-lang="fo" aria-pressed="false">FO</button>
+</div>
+
+  </div>
+
+  <!-- PAGE HEADER -->
+
+  <section class="page-header">
+    <h1>News from Delta Seafood</h1>
+  </section>
+
+  <!-- ARCHIVE ARTICLES -->
+
+  <section class="archive-section">
+
+<div class="archive-grid"></div>
+
+  </section>
+
+
+
+  <!-- ARCHIVE POPUP -->
+
+  <div id="archiveModal" class="archive-modal">
+    <div class="archive-modal-box">
+      <span class="archive-close-btn">&times;</span>
+
+  <div class="archive-modal-inner">
+    <img id="archiveModalImage" src="" alt="">
+    <p id="archiveModalDate"></p>
+    <h1 id="archiveModalTitle"></h1>
+    <div id="archiveModalText"></div>
+  </div>
+</div>
+
+  </div>
+
+  <!-- FOOTER -->
+
+  <footer>
+    <div class="footer-wrapper">
+
+  <div class="footer-logo">
+    <img src="delta-bumerki.png" alt="Delta Seafood Logo">
+  </div>
+
+  <div class="footer-feature-grid">
+
+    <div class="footer-column">
+      <h4>Contact</h4>
+          <div class="footer-contact-entry"><strong>Delta Seafood</strong><a href="mailto:Deltaseafood@deltaseafood.fo">Deltaseafood@deltaseafood.fo</a><span>Telephone +298 208800</span><span>Havnalagið 25, 800 Tvøroyri</span><span>Reg no: 2468</span><span>VAT no.: 448486</span></div>
+          <div class="footer-contact-entry"><strong>TG Seafood</strong><a href="mailto:tgseafood@tgseafood.fo">tgseafood@tgseafood.fo</a><span>Telephone +298 208800</span><span>Á Hamranesi 10, 850 Hvalba</span><span>Reg no: 3670</span><span>VAT no.: 532908</span></div>
+
+      <h4>Address</h4>
+
+      <div class="footer-address-grid">
+        <div>
+          <p>Delta Seafood</p>
+          <p>Havnalagið 25</p>
+          <p>800 Tvøroyri</p>
+        </div>
+
+        <div>
+          <p>TG Seafood</p>
+          <p>Á Hamranesi 10</p>
+          <p>850 Hvalba</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-column footer-image-column">
+      <img src="salted-cod.png" alt="Salted cod">
+    </div>
+
+    <div class="footer-column">
+      <h4>Registration Delta Seafood</h4>
+      <p>Registration no: 2468</p>
+      <p>VAT no.: 448486</p>
+      <h4>Registration TG Seafood</h4>
+      <p>Registration no: 3670</p>
+      <p>VAT no.: 532908</p>
+    </div>
+
+    <div class="footer-column footer-msc">
+      <div class="footer-msc-frame">
+            <img src="msc.svg" alt="MSC Certification">
+        <p>Certified sustainable by MSC for responsible seafood sourcing.</p>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div class="footer-note">
+  Delta Seafood © 2026. All rights reserved.
+</div>
+
+  </footer>
+
+  <!-- JAVASCRIPT FOR ARCHIVE POPUP -->
+
+  <script src="articles.js?v=2"></script>
+  <script>
+    const archiveModal = document.getElementById("archiveModal");
+    const archiveModalImage = document.getElementById("archiveModalImage");
+    const archiveModalDate = document.getElementById("archiveModalDate");
+    const archiveModalTitle = document.getElementById("archiveModalTitle");
+    const archiveModalText = document.getElementById("archiveModalText");
+    const archiveCloseBtn = document.querySelector(".archive-close-btn");
+    const languageButtons = document.querySelectorAll(".language-switcher button");
+    const archiveGrid = document.querySelector(".archive-grid");
+    const sortedArticles = [...articles].sort((a, b) => (b.published || "").localeCompare(a.published || ""));
+
+    archiveGrid.innerHTML = sortedArticles.map(article => `
+      <div class="archive-card">
+        <img src="${article.en.image}" alt="${article.en.alt}" loading="lazy">
+        <div class="archive-card-content">
+          <p class="archive-date">${article.en.date}</p>
+          <h3>${article.en.title}</h3>
+          <span class="archive-read-more">Read more</span>
+          <div class="archive-full-text">${article.en.text}</div>
+        </div>
+      </div>
+    `).join("");
+
+    const archiveCards = [...document.querySelectorAll(".archive-card")];
+
+    function setLanguage(language){
+      const isFaroese = language === "fo";
+      document.documentElement.lang = language;
+      document.title = isFaroese ? "Tíðindi frá Delta Seafood" : "News from Delta Seafood";
+      document.querySelector(".page-header h1").textContent = isFaroese ? "Tíðindi frá Delta Seafood" : "News from Delta Seafood";
+
+      const navigation = document.querySelectorAll(".navbar .menu-left > a, .navbar .menu-right > a, .navbar .nav-item > a");
+      const labels = isFaroese
+        ? ["Heim", "Vørur", "Um okkara virkir", "Samband"]
+        : ["Home", "Products", "About our facilities", "Contact"];
+      navigation.forEach((link, index) => link.textContent = labels[index]);
+
+      archiveCards.forEach((card, index) => {
+        const article = sortedArticles[index][language];
+        card.querySelector(".archive-date").textContent = article.date;
+        card.querySelector("h3").textContent = article.title;
+        card.querySelector(".archive-read-more").textContent = isFaroese ? "Les meira" : "Read more";
+        card.querySelector(".archive-full-text").innerHTML = article.text;
+        card.querySelector("img").src = article.image;
+        card.querySelector("img").alt = article.alt;
+      });
+
+      const footerHeadings = document.querySelectorAll(".footer-column h4");
+      footerHeadings[0].textContent = isFaroese ? "Samband" : "Contact";
+      footerHeadings[1].textContent = isFaroese ? "Bústaður" : "Address";
+      footerHeadings[2].textContent = isFaroese ? "Skráseting" : "Registration";
+      document.querySelector(".footer-note").textContent = isFaroese ? "Delta Seafood © 2026. Øll rættindi vard." : "Delta Seafood © 2026. All rights reserved.";
+
+      languageButtons.forEach(button => {
+        const active = button.dataset.lang === language;
+        button.classList.toggle("active", active);
+        button.setAttribute("aria-pressed", active);
+      });
+      localStorage.setItem("deltaLanguage", language);
+      closeArchiveModal();
+    }
+
+    languageButtons.forEach(button => button.addEventListener("click", () => setLanguage(button.dataset.lang)));
+
+    function closeArchiveModal(){
+      archiveModal.classList.remove("active");
+      document.body.style.overflow = "auto";
+    }
+
+    archiveCards.forEach(card => {
+      card.addEventListener("click", () => {
+        const image = card.querySelector("img").src;
+        const imageAlt = card.querySelector("img").alt;
+        const date = card.querySelector(".archive-date").innerText;
+        const title = card.querySelector("h3").innerText;
+        const fullText = card.querySelector(".archive-full-text");
+
+        archiveModalImage.src = image;
+        archiveModalImage.classList.toggle("jonas-image", image.includes("jonas-progv.jpg"));
+        archiveModalImage.alt = imageAlt;
+        archiveModalDate.innerText = date;
+        archiveModalTitle.innerText = title;
+        archiveModalText.innerHTML = fullText ? fullText.innerHTML : "";
+
+        archiveModal.classList.add("active");
+        document.body.style.overflow = "hidden";
+      });
+    });
+
+    archiveCloseBtn.addEventListener("click", function(e){
+      e.stopPropagation();
+      closeArchiveModal();
+    });
+
+    archiveModal.addEventListener("click", function(e){
+      if(e.target === archiveModal){
+        closeArchiveModal();
+      }
+    });
+
+    document.addEventListener("keydown", function(e){
+      if(e.key === "Escape"){
+        closeArchiveModal();
+      }
+    });
+
+    setLanguage(localStorage.getItem("deltaLanguage") === "fo" ? "fo" : "en");
+  </script>
+
+  <script src="mobile-nav.js?v=3"></script>
+</body>
+</html>
