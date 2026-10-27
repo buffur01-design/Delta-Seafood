@@ -27,9 +27,9 @@ const articles = [
     },
     fo: {
       date: "20. august 2026",
-      title: "Landstýrismaðurin í fiskivinnumálum vitjar Delta Seafood",
+      title: "Landstýrismaðurin í uttanríkis- og fiskivinnumálum vitjar Delta Seafood",
       image: "Bárður á steig vitjan.jpg",
-      alt: "Landstýrismaðurin í fiskivinnumálum vitjar Delta Seafood",
+      alt: "Landstýrismaðurin í uttanríkis- og fiskivinnumálum vitjar Delta Seafood",
       text: `<p>Í gjár høvdu okur vitjan av landsstýrismanninum Bárður á Steig Nielsen í uttanríkis-og fiskimálaráðnum við umsiting.
 Tosað bleiv um ymisk viðurskifti, sum kunnu geva meira virksemið á virkinum á Tvøroyri.
 Okur takka fyri vitjanina og fegnast um, at landsstýrismaðurin við umsiting kemur út til vinnuna. </p>`
@@ -53,6 +53,24 @@ Okur takka fyri vitjanina og fegnast um, at landsstýrismaðurin við umsiting k
     }
   },
   {
+    published: "2025-10-23",
+    en: {
+      date: "23 Oktober 2025",
+      title: "Minister of foreign affairs and fisheries visits",
+      image: "sirið stenberg vitjar.jpg",
+      alt: "Sirið Stenberg vitjar",
+      text: `<p>Last week we had the pleasure of hosting the Minister of foreign affairs and fisheries Sirið Stenberg. We told her about our work and the company. We also talked about the big need for raw fish products. In the debate today about fishing rights the fish industry on land is forgotten. The visit ended with a tour of the facility.</p>`
+    },
+    fo: {
+      date: "23. oktober 2025",
+      title: "Landstýriskvinnan í uttanríkis- og fiskivinnumálum á vitjan",
+      image: "sirið stenberg vitjar.jpg",
+      alt: "Landstýriskvinnan í uttanríkis- og fiskivinnumálum á vitjan",
+      text: `<p>Í farnu viku var Sirið Stenberg á vitjan har vit greiddu henni um virksemið á virkinum hjá okkum. Eisini var komi inn á stóra tørvin av rávørum. Í kjakinum um veiðiloyvir verður fiskivinnan á landi ofta gloymd. Túrurin endaði við rundvísing á virkinum.</p>`
+    }
+  },
+  {
+
     published: "2025-08-20",
     en: {
       date: "20 August 2025",
