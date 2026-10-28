@@ -4,14 +4,14 @@ const articles = [
     en: {
       date: "17 October 2026",
       title: "We are part of the fall market in Tvøroyri",
-      image: "á heystmarknaði.jpg",
+      image: "Á Heystmarknaði.jpg",
       alt: "Delta on the fall market in Tvøroyri",
       text: `<p> We are proud to be part of the fall market in Tvøroyri, where we showcase our products and connect with the locals and give them the opportunity to try our salted fish products.</p>`
     },
     fo: {
       date: "17. oktobur 2026",
       title: "Vit luttaka á heystimarknaðinum á Tvøroyri",
-      image: "á heystmarknaði.jpg",
+      image: "Á Heystmarknaði.jpg",
       alt: "Framleiðsluvirkið hjá Delta Seafood",
       text: `<p>Vit eru errin at vera partur av heystmarknaðinum á Tvøroyri. Vit burturluta saltfiska vørur, og tað er møguligt at keypa saltfiska vørur.</p>`
     }
@@ -21,14 +21,14 @@ const articles = [
     en: {
       date: "20 August 2026",
       title: "Minister of fisheries visits Delta Seafood",
-      image: "Bárður á steig vitjan.jpg",
+      image: "Bárður á Steig vitjan.jpg",
       alt: "Minister of fisheries visits Delta Seafood",
       text: `<p>Yesterday we had the pleasure of hosting the Minister of foreign affairs and fisheries with this administration. We talked about different topics which could lead to higher utilization of the firm on Tvøroyri. We are gratefull for the visit and are happy that the minister with administration takes it times to visit firm in the industry</p>`
     },
     fo: {
       date: "20. august 2026",
       title: "Landstýrismaðurin í uttanríkis- og fiskivinnumálum vitjar Delta Seafood",
-      image: "Bárður á steig vitjan.jpg",
+      image: "Bárður á Steig vitjan.jpg",
       alt: "Landstýrismaðurin í uttanríkis- og fiskivinnumálum vitjar Delta Seafood",
       text: `<p>Í gjár høvdu okur vitjan av landsstýrismanninum Bárður á Steig Nielsen í uttanríkis-og fiskimálaráðnum við umsiting.
 Tosað bleiv um ymisk viðurskifti, sum kunnu geva meira virksemið á virkinum á Tvøroyri.
@@ -57,14 +57,14 @@ Okur takka fyri vitjanina og fegnast um, at landsstýrismaðurin við umsiting k
     en: {
       date: "23 Oktober 2025",
       title: "Minister of foreign affairs and fisheries visits",
-      image: "sirið stenberg vitjar.jpg",
+      image: "Sirið Stenberg vitjar.jpg",
       alt: "Sirið Stenberg vitjar",
       text: `<p>Last week we had the pleasure of hosting the Minister of foreign affairs and fisheries Sirið Stenberg. We told her about our work and the company. We also talked about the big need for raw fish products. In the debate today about fishing rights the fish industry on land is forgotten. The visit ended with a tour of the facility.</p>`
     },
     fo: {
       date: "23. oktober 2025",
       title: "Landstýriskvinnan í uttanríkis- og fiskivinnumálum á vitjan",
-      image: "sirið stenberg vitjar.jpg",
+      image: "Sirið Stenberg vitjar.jpg",
       alt: "Landstýriskvinnan í uttanríkis- og fiskivinnumálum á vitjan",
       text: `<p>Í farnu viku var Sirið Stenberg á vitjan har vit greiddu henni um virksemið á virkinum hjá okkum. Eisini var komi inn á stóra tørvin av rávørum. Í kjakinum um veiðiloyvir verður fiskivinnan á landi ofta gloymd. Túrurin endaði við rundvísing á virkinum.</p>`
     }
