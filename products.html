@@ -586,19 +586,20 @@
     .sales-team-float{
       position:fixed;
       top:50%;
-      right:clamp(36px, 4vw, 64px);
-      width:58px;
-      height:58px;
+      right:0;
+      width:78px;
+      height:64px;
       display:flex;
       align-items:center;
       justify-content:center;
       transform:translateY(-50%);
       border:2px solid white;
-      border-radius:50%;
+      border-right:0;
+      border-radius:20px 0 0 20px;
       background:#16384c;
-      box-shadow:0 0 0 4px rgba(22,56,76,0.14), 0 14px 34px rgba(22,56,76,0.34);
+      box-shadow:-8px 10px 28px rgba(22,56,76,0.34);
       z-index:900;
-      transition:transform 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease;
+      transition:width 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease;
     }
 
     .sales-team-float img{
@@ -609,9 +610,9 @@
     }
 
     .sales-team-float:hover{
-      transform:translateY(-50%) scale(1.08);
+      width:88px;
       background:#285a73;
-      box-shadow:0 0 0 4px rgba(22,56,76,0.18), 0 16px 38px rgba(22,56,76,0.42);
+      box-shadow:-10px 12px 32px rgba(22,56,76,0.42);
     }
 
     .sales-team-float:focus-visible{
