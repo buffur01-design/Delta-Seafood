@@ -204,6 +204,20 @@
       display:block;
     }
 
+    .archive-image-link{
+      display:block;
+      width:100%;
+      padding:0;
+      border:0;
+      background:#eef5f8;
+      cursor:pointer;
+    }
+
+    .archive-image-link:focus-visible{
+      outline:3px solid #78b9dc;
+      outline-offset:-3px;
+    }
+
     .archive-card img[src="jonas-progv.jpg"]{
       object-position:center top;
     }
@@ -766,11 +780,13 @@
     const archiveGrid = document.querySelector(".archive-grid");
     const sortedArticles = getArticlesNewestFirst(articles);
 
-    archiveGrid.innerHTML = sortedArticles.map(article => `
+    archiveGrid.innerHTML = sortedArticles.map((article, index) => `
       <div class="archive-card">
-        <img src="${article.en.image}" alt="${article.en.alt}" loading="lazy">
+        <button type="button" class="archive-image-link" aria-labelledby="archive-title-${index}">
+          <img src="${article.en.image}" alt="${article.en.alt}" loading="lazy">
+        </button>
         <div class="archive-card-content">
-          <h3>${article.en.title}</h3>
+          <h3 id="archive-title-${index}">${article.en.title}</h3>
           <button type="button" class="archive-read-more">Read more</button>
         </div>
       </div>
@@ -820,20 +836,24 @@
       document.body.style.overflow = "auto";
     }
 
+    function openArchiveArticle(index){
+      const language = document.documentElement.lang === "fo" ? "fo" : "en";
+      const article = sortedArticles[index][language];
+
+      archiveModalImage.src = article.image;
+      archiveModalImage.classList.toggle("jonas-image", article.image.includes("jonas-progv.jpg"));
+      archiveModalImage.alt = article.alt;
+      archiveModalDate.innerText = article.date;
+      archiveModalTitle.innerText = article.title;
+      archiveModalText.innerHTML = article.text;
+
+      archiveModal.classList.add("active");
+      document.body.style.overflow = "hidden";
+    }
+
     archiveCards.forEach((card, index) => {
-      card.querySelector(".archive-read-more").addEventListener("click", () => {
-        const language = document.documentElement.lang === "fo" ? "fo" : "en";
-        const article = sortedArticles[index][language];
-
-        archiveModalImage.src = article.image;
-        archiveModalImage.classList.toggle("jonas-image", article.image.includes("jonas-progv.jpg"));
-        archiveModalImage.alt = article.alt;
-        archiveModalDate.innerText = article.date;
-        archiveModalTitle.innerText = article.title;
-        archiveModalText.innerHTML = article.text;
-
-        archiveModal.classList.add("active");
-        document.body.style.overflow = "hidden";
+      card.querySelectorAll(".archive-image-link, .archive-read-more").forEach(control => {
+        control.addEventListener("click", () => openArchiveArticle(index));
       });
     });
 
