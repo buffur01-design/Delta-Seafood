@@ -4,7 +4,7 @@ const articles = [
     en: {
       date: "5 november 2026",
       title: "Prime minister of Faroe Islands visits",
-      image: "Løgmaður vitjar 05.11.2026.jpg",
+      image: "Løgmansvitjan 05.11.jpg",
       alt: "Prime minister visits Delta Seafood",
       text: `<p> On thursday the 5th of November 2026, the Prime Minister of the Faroe Islands Beinir Johannesenvisited Delta Seafood with his delegation.
       We talked about various topics that could lead to more work in our production facilities. The Prime Minister also walked through the production facilities which proccesed high quality fish from long liners. This is where the Prime Ministers knowledge and interest in long line fishing came to fruition.
@@ -13,7 +13,7 @@ const articles = [
     fo: {
       date: "5. novembur 2026",
       title: "Løgmaður á vitjan",
-      image: "Løgmaður vitjar 05.11.2026.jpg",
+      image: "Løgmansvitjan 05.11.jpg",
       alt: "Løgmaður vitjar Delta Seafood",
       text: `<p>Tórsdagin 5. novembur høvdu okur vitjan av løgmanni Beinir Johannesen við fylgi.
 Tosað bleiv um ymisk viðurskifti, sum kunnu geva meira virksemi á virkinum hjá Delta Seafood á Tvøroyri.
