@@ -1,4 +1,24 @@
 const articles = [
+    {
+    published: "2026-11-5",
+    en: {
+      date: "5 november 2026",
+      title: "Prime minister of Faroe Islands visits",
+      image: "Løgmaður vitjar 05.11.2026.jpg",
+      alt: "Prime minister visits Delta Seafood",
+      text: `<p> We are proud to be part of the fall market in Tvøroyri, where we showcase our products and connect with the locals and give them the opportunity to try our salted fish products.</p>`
+    },
+    fo: {
+      date: "5. novembur 2026",
+      title: "Løgmaður á vitjan",
+      image: "Løgmaður vitjar 05.11.2026.jpg",
+      alt: "Løgmaður vitjar Delta Seafood",
+      text: `<p>Tórsdagin 5. novembur høvdu okur vitjan av løgmanni Beinir Johannesen við fylgi.
+Tosað bleiv um ymisk viðurskifti, sum kunnu geva meira virksemi á virkinum hjá Delta Seafood á Tvøroyri.
+Løgmaður vitjaði framleiðsluna, sum tórsdagin framleiddi góðan línufisk. Her var løgmaður veruliga á heimabana við sínum áhuga og kunnleika til línufiskiskap.
+Okur takka løgmanni fyri vitjanina og fegnast um, at løgmaður við fylgi kemur út til vinnuna, fyri at hoyra hvat rørir seg í vinnuni.</p>`
+    }
+  },
   {
     published: "2026-10-17",
     en: {
