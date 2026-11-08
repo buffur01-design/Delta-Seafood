@@ -621,14 +621,17 @@
       filter:brightness(0) invert(1);
     }
 
-    .sales-team-float span{
+    .sales-team-float-label{
+      display:flex;
+      flex-direction:column;
+      align-items:flex-start;
       max-width:0;
       overflow:hidden;
       opacity:0;
       color:white;
-      font-size:20px;
+      font-size:18px;
       font-weight:700;
-      line-height:1;
+      line-height:1.05;
       transform:translateX(8px);
       transition:
         max-width 0.28s cubic-bezier(0.2, 0.8, 0.2, 1),
@@ -638,15 +641,15 @@
 
     .sales-team-float:hover,
     .sales-team-float:focus{
-      width:238px;
-      gap:14px;
+      width:190px;
+      gap:12px;
       background:#285a73;
       box-shadow:-10px 12px 32px rgba(22,56,76,0.42);
     }
 
-    .sales-team-float:hover span,
-    .sales-team-float:focus span{
-      max-width:150px;
+    .sales-team-float:hover .sales-team-float-label,
+    .sales-team-float:focus .sales-team-float-label{
+      max-width:100px;
       opacity:1;
       transform:translateX(0);
     }
@@ -899,7 +902,10 @@
 
   <a class="sales-team-float" href="contact.html#sales-team">
     <img src="email_icon.svg" alt="">
-    <span>Send Inquiry</span>
+    <span class="sales-team-float-label">
+      <span>Send</span>
+      <span>Inquiry</span>
+    </span>
   </a>
 
   <!-- PRODUCTS -->
