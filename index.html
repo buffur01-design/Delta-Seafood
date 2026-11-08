@@ -219,6 +219,12 @@
       padding:24px;
     }
 
+    .update-date{
+      color:#6b8798;
+      font-size:15px;
+      margin:0 0 10px 0;
+    }
+
     .update-card h3{
       color:#1f3c4d;
       font-size:23px;
@@ -802,6 +808,7 @@
           <img src="${content.image}" alt="${content.alt}" loading="lazy">
         </button>
         <div class="update-card-content">
+          <p class="update-date">${content.date}</p>
           <h3 id="update-title-${index}">${content.title}</h3>
           <button type="button" class="update-read-more">${currentLanguage === "fo" ? "Les meira" : "Read more"}</button>
         </div>
