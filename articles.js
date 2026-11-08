@@ -6,7 +6,9 @@ const articles = [
       title: "Prime minister of Faroe Islands visits",
       image: "Løgmaður vitjar 05.11.2026.jpg",
       alt: "Prime minister visits Delta Seafood",
-      text: `<p> We are proud to be part of the fall market in Tvøroyri, where we showcase our products and connect with the locals and give them the opportunity to try our salted fish products.</p>`
+      text: `<p> On thursday the 5th of November 2026, the Prime Minister of the Faroe Islands Beinir Johannesenvisited Delta Seafood with his delegation.
+      We talked about various topics that could lead to more work in our production facilities. The Prime Minister also walked through the production facilities which proccesed high quality fish from long liners. This is where the Prime Ministers knowledge and interest in long line fishing came to fruition.
+      We are great full for the Prime Ministers visit and appreciate the fact that Prime Minister with delegation travles around the country to listen to what is happening in the industry.</p>`
     },
     fo: {
       date: "5. novembur 2026",
