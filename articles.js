@@ -34,7 +34,7 @@ Okur takka løgmanni fyri vitjanina og fegnast um, at løgmaður við fylgi kemu
       date: "17. oktobur 2026",
       title: "Vit luttaka á heystimarknaðinum á Tvøroyri",
       image: "Á Heystmarknaði.jpg",
-      alt: "Framleiðsluvirkið hjá Delta Seafood",
+      alt: "Delta á heystimarknaðinum á Tvøroyri",
       text: `<p>Vit eru errin at vera partur av heystmarknaðinum á Tvøroyri. Vit burturluta saltfiska vørur, og tað er møguligt at keypa saltfiska vørur.</p>`
     }
   },
@@ -51,7 +51,7 @@ Okur takka løgmanni fyri vitjanina og fegnast um, at løgmaður við fylgi kemu
       date: "20. august 2026",
       title: "Landstýrismaðurin í uttanríkis- og fiskivinnumálum vitjar Delta Seafood",
       image: "Bárður á Steig vitjan.jpg",
-      alt: "Landstýrismaðurin í uttanríkis- og fiskivinnumálum vitjar Delta Seafood",
+      alt: "Landstýrismaðurin í uttanríkis- og fiskivinnumálum á vitjan.",
       text: `<p>Í gjár høvdu okur vitjan av landsstýrismanninum Bárður á Steig Nielsen í uttanríkis-og fiskimálaráðnum við umsiting.
 Tosað bleiv um ymisk viðurskifti, sum kunnu geva meira virksemið á virkinum á Tvøroyri.
 Okur takka fyri vitjanina og fegnast um, at landsstýrismaðurin við umsiting kemur út til vinnuna. </p>`
@@ -80,7 +80,7 @@ Okur takka fyri vitjanina og fegnast um, at landsstýrismaðurin við umsiting k
       date: "23 Oktober 2025",
       title: "Minister of foreign affairs and fisheries visits",
       image: "Sirið Stenberg vitjar.jpg",
-      alt: "Sirið Stenberg vitjar",
+      alt: "Landstýriskvinnan í uttanríkis- og fiskivinnumálum á vitjan",
       text: `<p>Last week we had the pleasure of hosting the Minister of foreign affairs and fisheries Sirið Stenberg. We told her about our work and the company. We also talked about the big need for raw fish products. In the debate today about fishing rights the fish industry on land is forgotten. The visit ended with a tour of the facility.</p>`
     },
     fo: {
