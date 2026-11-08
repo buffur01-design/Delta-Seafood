@@ -584,16 +584,17 @@
     }
 
     .sales-team-float{
+      --label-width:62px;
       position:fixed;
       top:50%;
       right:0;
-      width:76px;
+      width:auto;
       height:68px;
       display:flex;
       align-items:center;
       justify-content:flex-start;
       gap:0;
-      padding:0 18px 0 22px;
+      padding:0 20px 0 22px;
       transform:translateY(-50%);
       border:2px solid white;
       border-right:0;
@@ -607,10 +608,14 @@
       white-space:nowrap;
       z-index:900;
       transition:
-        width 0.28s cubic-bezier(0.2, 0.8, 0.2, 1),
+        padding 0.28s cubic-bezier(0.2, 0.8, 0.2, 1),
         gap 0.28s cubic-bezier(0.2, 0.8, 0.2, 1),
         background-color 0.2s ease,
         box-shadow 0.2s ease;
+    }
+
+    html[lang="fo"] .sales-team-float{
+      --label-width:104px;
     }
 
     .sales-team-float img{
@@ -625,6 +630,7 @@
       display:flex;
       flex-direction:column;
       align-items:flex-start;
+      width:max-content;
       max-width:0;
       overflow:hidden;
       opacity:0;
@@ -641,27 +647,17 @@
 
     .sales-team-float:hover,
     .sales-team-float:focus{
-      width:148px;
-      gap:12px;
+      gap:10px;
+      padding-right:16px;
       background:#285a73;
       box-shadow:-10px 12px 32px rgba(22,56,76,0.42);
     }
 
     .sales-team-float:hover .sales-team-float-label,
     .sales-team-float:focus .sales-team-float-label{
-      max-width:64px;
+      max-width:var(--label-width);
       opacity:1;
       transform:translateX(0);
-    }
-
-    html[lang="fo"] .sales-team-float:hover,
-    html[lang="fo"] .sales-team-float:focus{
-      width:188px;
-    }
-
-    html[lang="fo"] .sales-team-float:hover .sales-team-float-label,
-    html[lang="fo"] .sales-team-float:focus .sales-team-float-label{
-      max-width:104px;
     }
 
     .sales-team-float:focus-visible{
@@ -1566,8 +1562,8 @@
     });
   </script>
 
-  <script src="page-translations.js?v=11"></script>
-  <script src="language-switch.js?v=2"></script>
+  <script src="page-translations.js?v=12"></script>
+  <script src="language-switch.js?v=3"></script>
   <script src="mobile-nav.js?v=3"></script>
 </body>
 </html>

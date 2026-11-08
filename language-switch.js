@@ -110,5 +110,12 @@
 
     const translatedTitle = translationByMatch.get(document.title);
     if(translatedTitle) document.title = translatedTitle[language];
+
+    document.querySelectorAll(".sales-team-float").forEach(tab => {
+      const label = tab.querySelector(".sales-team-float-label");
+      if(label && label.scrollWidth > 0){
+        tab.style.setProperty("--label-width", `${Math.ceil(label.scrollWidth) + 2}px`);
+      }
+    });
   }
 })();
