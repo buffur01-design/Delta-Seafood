@@ -183,7 +183,6 @@
       border-radius:18px;
       box-shadow:0 18px 40px rgba(37,86,108,0.08);
       overflow:hidden;
-      cursor:pointer;
       transition:0.25s ease;
       text-align:left;
     }
@@ -204,23 +203,10 @@
       padding:24px;
     }
 
-    .update-date{
-      color:#6b8798;
-      font-size:15px;
-      margin:0 0 10px 0;
-    }
-
     .update-card h3{
       color:#1f3c4d;
       font-size:23px;
       margin:0 0 12px 0;
-    }
-
-    .update-card p{
-      color:#37586f;
-      font-size:16px;
-      line-height:1.6;
-      margin:0;
     }
 
     .update-read-more{
@@ -229,13 +215,22 @@
       background:#1f3c4d;
       color:white;
       padding:10px 20px;
+      border:0;
       border-radius:999px;
+      font:inherit;
       font-size:15px;
       font-weight:bold;
+      cursor:pointer;
+      transition:background 0.2s ease;
     }
 
-    .update-full-text{
-      display:none;
+    .update-read-more:hover{
+      background:#2f5f79;
+    }
+
+    .update-read-more:focus-visible{
+      outline:3px solid #78b9dc;
+      outline-offset:3px;
     }
 
     /* ARCHIVE LINK */
@@ -778,24 +773,14 @@
       document.querySelector(".archive-link a").textContent = "Fleiri tíðindi";
     }
 
-    function articleSummary(html){
-      const container = document.createElement("div");
-      container.innerHTML = html;
-      const text = container.querySelector("p")?.textContent.trim() || "";
-      return text.length > 135 ? `${text.slice(0, 132).trim()}...` : text;
-    }
-
     updatesGrid.innerHTML = latestArticles.map(article => {
       const content = article[currentLanguage];
       return `
       <div class="update-card">
         <img src="${content.image}" alt="${content.alt}" loading="lazy">
         <div class="update-card-content">
-          <p class="update-date">${content.date}</p>
           <h3>${content.title}</h3>
-          <p>${articleSummary(content.text)}</p>
-          <span class="update-read-more">${currentLanguage === "fo" ? "Les meira" : "Read more"}</span>
-          <div class="update-full-text">${content.text}</div>
+          <button type="button" class="update-read-more">${currentLanguage === "fo" ? "Les meira" : "Read more"}</button>
         </div>
       </div>
     `;
@@ -806,19 +791,15 @@
       document.body.style.overflow = "auto";
     }
 
-    document.querySelectorAll(".update-card").forEach(card => {
-      card.addEventListener("click", () => {
-        const image = card.querySelector("img").src;
-        const imageAlt = card.querySelector("img").alt;
-        const date = card.querySelector(".update-date").innerText;
-        const title = card.querySelector("h3").innerText;
-        const fullText = card.querySelector(".update-full-text");
+    document.querySelectorAll(".update-read-more").forEach((button, index) => {
+      button.addEventListener("click", () => {
+        const content = latestArticles[index][currentLanguage];
 
-        newsModalImage.src = image;
-        newsModalImage.alt = imageAlt;
-        newsModalDate.innerText = date;
-        newsModalTitle.innerText = title;
-        newsModalText.innerHTML = fullText ? fullText.innerHTML : "";
+        newsModalImage.src = content.image;
+        newsModalImage.alt = content.alt;
+        newsModalDate.innerText = content.date;
+        newsModalTitle.innerText = content.title;
+        newsModalText.innerHTML = content.text;
 
         newsModal.classList.add("active");
         document.body.style.overflow = "hidden";

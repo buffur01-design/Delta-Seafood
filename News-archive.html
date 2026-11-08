@@ -186,7 +186,6 @@
       border-radius:18px;
       box-shadow:0 18px 40px rgba(37,86,108,0.08);
       overflow:hidden;
-      cursor:pointer;
       transition:0.25s ease;
       text-align:left;
     }
@@ -211,23 +210,10 @@
       padding:24px;
     }
 
-    .archive-date{
-      color:#6b8798;
-      font-size:15px;
-      margin:0 0 10px 0;
-    }
-
     .archive-card h3{
       color:#1f3c4d;
       font-size:23px;
       margin:0 0 12px 0;
-    }
-
-    .archive-card p{
-      color:#37586f;
-      font-size:16px;
-      line-height:1.6;
-      margin:0;
     }
 
     .archive-read-more{
@@ -236,13 +222,22 @@
       background:#1f3c4d;
       color:white;
       padding:10px 20px;
+      border:0;
       border-radius:999px;
+      font:inherit;
       font-size:15px;
       font-weight:bold;
+      cursor:pointer;
+      transition:background 0.2s ease;
     }
 
-    .archive-full-text{
-      display:none;
+    .archive-read-more:hover{
+      background:#2f5f79;
+    }
+
+    .archive-read-more:focus-visible{
+      outline:3px solid #78b9dc;
+      outline-offset:3px;
     }
 
     /* ARTICLE POPUP */
@@ -768,10 +763,8 @@
       <div class="archive-card">
         <img src="${article.en.image}" alt="${article.en.alt}" loading="lazy">
         <div class="archive-card-content">
-          <p class="archive-date">${article.en.date}</p>
           <h3>${article.en.title}</h3>
-          <span class="archive-read-more">Read more</span>
-          <div class="archive-full-text">${article.en.text}</div>
+          <button type="button" class="archive-read-more">Read more</button>
         </div>
       </div>
     `).join("");
@@ -792,10 +785,8 @@
 
       archiveCards.forEach((card, index) => {
         const article = sortedArticles[index][language];
-        card.querySelector(".archive-date").textContent = article.date;
         card.querySelector("h3").textContent = article.title;
         card.querySelector(".archive-read-more").textContent = isFaroese ? "Les meira" : "Read more";
-        card.querySelector(".archive-full-text").innerHTML = article.text;
         card.querySelector("img").src = article.image;
         card.querySelector("img").alt = article.alt;
       });
@@ -822,20 +813,17 @@
       document.body.style.overflow = "auto";
     }
 
-    archiveCards.forEach(card => {
-      card.addEventListener("click", () => {
-        const image = card.querySelector("img").src;
-        const imageAlt = card.querySelector("img").alt;
-        const date = card.querySelector(".archive-date").innerText;
-        const title = card.querySelector("h3").innerText;
-        const fullText = card.querySelector(".archive-full-text");
+    archiveCards.forEach((card, index) => {
+      card.querySelector(".archive-read-more").addEventListener("click", () => {
+        const language = document.documentElement.lang === "fo" ? "fo" : "en";
+        const article = sortedArticles[index][language];
 
-        archiveModalImage.src = image;
-        archiveModalImage.classList.toggle("jonas-image", image.includes("jonas-progv.jpg"));
-        archiveModalImage.alt = imageAlt;
-        archiveModalDate.innerText = date;
-        archiveModalTitle.innerText = title;
-        archiveModalText.innerHTML = fullText ? fullText.innerHTML : "";
+        archiveModalImage.src = article.image;
+        archiveModalImage.classList.toggle("jonas-image", article.image.includes("jonas-progv.jpg"));
+        archiveModalImage.alt = article.alt;
+        archiveModalDate.innerText = article.date;
+        archiveModalTitle.innerText = article.title;
+        archiveModalText.innerHTML = article.text;
 
         archiveModal.classList.add("active");
         document.body.style.overflow = "hidden";
