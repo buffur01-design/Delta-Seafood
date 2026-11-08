@@ -641,7 +641,7 @@
 
     .sales-team-float:hover,
     .sales-team-float:focus{
-      width:190px;
+      width:148px;
       gap:12px;
       background:#285a73;
       box-shadow:-10px 12px 32px rgba(22,56,76,0.42);
@@ -649,9 +649,19 @@
 
     .sales-team-float:hover .sales-team-float-label,
     .sales-team-float:focus .sales-team-float-label{
-      max-width:102px;
+      max-width:64px;
       opacity:1;
       transform:translateX(0);
+    }
+
+    html[lang="fo"] .sales-team-float:hover,
+    html[lang="fo"] .sales-team-float:focus{
+      width:188px;
+    }
+
+    html[lang="fo"] .sales-team-float:hover .sales-team-float-label,
+    html[lang="fo"] .sales-team-float:focus .sales-team-float-label{
+      max-width:104px;
     }
 
     .sales-team-float:focus-visible{
