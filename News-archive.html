@@ -226,6 +226,12 @@
       padding:24px;
     }
 
+    .archive-date{
+      color:#6b8798;
+      font-size:15px;
+      margin:0 0 10px 0;
+    }
+
     .archive-card h3{
       color:#1f3c4d;
       font-size:23px;
@@ -786,6 +792,7 @@
           <img src="${article.en.image}" alt="${article.en.alt}" loading="lazy">
         </button>
         <div class="archive-card-content">
+          <p class="archive-date">${article.en.date}</p>
           <h3 id="archive-title-${index}">${article.en.title}</h3>
           <button type="button" class="archive-read-more">Read more</button>
         </div>
@@ -808,6 +815,7 @@
 
       archiveCards.forEach((card, index) => {
         const article = sortedArticles[index][language];
+        card.querySelector(".archive-date").textContent = article.date;
         card.querySelector("h3").textContent = article.title;
         card.querySelector(".archive-read-more").textContent = isFaroese ? "Les meira" : "Read more";
         card.querySelector("img").src = article.image;
