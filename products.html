@@ -590,6 +590,21 @@
       margin:11px 0 0;
     }
 
+    .product-weight-row{
+      position:relative;
+      padding-left:2.35em;
+    }
+
+    .product-weight-row::before{
+      content:"";
+      position:absolute;
+      top:.12em;
+      left:0;
+      width:1.95em;
+      height:1em;
+      background:url("delta-bumerki.png") center / contain no-repeat;
+    }
+
     .cod-section .cod-rule{
       padding-top:10px;
       border-top:1px solid #c6d7e1;
@@ -1895,6 +1910,19 @@
       });
     }
 
+    function decorateWeightRows(container){
+      const weightPattern = /\d[\d.,]*(?:\s*[-–]\s*\d[\d.,]*)?\+?\s*(?:gr|g|kg|kilo|oz)\+?/i;
+
+      container.querySelectorAll(".cod-section p, .cod-section li").forEach(row => {
+        const text = row.textContent.trim();
+        const isPackaging = Boolean(row.closest(".cod-packaging"));
+
+        if(!isPackaging && weightPattern.test(text)){
+          row.classList.add("product-weight-row");
+        }
+      });
+    }
+
     function createProductPanels(description){
       if(description.querySelector(".cod-sections")){
         return description.innerHTML;
@@ -1966,6 +1994,7 @@
         modalText.innerHTML = modalDescription ? createProductPanels(modalDescription) : "";
         createPackagingPanels(modalText);
         window.translateDeltaSubtree?.(modalText);
+        decorateWeightRows(modalText);
         modalInquiry.setAttribute(
           "aria-label",
           isFaroese() ? `Send fyrispurning um ${title}` : `Send inquiry about ${title}`
