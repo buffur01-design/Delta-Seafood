@@ -104,6 +104,7 @@ const pageTranslations = [
   { match: "IQF greenland halibut is packaged in 20 kilo boxes", en: "IQF greenland halibut is packaged in 20 kilo boxes", fo: "IQF-svartkalvi verður pakkaður í 20 kg kassar" },
   { match: "IQF greenland halibut are packaged in 20 kilo boxes", en: "IQF greenland halibut are packaged in 20 kilo boxes", fo: "IQF-svartkalvi verður pakkaður í 20 kg kassar" },
   { match: "J-cut products are frozen in 20 kilo boxes", en: "J-cut products are frozen in 20 kilo boxes", fo: "J-cut-vørur verða frystar í 20 kg kassum" },
+  { match: "J-cut products are frozen and packaged in 20 kilo boxes", en: "J-cut products are frozen and packaged in 20 kilo boxes", fo: "J-cut-vørur verða frystar og pakkaðar í 20 kg kassar" },
   { match: "All other products are frozen in 12 kilo blocks and packaged in 24 kilo boxes", en: "All other products are frozen in 12 kilo blocks and packaged in 24 kilo boxes", fo: "Allar aðrar vørur verða frystar í 12 kg blokkum og pakkaðar í 24 kg kassar" },
   { match: "All other products are packaged in 20 kilo boxes", en: "All other products are packaged in 20 kilo boxes", fo: "Allar aðrar vørur verða pakkaðar í 20 kg kassar" },
   { match: "All other products are packaged in 7,5 kilo blocks", en: "All other products are packaged in 7,5 kilo blocks", fo: "Allar aðrar vørur verða pakkaðar í 7,5 kg blokkir" },
