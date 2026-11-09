@@ -183,7 +183,7 @@
     .map-section{
       display:flex;
       justify-content:flex-start;
-      align-items:flex-start;
+      align-items:stretch;
       gap:24px;
       max-width:1100px;
       margin:0 auto 40px;
@@ -193,6 +193,8 @@
     .map-block{
       flex:1;
       min-width:320px;
+      display:flex;
+      flex-direction:column;
     }
 
     .location-block{
@@ -218,6 +220,26 @@
       background:white;
     }
 
+    .location-visual{
+      width:100%;
+      height:180px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      border:1px solid #d6e7f1;
+      border-radius:16px;
+      background:
+        radial-gradient(circle at 70% 20%, rgba(125,183,209,.3), transparent 34%),
+        linear-gradient(145deg, #f1f8fb, #fff);
+      color:#285a73;
+    }
+
+    .location-visual svg{
+      width:62px;
+      height:62px;
+      filter:drop-shadow(0 8px 12px rgba(37,86,108,.18));
+    }
+
     .location-card h3{
       margin:16px 0 8px;
       color:#1f3c4d;
@@ -233,7 +255,9 @@
     #map{
       width:100%;
       max-width:760px;
-      height:500px;
+      min-height:500px;
+      height:auto;
+      flex:1;
       margin:0;
       border-radius:18px;
       box-shadow:0 18px 40px rgba(37,86,108,0.08);
@@ -451,6 +475,8 @@
 
       #map{
         height:420px;
+        min-height:420px;
+        flex:none;
       }
 
       .footer-wrapper{
@@ -669,6 +695,17 @@
         <img src="tg-seafood-bygningur.jpg" alt="TG Seafood building">
         <h3>TG Seafood</h3>
         <p>Á Hamranesi 10, 850 Hvalba</p>
+      </div>
+
+      <div class="location-card">
+        <div class="location-visual" aria-hidden="true">
+          <svg viewBox="0 0 64 64" focusable="false">
+            <path fill="currentColor" d="M32 3C20.4 3 11 12.4 11 24c0 15.8 21 37 21 37s21-21.2 21-37C53 12.4 43.6 3 32 3Z"/>
+            <circle cx="32" cy="24" r="8" fill="white"/>
+          </svg>
+        </div>
+        <h3>Defa</h3>
+        <p>61.472747, -6.807699</p>
       </div>
     </div>
   </div>
