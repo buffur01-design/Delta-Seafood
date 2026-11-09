@@ -1,0 +1,723 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Explore Delta Seafood products and handling for international seafood markets.">
+  <title>Markets - Delta Seafood</title>
+
+  <style>
+    *{
+      box-sizing:border-box;
+    }
+
+    html{
+      scroll-behavior:smooth;
+    }
+
+    body{
+      margin:0;
+      color:#18384a;
+      background:#fff;
+      font-family:Arial, sans-serif;
+    }
+
+    a{
+      color:inherit;
+    }
+
+    .skip-link{
+      position:fixed;
+      top:10px;
+      left:10px;
+      z-index:20000;
+      padding:11px 16px;
+      border-radius:8px;
+      color:#fff;
+      background:#18384a;
+      transform:translateY(-150%);
+      transition:transform .2s ease;
+    }
+
+    .skip-link:focus{
+      transform:translateY(0);
+    }
+
+    .navbar{
+      position:relative;
+      z-index:1000;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      height:120px;
+      background:linear-gradient(to bottom, #cfe8f3, #fff);
+    }
+
+    .logo{
+      position:absolute;
+      left:50%;
+      z-index:1001;
+      transform:translateX(-50%);
+    }
+
+    .logo img{
+      display:block;
+      width:170px;
+    }
+
+    .menu-left{
+      position:absolute;
+      right:calc(50% + 160px);
+      display:flex;
+      align-items:center;
+      gap:50px;
+    }
+
+    .menu-right{
+      position:absolute;
+      left:calc(50% + 160px);
+      display:flex;
+      align-items:center;
+      gap:50px;
+    }
+
+    .navbar a{
+      color:#111;
+      font-size:20px;
+      font-weight:700;
+      text-decoration:none;
+      white-space:nowrap;
+    }
+
+    .navbar a[aria-current="page"]{
+      color:#176647;
+    }
+
+    .nav-item{
+      position:relative;
+      display:inline-block;
+    }
+
+    .dropdown{
+      position:absolute;
+      top:100%;
+      left:50%;
+      z-index:9999;
+      display:none;
+      min-width:210px;
+      overflow:hidden;
+      border-radius:10px;
+      background:#fff;
+      box-shadow:0 12px 30px rgba(0,0,0,.15);
+      transform:translateX(-50%);
+    }
+
+    .dropdown a{
+      display:block;
+      padding:14px 18px;
+      color:#111;
+      font-size:16px;
+      text-align:left;
+    }
+
+    .dropdown a:hover,
+    .dropdown a:focus-visible{
+      background:#f1f7fb;
+    }
+
+    .nav-item:hover .dropdown{
+      display:block;
+    }
+
+    .markets-hero{
+      display:grid;
+      grid-template-columns:minmax(0, 1.03fr) minmax(420px, .97fr);
+      min-height:620px;
+      background:#f2f8fb;
+    }
+
+    .hero-copy{
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+      padding:clamp(70px, 9vw, 145px) clamp(34px, 7vw, 118px);
+    }
+
+    .eyebrow{
+      margin:0 0 18px;
+      color:#176647;
+      font-size:14px;
+      font-weight:800;
+      letter-spacing:.18em;
+      text-transform:uppercase;
+    }
+
+    .hero-copy h1{
+      max-width:720px;
+      margin:0;
+      color:#18384a;
+      font-size:clamp(48px, 5.5vw, 86px);
+      line-height:.98;
+      letter-spacing:-.045em;
+      text-wrap:balance;
+    }
+
+    .hero-copy > p:not(.eyebrow){
+      max-width:680px;
+      margin:28px 0 0;
+      color:#456679;
+      font-size:clamp(18px, 1.5vw, 22px);
+      line-height:1.65;
+    }
+
+    .hero-actions{
+      display:flex;
+      flex-wrap:wrap;
+      gap:14px;
+      margin-top:34px;
+    }
+
+    .button{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      min-height:52px;
+      padding:13px 23px;
+      border:2px solid #18384a;
+      border-radius:999px;
+      font-size:16px;
+      font-weight:800;
+      text-decoration:none;
+      transition:background .2s ease, color .2s ease, transform .2s ease;
+    }
+
+    .button:hover{
+      transform:translateY(-2px);
+    }
+
+    .button-primary{
+      color:#fff;
+      background:#18384a;
+    }
+
+    .button-secondary{
+      color:#18384a;
+      background:transparent;
+    }
+
+    .hero-image{
+      position:relative;
+      min-height:620px;
+      overflow:hidden;
+    }
+
+    .hero-image::after{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:linear-gradient(90deg, rgba(24,56,74,.12), transparent 35%);
+      pointer-events:none;
+    }
+
+    .hero-image img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+    }
+
+    .markets-section{
+      width:min(1240px, calc(100% - 48px));
+      margin:0 auto;
+      padding:110px 0;
+    }
+
+    .section-heading{
+      display:grid;
+      grid-template-columns:minmax(0, .75fr) minmax(0, 1.25fr);
+      gap:60px;
+      align-items:end;
+      margin-bottom:54px;
+    }
+
+    .section-heading h2{
+      margin:0;
+      color:#18384a;
+      font-size:clamp(38px, 4vw, 62px);
+      line-height:1.04;
+      letter-spacing:-.035em;
+      text-wrap:balance;
+    }
+
+    .section-heading p{
+      max-width:680px;
+      margin:0;
+      color:#537284;
+      font-size:19px;
+      line-height:1.7;
+    }
+
+    .format-list{
+      display:grid;
+      grid-template-columns:repeat(4, 1fr);
+      border-top:1px solid #bfd3de;
+      border-bottom:1px solid #bfd3de;
+    }
+
+    .format-link{
+      position:relative;
+      min-height:180px;
+      padding:34px 28px;
+      border-right:1px solid #bfd3de;
+      text-decoration:none;
+      transition:background .2s ease;
+    }
+
+    .format-link:last-child{
+      border-right:0;
+    }
+
+    .format-link:hover,
+    .format-link:focus-visible{
+      background:#f2f8fb;
+    }
+
+    .format-number{
+      display:block;
+      margin-bottom:54px;
+      color:#7390a0;
+      font-size:13px;
+      font-weight:800;
+      letter-spacing:.16em;
+    }
+
+    .format-name{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:16px;
+      color:#18384a;
+      font-size:22px;
+      font-weight:800;
+    }
+
+    .format-arrow{
+      color:#176647;
+      font-size:28px;
+      line-height:1;
+    }
+
+    .handling-band{
+      background:#18384a;
+      color:#fff;
+    }
+
+    .handling-inner{
+      display:grid;
+      grid-template-columns:minmax(0, 1.05fr) minmax(0, .95fr);
+      min-height:610px;
+    }
+
+    .handling-image{
+      min-height:520px;
+      overflow:hidden;
+    }
+
+    .handling-image img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+    }
+
+    .handling-copy{
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+      padding:70px clamp(36px, 7vw, 110px);
+    }
+
+    .handling-copy .eyebrow{
+      color:#9ed6bd;
+    }
+
+    .handling-copy h2{
+      margin:0;
+      font-size:clamp(38px, 4.2vw, 64px);
+      line-height:1.04;
+      letter-spacing:-.035em;
+      text-wrap:balance;
+    }
+
+    .handling-copy > p:not(.eyebrow){
+      margin:26px 0 0;
+      color:#d4e4ec;
+      font-size:19px;
+      line-height:1.7;
+    }
+
+    .handling-points{
+      display:grid;
+      gap:0;
+      margin:36px 0 0;
+      padding:0;
+      border-top:1px solid rgba(255,255,255,.22);
+      list-style:none;
+    }
+
+    .handling-points li{
+      padding:18px 0;
+      border-bottom:1px solid rgba(255,255,255,.22);
+      color:#fff;
+      font-size:17px;
+      font-weight:700;
+    }
+
+    .trust-section{
+      display:grid;
+      grid-template-columns:minmax(0, 1.2fr) minmax(320px, .8fr);
+      gap:70px;
+      align-items:center;
+      width:min(1240px, calc(100% - 48px));
+      margin:0 auto;
+      padding:110px 0 90px;
+    }
+
+    .trust-copy h2{
+      max-width:760px;
+      margin:0;
+      color:#18384a;
+      font-size:clamp(40px, 4.6vw, 70px);
+      line-height:1.02;
+      letter-spacing:-.04em;
+      text-wrap:balance;
+    }
+
+    .trust-copy p{
+      max-width:720px;
+      margin:28px 0 34px;
+      color:#537284;
+      font-size:19px;
+      line-height:1.7;
+    }
+
+    .trust-mark{
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      min-height:330px;
+      padding:50px;
+      border:1px solid #d2e3eb;
+      border-radius:50%;
+      background:#f4f9fb;
+    }
+
+    .trust-mark img{
+      width:min(240px, 80%);
+      height:auto;
+    }
+
+    .sales-cta{
+      width:min(1240px, calc(100% - 48px));
+      margin:20px auto 0;
+      padding:70px clamp(34px, 7vw, 92px);
+      border-radius:28px;
+      background:linear-gradient(135deg, #dff1f7, #f8fbfc 60%, #e8f4ee);
+    }
+
+    .sales-cta h2{
+      max-width:760px;
+      margin:0;
+      color:#18384a;
+      font-size:clamp(36px, 4vw, 58px);
+      line-height:1.06;
+      letter-spacing:-.035em;
+    }
+
+    .sales-cta p{
+      max-width:710px;
+      margin:20px 0 30px;
+      color:#4f6d7e;
+      font-size:19px;
+      line-height:1.65;
+    }
+
+    @media(max-width:1050px){
+      .markets-hero{
+        grid-template-columns:1fr;
+      }
+
+      .hero-image{
+        min-height:480px;
+      }
+
+      .section-heading,
+      .handling-inner,
+      .trust-section{
+        grid-template-columns:1fr;
+      }
+
+      .format-list{
+        grid-template-columns:repeat(2, 1fr);
+      }
+
+      .format-link:nth-child(2){
+        border-right:0;
+      }
+
+      .format-link:nth-child(-n+2){
+        border-bottom:1px solid #bfd3de;
+      }
+
+      .handling-image{
+        min-height:440px;
+      }
+
+      .trust-mark{
+        min-height:280px;
+        border-radius:24px;
+      }
+    }
+
+    @media(max-width:620px){
+      .hero-copy{
+        padding:72px 24px;
+      }
+
+      .hero-copy h1{
+        font-size:45px;
+      }
+
+      .hero-image{
+        min-height:330px;
+      }
+
+      .markets-section,
+      .trust-section,
+      .sales-cta{
+        width:min(100% - 32px, 1240px);
+      }
+
+      .markets-section,
+      .trust-section{
+        padding:76px 0;
+      }
+
+      .section-heading{
+        gap:22px;
+      }
+
+      .format-list{
+        grid-template-columns:1fr;
+      }
+
+      .format-link,
+      .format-link:nth-child(2){
+        min-height:130px;
+        border-right:0;
+        border-bottom:1px solid #bfd3de;
+      }
+
+      .format-link:last-child{
+        border-bottom:0;
+      }
+
+      .format-number{
+        margin-bottom:28px;
+      }
+
+      .handling-image{
+        min-height:300px;
+      }
+
+      .handling-copy{
+        padding:64px 24px;
+      }
+
+      .sales-cta{
+        padding:48px 24px;
+        border-radius:20px;
+      }
+    }
+
+    @media(prefers-reduced-motion:reduce){
+      html{
+        scroll-behavior:auto;
+      }
+
+      *,
+      *::before,
+      *::after{
+        transition-duration:.01ms !important;
+      }
+    }
+  </style>
+
+  <link rel="stylesheet" href="language-switch.css">
+  <link rel="stylesheet" href="footer.css?v=15">
+  <link rel="stylesheet" href="mobile.css?v=7">
+</head>
+
+<body>
+  <a class="skip-link" href="#main-content">Skip to content</a>
+
+  <nav class="navbar" aria-label="Primary navigation" data-aria-label-en="Primary navigation" data-aria-label-fo="Høvuðsvalmynd">
+    <div class="menu-left">
+      <a href="./">Home</a>
+      <a href="products.html">Products</a>
+      <a href="markets.html" aria-current="page">Markets</a>
+    </div>
+
+    <a href="./" class="logo">
+      <img src="delta-bumerki.png" alt="Delta Seafood Logo">
+    </a>
+
+    <div class="menu-right">
+      <div class="nav-item">
+        <a href="about-our-facilities.html">About our facilities</a>
+        <div class="dropdown">
+          <a href="delta-seafood.html">Delta Seafood</a>
+          <a href="tg-seafood.html">TG Seafood</a>
+          <a href="lmt.html">LMT</a>
+          <a href="certifications.html">Certifications</a>
+        </div>
+      </div>
+      <a href="contact.html">Contact</a>
+    </div>
+  </nav>
+
+  <main id="main-content">
+    <section class="markets-hero" aria-labelledby="markets-title">
+      <div class="hero-copy">
+        <p class="eyebrow">Markets</p>
+        <h1 id="markets-title">Seafood for international markets</h1>
+        <p>Wild-caught seafood from the Faroe Islands and international waters, prepared in a range of formats for customers around the world.</p>
+        <div class="hero-actions">
+          <a class="button button-primary" href="products.html">Explore products</a>
+          <a class="button button-secondary" href="contact.html#sales-team">Contact sales</a>
+        </div>
+      </div>
+      <div class="hero-image">
+        <img src="Delta bygningur við skipi.jpg" alt="Delta Seafood facility and vessel" loading="eager">
+      </div>
+    </section>
+
+    <section class="markets-section" aria-labelledby="range-heading">
+      <div class="section-heading">
+        <h2 id="range-heading">A flexible seafood range</h2>
+        <p>Our catalogue covers salted, light-salted, frozen and IQF products. Each species page shows the available cuts, sizes, quality grades and packaging.</p>
+      </div>
+
+      <div class="format-list" aria-label="Seafood product formats">
+        <a class="format-link" href="products.html">
+          <span class="format-number">01</span>
+          <span class="format-name">Salted <span class="format-arrow" aria-hidden="true">→</span></span>
+        </a>
+        <a class="format-link" href="products.html">
+          <span class="format-number">02</span>
+          <span class="format-name">Light salted <span class="format-arrow" aria-hidden="true">→</span></span>
+        </a>
+        <a class="format-link" href="products.html">
+          <span class="format-number">03</span>
+          <span class="format-name">Frozen <span class="format-arrow" aria-hidden="true">→</span></span>
+        </a>
+        <a class="format-link" href="products.html">
+          <span class="format-number">04</span>
+          <span class="format-name">IQF <span class="format-arrow" aria-hidden="true">→</span></span>
+        </a>
+      </div>
+    </section>
+
+    <section class="handling-band" aria-labelledby="handling-heading">
+      <div class="handling-inner">
+        <div class="handling-image">
+          <img src="hamranes-breidanes.jpg" alt="Hamranes and Breiðanes fishing vessels" loading="lazy">
+        </div>
+        <div class="handling-copy">
+          <p class="eyebrow">From landing to packaging</p>
+          <h2 id="handling-heading">Built around your specification</h2>
+          <p>Across our facilities, seafood is handled and sorted to support customer requirements and export standards.</p>
+          <ul class="handling-points">
+            <li>Sorting by species, size and quality</li>
+            <li>Packaging tailored to customer specifications</li>
+            <li>Salted, light-salted, frozen and IQF formats</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="trust-section" aria-labelledby="trust-heading">
+      <div class="trust-copy">
+        <p class="eyebrow">Quality documentation</p>
+        <h2 id="trust-heading">Approvals for confident sourcing</h2>
+        <p>Review the available certification and food-safety documentation for Delta Seafood and TG Seafood.</p>
+        <a class="button button-primary" href="certifications.html">View certifications</a>
+      </div>
+      <div class="trust-mark" aria-hidden="true">
+        <img src="msc.svg" alt="">
+      </div>
+    </section>
+
+    <section class="sales-cta" aria-labelledby="sales-heading">
+      <p class="eyebrow">Sales support</p>
+      <h2 id="sales-heading">Tell us what your market needs</h2>
+      <p>Contact our sales team to discuss species, cuts, sizes, grades and packaging.</p>
+      <a class="button button-primary" href="contact.html#sales-team">Send an inquiry</a>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-wrapper">
+      <div class="footer-logo">
+        <img src="delta-bumerki.png" alt="Delta Seafood Logo">
+      </div>
+
+      <div class="footer-feature-grid">
+        <div class="footer-column">
+          <h4>Contact</h4>
+          <div class="footer-contact-entry"><strong>Delta Seafood</strong><a href="mailto:Deltaseafood@deltaseafood.fo">Deltaseafood@deltaseafood.fo</a><span>Telephone +298 208800</span><span>Havnalagið 25, 800 Tvøroyri</span><span>Reg no: 2468</span><span>VAT no.: 448486</span></div>
+          <div class="footer-contact-entry"><strong>TG Seafood</strong><a href="mailto:tgseafood@tgseafood.fo">tgseafood@tgseafood.fo</a><span>Telephone +298 208800</span><span>Á Hamranesi 10, 850 Hvalba</span><span>Reg no: 3670</span><span>VAT no.: 532908</span></div>
+
+          <h4>Address</h4>
+          <div class="footer-address-grid">
+            <div>
+              <p>Delta Seafood</p>
+              <p>Havnalagið 25</p>
+              <p>800 Tvøroyri</p>
+            </div>
+            <div>
+              <p>TG Seafood</p>
+              <p>Á Hamranesi 10</p>
+              <p>850 Hvalba</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="footer-column footer-image-column">
+          <img src="salted-cod.png" alt="Salted cod">
+        </div>
+
+        <div class="footer-column">
+          <h4>Registration Delta Seafood</h4>
+          <p>Registration no: 2468</p>
+          <p>VAT no.: 448486</p>
+          <h4>Registration TG Seafood</h4>
+          <p>Registration no: 3670</p>
+          <p>VAT no.: 532908</p>
+        </div>
+
+        <div class="footer-column footer-msc">
+          <div class="footer-msc-frame">
+            <img src="msc.svg" alt="MSC Certification">
+            <p>Certified sustainable by MSC for responsible seafood sourcing.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-note">Delta Seafood © 2026. All rights reserved.</div>
+  </footer>
+
+  <script src="page-translations.js?v=12"></script>
+  <script src="language-switch.js?v=5"></script>
+  <script src="mobile-nav.js?v=3"></script>
+</body>
+</html>
