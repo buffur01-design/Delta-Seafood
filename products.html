@@ -3,14 +3,59 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Explore Delta Seafood's range of salted, light-salted, frozen and IQF seafood products from the Faroe Islands.">
   <title>Products - Delta Seafood</title>
 
   <style>
+    :root{
+      --navy:#16384c;
+      --navy-soft:#285a73;
+      --ink:#1f3c4d;
+      --muted:#557184;
+      --ice:#f3f9fc;
+      --line:#d6e7f1;
+      --white:#fff;
+    }
+
+    *{
+      box-sizing:border-box;
+    }
+
     body{
       margin:0;
       font-family:Arial, sans-serif;
       background:white;
       text-align:center;
+      color:var(--ink);
+    }
+
+    .skip-link{
+      position:fixed;
+      top:10px;
+      left:10px;
+      z-index:100000;
+      padding:10px 16px;
+      border-radius:8px;
+      background:var(--navy);
+      color:white;
+      text-decoration:none;
+      transform:translateY(-150%);
+    }
+
+    .skip-link:focus{
+      transform:translateY(0);
+    }
+
+    .visually-hidden{
+      position:absolute !important;
+      width:1px !important;
+      height:1px !important;
+      padding:0 !important;
+      margin:-1px !important;
+      overflow:hidden !important;
+      clip:rect(0,0,0,0) !important;
+      white-space:nowrap !important;
+      border:0 !important;
     }
 
     /* NAVBAR */
@@ -99,49 +144,182 @@
       display:block;
     }
 
-    /* PAGE TITLE */
+    /* CATALOG INTRO */
+
+    .catalog-hero{
+      width:min(1180px, calc(100% - 48px));
+      margin:44px auto 28px;
+      padding:46px 52px;
+      border:1px solid #e2eef4;
+      border-radius:26px;
+      background:
+        radial-gradient(circle at 92% 12%, rgba(116,180,207,.22), transparent 28%),
+        linear-gradient(135deg, #f2f9fc 0%, #fff 62%);
+      text-align:left;
+      box-shadow:0 24px 60px rgba(37,86,108,.08);
+    }
+
+    .catalog-eyebrow{
+      margin:0 0 12px;
+      color:#3e728c;
+      font-size:13px;
+      font-weight:800;
+      letter-spacing:.16em;
+      text-transform:uppercase;
+    }
 
     .page-title{
-      margin-top:40px;
-      font-size:42px;
-      font-weight:bold;
-      color:#1f3c4d;
+      margin:0;
+      max-width:760px;
+      color:var(--ink);
+      font-size:52px;
+      line-height:1.02;
+      letter-spacing:-.035em;
+    }
+
+    .catalog-intro{
+      max-width:720px;
+      margin:18px 0 0;
+      color:#456477;
+      font-size:20px;
+      line-height:1.55;
+    }
+
+    .catalog-actions{
+      display:flex;
+      flex-wrap:wrap;
+      gap:12px;
+      margin-top:26px;
+    }
+
+    .catalog-action{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      min-height:46px;
+      padding:0 22px;
+      border:2px solid var(--navy);
+      border-radius:999px;
+      color:var(--navy);
+      font-size:16px;
+      font-weight:800;
+      text-decoration:none;
+    }
+
+    .catalog-action.primary{
+      background:var(--navy);
+      color:white;
+    }
+
+    .catalog-action:hover,
+    .catalog-action:focus-visible{
+      border-color:var(--navy-soft);
+      background:var(--navy-soft);
+      color:white;
+    }
+
+    .catalog-section{
+      width:100%;
+    }
+
+    .catalog-toolbar{
+      display:flex;
+      align-items:flex-end;
+      justify-content:space-between;
+      gap:24px;
+      width:min(1300px, calc(100% - 80px));
+      margin:0 auto;
+      padding:18px 0 4px;
+      text-align:left;
+    }
+
+    .catalog-toolbar h2{
+      margin:0;
+      color:var(--ink);
+      font-size:28px;
+    }
+
+    .catalog-toolbar p{
+      margin:7px 0 0;
+      color:var(--muted);
+      font-size:15px;
+    }
+
+    .product-filters{
+      display:flex;
+      flex-wrap:wrap;
+      justify-content:flex-end;
+      gap:8px;
+    }
+
+    .product-filters button{
+      min-height:42px;
+      padding:0 17px;
+      border:1px solid #c8dce7;
+      border-radius:999px;
+      background:white;
+      color:var(--ink);
+      font:inherit;
+      font-size:14px;
+      font-weight:800;
+      cursor:pointer;
+      transition:background-color .2s ease, color .2s ease, border-color .2s ease;
+    }
+
+    .product-filters button:hover,
+    .product-filters button[aria-pressed="true"]{
+      border-color:var(--navy);
+      background:var(--navy);
+      color:white;
     }
 
     /* PRODUCTS */
 
     .gallery{
       display:grid;
-      grid-template-columns:repeat(2, minmax(260px, 1fr));
-      gap:40px;
-      padding:50px;
+      grid-template-columns:repeat(3, minmax(0, 1fr));
+      gap:26px;
+      padding:30px 40px 68px;
       max-width:1300px;
       margin:0 auto;
     }
 
+    .product-card[hidden]{
+      display:none !important;
+    }
+
     .product-card{
-      background:#f7fbff;
-      border-radius:18px;
-      box-shadow:0 18px 40px rgba(37,86,108,0.08);
-      cursor:pointer;
-      transition:0.25s ease;
-      height:390px;
+      position:relative;
       display:flex;
       flex-direction:column;
       justify-content:flex-start;
-      gap:18px;
       align-items:center;
-      padding:30px;
-      box-sizing:border-box;
+      min-width:0;
+      min-height:430px;
+      padding:28px 26px 26px;
+      overflow:hidden;
+      border:1px solid #e0edf3;
+      border-radius:22px;
+      background:#f7fbff;
+      box-shadow:0 18px 40px rgba(37,86,108,0.08);
+      transition:transform .25s ease, box-shadow .25s ease, border-color .25s ease;
     }
 
-    .product-card:hover{
+    .product-card-trigger{
+      border:0;
+      font:inherit;
+      cursor:pointer;
+    }
+
+    .product-card:hover,
+    .product-card:focus-within{
       transform:translateY(-4px);
       box-shadow:0 22px 45px rgba(37,86,108,0.14);
+      border-color:#bed7e3;
     }
 
     .image-box{
-      height:210px;
+      height:190px;
       width:100%;
       display:flex;
       align-items:center;
@@ -150,7 +328,7 @@
 
     .image-box img{
       max-width:90%;
-      max-height:190px;
+      max-height:170px;
       width:auto;
       height:auto;
       object-fit:contain;
@@ -163,7 +341,8 @@
     }
 
     .product-details{
-      min-height:130px;
+      width:100%;
+      flex:1;
       display:flex;
       flex-direction:column;
       justify-content:flex-start;
@@ -171,34 +350,73 @@
     }
 
     .title{
-      font-size:30px;
+      margin:10px 0 0;
+      font-size:27px;
       font-weight:900;
       color:#1f3c4d;
-      margin-bottom:8px;
+      line-height:1.14;
     }
 
     .subtitle{
-      font-size:24px;
+      margin:7px 0 0;
+      font-size:18px;
       color:#37586f;
       font-style:italic;
-      margin-bottom:18px;
+      line-height:1.3;
+    }
+
+    .product-tags{
+      display:flex;
+      flex-wrap:wrap;
+      justify-content:center;
+      gap:7px;
+      margin:16px 0 20px;
+    }
+
+    .product-tags span{
+      display:inline-flex;
+      align-items:center;
+      min-height:28px;
+      padding:4px 10px;
+      border:1px solid #c9dfe9;
+      border-radius:999px;
+      background:#fff;
+      color:#365c70;
+      font-size:12px;
+      font-weight:800;
+      line-height:1.15;
     }
 
     .see-products{
-      display:inline-block;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:8px;
+      margin-top:auto;
       background:#1f3c4d;
       color:white;
-      padding:12px 24px;
+      padding:12px 20px;
+      border:0;
       border-radius:999px;
-      font-size:17px;
+      font-size:15px;
       font-weight:bold;
       letter-spacing:0.02em;
       transition:0.2s ease;
     }
 
-    .product-card:hover .see-products{
+    .product-card:hover .see-products,
+    .product-card:focus-within .see-products{
       background:#2f5f79;
       transform:translateY(-2px);
+    }
+
+    .product-card-trigger:focus-visible,
+    .product-filters button:focus-visible,
+    .close-btn:focus-visible,
+    .modal-inquiry:focus-visible,
+    .catalog-action:focus-visible{
+      outline:3px solid #4d94b4;
+      outline-offset:4px;
     }
 
     .modal-description{
@@ -218,6 +436,10 @@
       padding:40px;
       box-sizing:border-box;
       overflow:hidden;
+    }
+
+    .modal[hidden]{
+      display:none !important;
     }
 
     .modal.active{
@@ -456,6 +678,53 @@
       margin-top:9px;
     }
 
+    .modal-actions{
+      position:sticky;
+      bottom:0;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:20px;
+      padding:16px 30px;
+      border-top:1px solid var(--line);
+      background:rgba(255,255,255,.97);
+      box-shadow:0 -12px 28px rgba(31,60,77,.08);
+      text-align:left;
+      z-index:3;
+    }
+
+    .modal-action-copy strong{
+      display:block;
+      color:var(--ink);
+      font-size:17px;
+    }
+
+    .modal-action-copy span{
+      display:block;
+      margin-top:3px;
+      color:var(--muted);
+      font-size:14px;
+    }
+
+    .modal-inquiry{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      flex:0 0 auto;
+      min-height:46px;
+      padding:0 22px;
+      border-radius:999px;
+      background:var(--navy);
+      color:white;
+      font-size:15px;
+      font-weight:800;
+      text-decoration:none;
+    }
+
+    .modal-inquiry:hover{
+      background:var(--navy-soft);
+    }
+
     @keyframes modalOpen{
       from{
         opacity:0;
@@ -466,6 +735,55 @@
         opacity:1;
         transform:scale(1);
       }
+    }
+
+    /* CATALOG CLOSING CTA */
+
+    .catalog-assurance{
+      display:grid;
+      grid-template-columns:repeat(2, minmax(0, 1fr));
+      gap:1px;
+      width:min(1180px, calc(100% - 48px));
+      margin:0 auto 70px;
+      overflow:hidden;
+      border:1px solid var(--line);
+      border-radius:24px;
+      background:var(--line);
+      text-align:left;
+      box-shadow:0 18px 45px rgba(37,86,108,.08);
+    }
+
+    .assurance-card{
+      padding:34px 38px;
+      background:white;
+    }
+
+    .assurance-label{
+      margin:0 0 8px;
+      color:#4d7d94;
+      font-size:12px;
+      font-weight:900;
+      letter-spacing:.13em;
+      text-transform:uppercase;
+    }
+
+    .assurance-card h2{
+      margin:0;
+      color:var(--ink);
+      font-size:25px;
+    }
+
+    .assurance-card p{
+      margin:12px 0 18px;
+      color:var(--muted);
+      font-size:16px;
+      line-height:1.55;
+    }
+
+    .assurance-card a{
+      color:var(--navy);
+      font-weight:900;
+      text-underline-offset:4px;
     }
 
     /* FOOTER */
@@ -685,6 +1003,19 @@
       .footer-feature-grid{
         grid-template-columns:repeat(2, minmax(240px,1fr));
       }
+
+      .catalog-toolbar{
+        align-items:flex-start;
+        flex-direction:column;
+      }
+
+      .product-filters{
+        justify-content:flex-start;
+      }
+
+      .gallery{
+        grid-template-columns:repeat(2, minmax(0, 1fr));
+      }
     }
 
     /* MOBILE */
@@ -734,6 +1065,72 @@
       .gallery{
         grid-template-columns:1fr;
         padding:30px;
+      }
+
+      main{
+        padding-left:0 !important;
+        padding-right:0 !important;
+      }
+
+      .catalog-hero{
+        width:calc(100% - 28px);
+        margin-top:22px;
+        padding:32px 24px;
+        border-radius:20px;
+      }
+
+      .page-title{
+        font-size:40px;
+      }
+
+      .catalog-intro{
+        font-size:17px;
+      }
+
+      .catalog-action{
+        width:100%;
+      }
+
+      .catalog-toolbar{
+        width:calc(100% - 32px);
+        padding-top:10px;
+      }
+
+      .catalog-toolbar h2{
+        font-size:24px;
+      }
+
+      .product-filters{
+        width:100%;
+      }
+
+      .product-filters button{
+        flex:1 1 auto;
+      }
+
+      .product-card{
+        min-height:390px;
+      }
+
+      .catalog-assurance{
+        grid-template-columns:1fr;
+        width:calc(100% - 28px);
+        margin-bottom:50px;
+      }
+
+      .assurance-card{
+        padding:28px 24px;
+      }
+
+      .modal-actions{
+        align-items:stretch;
+        flex-direction:column;
+        gap:12px;
+        padding:13px 16px 16px;
+      }
+
+      .modal-inquiry{
+        width:100%;
       }
 
       .footer-wrapper{
@@ -795,8 +1192,13 @@
       }
 
       .product-card{
-        height:350px;
-        padding:22px;
+        height:auto;
+        min-height:370px;
+        padding:0;
+      }
+
+      .product-card-trigger{
+        min-height:44px;
       }
 
       .image-box{
@@ -863,6 +1265,17 @@
         min-height:0;
       }
     }
+
+    @media(prefers-reduced-motion:reduce){
+      .product-card,
+      .product-card img,
+      .see-products,
+      .product-filters button,
+      .modal-box{
+        animation:none !important;
+        transition:none !important;
+      }
+    }
   </style>
   <link rel="stylesheet" href="language-switch.css">
   <link rel="stylesheet" href="footer.css?v=15">
@@ -871,13 +1284,15 @@
 
 <body>
 
+  <a class="skip-link" href="#main-content">Skip to products</a>
+
   <!-- NAVBAR -->
 
-  <div class="navbar">
+  <nav class="navbar" aria-label="Primary navigation" data-aria-label-en="Primary navigation" data-aria-label-fo="Høvuðsvalmynd">
 
     <div class="menu-left">
       <a href="./">Home</a>
-      <a href="products.html">Products</a>
+      <a href="products.html" aria-current="page">Products</a>
     </div>
 
     <a href="./" class="logo">
@@ -899,12 +1314,12 @@
       <a href="contact.html">Contact</a>
     </div>
 
-    <div class="site-language-switcher" aria-label="Choose language">
+    <div class="site-language-switcher" aria-label="Choose language" data-aria-label-en="Choose language" data-aria-label-fo="Vel mál">
       <button type="button" data-lang="en">EN</button>
       <button type="button" data-lang="fo">FO</button>
     </div>
 
-  </div>
+  </nav>
 
   <a class="sales-team-float" href="contact.html#sales-team">
     <img src="email_icon.svg" alt="">
@@ -916,23 +1331,52 @@
 
   <!-- PRODUCTS -->
 
-  <div class="page-title">
-    PRODUCTS
-  </div>
+  <main id="main-content">
+    <section class="catalog-hero" aria-labelledby="catalog-title">
+      <p class="catalog-eyebrow">From the Faroe Islands</p>
+      <h1 class="page-title" id="catalog-title">Explore our seafood range</h1>
+      <p class="catalog-intro">Explore our range of wild-caught seafood, available in salted, light-salted, frozen and IQF formats. Select a species to view cuts, sizes, grades and packaging.</p>
+      <div class="catalog-actions">
+        <a class="catalog-action primary" href="contact.html#sales-team">Send an inquiry</a>
+        <a class="catalog-action" href="certifications.html">View certifications</a>
+      </div>
+    </section>
 
-  <div class="gallery">
+    <section class="catalog-section" aria-labelledby="product-range-title">
+      <div class="catalog-toolbar">
+        <div>
+          <h2 id="product-range-title">Browse by species</h2>
+          <p>Filter the catalogue by processing format.</p>
+        </div>
 
-    <div class="product-card">
+        <div class="product-filters" role="group" aria-label="Filter products by processing type" data-aria-label-en="Filter products by processing type" data-aria-label-fo="Síla vørur eftir framleiðsluhátti">
+          <button type="button" data-filter="all" aria-pressed="true">All products</button>
+          <button type="button" data-filter="salted" aria-pressed="false">Salted</button>
+          <button type="button" data-filter="frozen" aria-pressed="false">Frozen</button>
+          <button type="button" data-filter="iqf" aria-pressed="false">IQF</button>
+        </div>
+      </div>
+
+      <p class="filter-status visually-hidden" role="status" aria-live="polite"></p>
+
+      <div class="gallery" id="productGallery">
+
+    <article class="product-card" data-formats="salted frozen">
       <div class="image-box">
-        <img src="cod.png" alt="Cod">
+        <img src="cod.png" width="1600" height="1000" alt="Cod" data-alt-en="Cod" data-alt-fo="Toskur" decoding="async" fetchpriority="high">
       </div>
 
       <div class="product-details">
-        <div class="title">Cod</div>
-        <div class="subtitle">Gadus morhua</div>
-        <div class="see-products">See products</div>
+        <h3 class="title">Cod</h3>
+        <p class="subtitle">Gadus morhua</p>
+        <div class="product-tags" aria-label="Available processing formats" data-aria-label-en="Available processing formats" data-aria-label-fo="Tøkir framleiðsluhættir">
+          <span>Wet salted</span>
+          <span>Light salted</span>
+          <span>Interleaved frozen</span>
+        </div>
+        <button class="see-products product-card-trigger" type="button" aria-haspopup="dialog" aria-controls="productModal">View specifications <span aria-hidden="true">→</span></button>
 
-        <div class="modal-description cod-description">
+        <div class="modal-description cod-description" hidden>
           <div class="cod-sections">
             <section class="cod-section">
               <h2>1. Wet salted</h2>
@@ -999,19 +1443,23 @@
           </div>
         </div>
       </div>
-    </div>
+    </article>
 
-    <div class="product-card">
+    <article class="product-card" data-formats="salted">
       <div class="image-box">
-        <img src="ling.png" alt="Ling">
+        <img src="ling.png" width="1181" height="709" alt="Ling" data-alt-en="Ling" data-alt-fo="Longa" decoding="async">
       </div>
 
       <div class="product-details">
-        <div class="title">Ling</div>
-        <div class="subtitle">Molva molva</div>
-        <div class="see-products">See products</div>
+        <h3 class="title">Ling</h3>
+        <p class="subtitle">Molva molva</p>
+        <div class="product-tags" aria-label="Available processing formats" data-aria-label-en="Available processing formats" data-aria-label-fo="Tøkir framleiðsluhættir">
+          <span>Wet salted</span>
+          <span>Light salted</span>
+        </div>
+        <button class="see-products product-card-trigger" type="button" aria-haspopup="dialog" aria-controls="productModal">View specifications <span aria-hidden="true">→</span></button>
 
-        <div class="modal-description">
+        <div class="modal-description" hidden>
           <strong>Products:</strong>
           <ul>
           <strong>Wet salted:</strong>
@@ -1027,19 +1475,23 @@
           </ul>
         </div>
       </div>
-    </div>
+    </article>
 
-    <div class="product-card">
+    <article class="product-card" data-formats="salted">
       <div class="image-box">
-        <img src="tusk.png" alt="Tusk">
+        <img src="tusk.png" width="1181" height="709" alt="Tusk" data-alt-en="Tusk" data-alt-fo="Brosma" loading="lazy" decoding="async">
       </div>
 
       <div class="product-details">
-        <div class="title">Tusk</div>
-        <div class="subtitle">Brosme brosme</div>
-        <div class="see-products">See products</div>
+        <h3 class="title">Tusk</h3>
+        <p class="subtitle">Brosme brosme</p>
+        <div class="product-tags" aria-label="Available processing formats" data-aria-label-en="Available processing formats" data-aria-label-fo="Tøkir framleiðsluhættir">
+          <span>Wet salted</span>
+          <span>Light salted</span>
+        </div>
+        <button class="see-products product-card-trigger" type="button" aria-haspopup="dialog" aria-controls="productModal">View specifications <span aria-hidden="true">→</span></button>
 
-        <div class="modal-description">
+        <div class="modal-description" hidden>
           <strong>Products:</strong>
           <ul>
           <strong>Wet salted:</strong>
@@ -1056,19 +1508,23 @@
 
         </div>
       </div>
-    </div>
+    </article>
 
-    <div class="product-card">
+    <article class="product-card" data-formats="frozen iqf">
       <div class="image-box">
-        <img src="greenland-halibut.png" alt="Greenland Halibut">
+        <img src="greenland-halibut.png" width="1181" height="354" alt="Greenland Halibut" data-alt-en="Greenland Halibut" data-alt-fo="Svartkalvi" loading="lazy" decoding="async">
       </div>
 
       <div class="product-details">
-        <div class="title">Greenland Halibut</div>
-        <div class="subtitle">Reinhardtius hippoglossoides</div>
-        <div class="see-products">See products</div>
+        <h3 class="title">Greenland Halibut</h3>
+        <p class="subtitle">Reinhardtius hippoglossoides</p>
+        <div class="product-tags" aria-label="Available processing formats" data-aria-label-en="Available processing formats" data-aria-label-fo="Tøkir framleiðsluhættir">
+          <span>J-cut</span>
+          <span>IQF</span>
+        </div>
+        <button class="see-products product-card-trigger" type="button" aria-haspopup="dialog" aria-controls="productModal">View specifications <span aria-hidden="true">→</span></button>
 
-        <div class="modal-description">
+        <div class="modal-description" hidden>
           <strong> J-cut </strong>
           <ul>
 
@@ -1100,19 +1556,25 @@
           
         </div>
       </div>
-    </div>
+    </article>
 
-    <div class="product-card">
+    <article class="product-card" data-formats="salted frozen iqf">
       <div class="image-box">
-        <img src="saithe.png" alt="Saithe">
+        <img src="saithe.png" width="1600" height="1000" alt="Saithe" data-alt-en="Saithe" data-alt-fo="Upsi" loading="lazy" decoding="async">
       </div>
 
       <div class="product-details">
-        <div class="title">Saithe</div>
-        <div class="subtitle">Pollachius virens</div>
-        <div class="see-products">See products</div>
+        <h3 class="title">Saithe</h3>
+        <p class="subtitle">Pollachius virens</p>
+        <div class="product-tags" aria-label="Available processing formats" data-aria-label-en="Available processing formats" data-aria-label-fo="Tøkir framleiðsluhættir">
+          <span>Wet salted</span>
+          <span>Light salted</span>
+          <span>Interleaved frozen</span>
+          <span>IQF</span>
+        </div>
+        <button class="see-products product-card-trigger" type="button" aria-haspopup="dialog" aria-controls="productModal">View specifications <span aria-hidden="true">→</span></button>
 
-        <div class="modal-description">
+        <div class="modal-description" hidden>
           <strong>Interleaved frozen products:</strong>
           <ul>
             <p>Fillets, skinless PBI, 8-16 oz 16-32 oz and 32+ oz </p>
@@ -1159,19 +1621,23 @@
           </ul>
         </div>
       </div>
-    </div>
+    </article>
 
-    <div class="product-card">
+    <article class="product-card" data-formats="salted frozen">
       <div class="image-box">
-        <img src="haddock.png" alt="Haddock">
+        <img src="haddock.png" width="1600" height="1000" alt="Haddock" data-alt-en="Haddock" data-alt-fo="Hýsa" loading="lazy" decoding="async">
       </div>
 
       <div class="product-details">
-        <div class="title">Haddock</div>
-        <div class="subtitle">Melanogrammus aeglefinus</div>
-        <div class="see-products">See products</div>
+        <h3 class="title">Haddock</h3>
+        <p class="subtitle">Melanogrammus aeglefinus</p>
+        <div class="product-tags" aria-label="Available processing formats" data-aria-label-en="Available processing formats" data-aria-label-fo="Tøkir framleiðsluhættir">
+          <span>Wet salted</span>
+          <span>Interleaved frozen</span>
+        </div>
+        <button class="see-products product-card-trigger" type="button" aria-haspopup="dialog" aria-controls="productModal">View specifications <span aria-hidden="true">→</span></button>
 
-        <div class="modal-description">
+        <div class="modal-description" hidden>
           <strong>Interleaved frozen products:</strong>
           <ul>
             <p>Fillets, skin on, PBI, sizes 100-200 gr, 200-400 gr and 400-900 gr</p>
@@ -1187,19 +1653,23 @@
           <p>All wet salted products are packaged in 20 kilo and 500 kilo boxes</p>
         </div>
       </div>
-    </div>
+    </article>
 
-    <div class="product-card">
+    <article class="product-card" data-formats="salted frozen">
       <div class="image-box">
-        <img src="blue-ling.png" alt="Blue Ling">
+        <img src="blue-ling.png" width="1600" height="1000" alt="Blue Ling" data-alt-en="Blue Ling" data-alt-fo="Blálonga" loading="lazy" decoding="async">
       </div>
 
       <div class="product-details">
-        <div class="title">Blue Ling</div>
-        <div class="subtitle">Molva dypterygia</div>
-        <div class="see-products">See products</div>
+        <h3 class="title">Blue Ling</h3>
+        <p class="subtitle">Molva dypterygia</p>
+        <div class="product-tags" aria-label="Available processing formats" data-aria-label-en="Available processing formats" data-aria-label-fo="Tøkir framleiðsluhættir">
+          <span>Wet salted</span>
+          <span>Interleaved frozen</span>
+        </div>
+        <button class="see-products product-card-trigger" type="button" aria-haspopup="dialog" aria-controls="productModal">View specifications <span aria-hidden="true">→</span></button>
 
-        <div class="modal-description">
+        <div class="modal-description" hidden>
           <strong>Interleaved frozen products:</strong>
           <ul>
             <p>Fillets skin on size +400 gr</p>
@@ -1219,19 +1689,22 @@
 
         </div>
       </div>
-    </div>
+    </article>
 
-    <div class="product-card">
+    <article class="product-card" data-formats="frozen">
       <div class="image-box">
-        <img src="whiting.png" alt="Whiting">
+        <img src="whiting.png" width="1600" height="1000" alt="Whiting" data-alt-en="Whiting" data-alt-fo="Hvítingur" loading="lazy" decoding="async">
       </div>
 
       <div class="product-details">
-        <div class="title">Whiting</div>
-        <div class="subtitle">Merlangius merlangus</div>
-        <div class="see-products">See products</div>
+        <h3 class="title">Whiting</h3>
+        <p class="subtitle">Merlangius merlangus</p>
+        <div class="product-tags" aria-label="Available processing formats" data-aria-label-en="Available processing formats" data-aria-label-fo="Tøkir framleiðsluhættir">
+          <span>Interleaved frozen</span>
+        </div>
+        <button class="see-products product-card-trigger" type="button" aria-haspopup="dialog" aria-controls="productModal">View specifications <span aria-hidden="true">→</span></button>
 
-        <div class="modal-description">
+        <div class="modal-description" hidden>
           <strong>Interleaved frozen products:</strong>
           <ul>
             <p>Fillets, skinless PBI: sizes 70 gr+</p>
@@ -1239,21 +1712,51 @@
           <p>All interleaved frozen products are packaged in 6,81 kilo blocks and packaged in 20,43 kilo boxes</p>
         </div>
       </div>
-    </div>
+    </article>
 
-  </div>
+      </div>
+
+      <noscript>
+        <p>Please enable JavaScript to view detailed product specifications, or contact our sales team for assistance.</p>
+      </noscript>
+    </section>
+
+    <section class="catalog-assurance" aria-label="Product support">
+      <div class="assurance-card">
+        <p class="assurance-label">Quality documentation</p>
+        <h2>Certifications and approvals</h2>
+        <p>Review the available certification and food-safety documentation for Delta Seafood and TG Seafood.</p>
+        <a href="certifications.html">Learn about our certifications</a>
+      </div>
+
+      <div class="assurance-card">
+        <p class="assurance-label">Sales support</p>
+        <h2>Need detailed product information?</h2>
+        <p>Contact our sales team to discuss the species, cuts, sizes and packaging shown in this catalogue.</p>
+        <a href="contact.html#sales-team">Contact the sales team</a>
+      </div>
+    </section>
+  </main>
 
   <!-- PRODUCT MODAL -->
 
-  <div id="productModal" class="modal">
-    <div class="modal-box">
-      <span class="close-btn">&times;</span>
+  <div id="productModal" class="modal" hidden>
+    <div class="modal-box" role="dialog" aria-modal="true" aria-labelledby="modalTitle" aria-describedby="modalSubtitle" tabindex="-1">
+      <button class="close-btn" type="button" aria-label="Close product details" data-aria-label-en="Close product details" data-aria-label-fo="Lat vørulýsing aftur"><span aria-hidden="true">&times;</span></button>
 
       <div class="modal-inner">
-        <h1 id="modalTitle"></h1>
-        <h3 id="modalSubtitle"></h3>
+        <h2 id="modalTitle"></h2>
+        <p id="modalSubtitle"></p>
         <img id="modalImage" src="" alt="">
         <div id="modalText"></div>
+      </div>
+
+      <div class="modal-actions">
+        <div class="modal-action-copy">
+          <strong>Interested in this product?</strong>
+          <span>Contact our sales team for availability and specifications.</span>
+        </div>
+        <a id="modalInquiry" class="modal-inquiry" href="contact.html#sales-team">Send product inquiry</a>
       </div>
     </div>
   </div>
