@@ -31,14 +31,15 @@
   });
 
   const commonLabels = {
-    en:{home:"Home", products:"Products", facilities:"About our facilities", contact:"Contact"},
-    fo:{home:"Heim", products:"Vørur", facilities:"Um okkara virkir", contact:"Samband"}
+    en:{home:"Home", products:"Products", markets:"Markets", facilities:"About our facilities", contact:"Contact"},
+    fo:{home:"Heim", products:"Vørur", markets:"Marknaðir", facilities:"Um okkara virkir", contact:"Samband"}
   }[language];
 
   document.querySelectorAll('.navbar a[href="./"], .navbar a[href="index.html"]').forEach(link => {
     if(!link.classList.contains("logo")) link.textContent = commonLabels.home;
   });
   document.querySelectorAll('.navbar a[href="products.html"]').forEach(link => link.textContent = commonLabels.products);
+  document.querySelectorAll('.navbar a[href="markets.html"]').forEach(link => link.textContent = commonLabels.markets);
   document.querySelectorAll('.navbar a[href="about-our-facilities.html"], .navbar a[href="facilities.html"]').forEach(link => {
     if(link.closest(".dropdown")) return;
     link.textContent = commonLabels.facilities;

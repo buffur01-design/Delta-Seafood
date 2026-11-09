@@ -6,6 +6,80 @@
   display:block;
 }
 
+/* Desktop navigation: brand at the left, with the full menu centered. */
+@media(min-width:1101px){
+  .navbar{
+    display:grid !important;
+    grid-template-columns:minmax(170px, 1fr) max-content max-content minmax(170px, 1fr);
+    align-items:center !important;
+    column-gap:clamp(20px, 2vw, 38px) !important;
+    height:120px !important;
+    padding:0 clamp(20px, 3vw, 48px) !important;
+    box-sizing:border-box;
+  }
+
+  .navbar .logo{
+    position:static !important;
+    left:auto !important;
+    transform:none !important;
+    grid-column:1;
+    grid-row:1;
+    justify-self:start;
+    margin:0;
+  }
+
+  .navbar .menu-left,
+  .navbar .menu-right{
+    position:static !important;
+    left:auto !important;
+    right:auto !important;
+    display:flex;
+    align-items:center;
+    gap:clamp(20px, 2vw, 38px) !important;
+  }
+
+  .navbar .menu-left{
+    grid-column:2;
+    grid-row:1;
+    justify-self:end;
+  }
+
+  .navbar .menu-right{
+    grid-column:3;
+    grid-row:1;
+    justify-self:start;
+  }
+
+  .navbar .menu-left > a,
+  .navbar .menu-right > .nav-item,
+  .navbar .menu-right > a{
+    width:auto !important;
+  }
+
+  .navbar .site-language-switcher,
+  .navbar .language-switcher{
+    position:static !important;
+    top:auto !important;
+    right:auto !important;
+    left:auto !important;
+    transform:none !important;
+    grid-column:4;
+    grid-row:1;
+    justify-self:end;
+  }
+
+  /* facilities.html uses one combined menu instead of split groups. */
+  .navbar > .menu{
+    position:static !important;
+    grid-column:2 / 4;
+    grid-row:1;
+    justify-self:center;
+    display:flex;
+    align-items:center;
+    gap:clamp(20px, 2vw, 38px) !important;
+  }
+}
+
 /* Let the compact footer breathe on tablets and small laptops. */
 @media(max-width:1300px){
   footer .footer-feature-grid,
