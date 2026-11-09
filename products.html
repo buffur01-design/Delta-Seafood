@@ -1436,7 +1436,7 @@
 
         if(/^(quality grades?|góðsku flokkar|góðskuflokkar)/i.test(originalText)){
           paragraph.innerHTML = originalText.replace(/^(quality grades?|góðsku flokkar|góðskuflokkar)/i, "<b>$1:</b>").replace(/::/, ":");
-        }else if(/^all .*packaged/i.test(originalText) || /products are packaged|pakkað|kassar/i.test(originalText)){
+        }else if(/^all .*packaged/i.test(originalText) || /products are packaged|pakkað|kass(?:ar|um)/i.test(originalText)){
           const packagingLabel = document.documentElement.lang === "fo" ? "Pakking" : "Packaging";
           paragraph.innerHTML = `<b>${packagingLabel}:</b> ${originalText}`;
         }
@@ -1446,7 +1446,7 @@
     function createPackagingPanels(container){
       container.querySelectorAll(".cod-section").forEach(section => {
         const packagingParagraphs = [...section.querySelectorAll("p")].filter(paragraph => {
-          return /packag(?:e|ed|ing)|pakkað|kassar|(?:frozen|packed|fryst)\s+in.*boxes/i.test(paragraph.textContent);
+          return /packag(?:e|ed|ing)|pakkað|kass(?:ar|um)|(?:frozen|packed|fryst)\s+in.*boxes|fryst(?:ar|ur)?\s+í.*(?:kass|blokk)/i.test(paragraph.textContent);
         });
 
         if(!packagingParagraphs.length) return;
