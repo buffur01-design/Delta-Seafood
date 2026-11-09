@@ -1914,6 +1914,7 @@
       const weightPattern = /\d[\d.,]*(?:\s*[-–]\s*\d[\d.,]*)?\+?\s*(?:gr|g|kg|kilo|oz)\+?/i;
       const standaloneWeightPattern = /^\s*[+-]?\d[\d.,]*(?:\s*[-–]\s*[+-]?\d[\d.,]*)?\+?\s*(?:gr|g|kg|kilo|oz)\+?\s*\.?\s*$/i;
       const tailPattern = /\b(?:tail|tails|halar|hala)\b/i;
+      const simpleTailLabelPattern = /^(?:tail|tails|hali|halar)$/i;
       const highlightedDetailPattern = /^(?:back\s*bone\s*in|við ryggbeini)$/i;
 
       container.querySelectorAll(".cod-section").forEach(section => {
@@ -1942,6 +1943,8 @@
             });
             return;
           }
+
+          if(!simpleTailLabelPattern.test(text)) return;
 
           let nextRow = label.nextElementSibling;
           while(nextRow && standaloneWeightPattern.test(nextRow.textContent.trim())){
