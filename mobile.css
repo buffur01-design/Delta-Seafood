@@ -12,7 +12,7 @@
     display:grid !important;
     grid-template-columns:minmax(170px, 1fr) max-content max-content minmax(170px, 1fr);
     align-items:center !important;
-    column-gap:clamp(20px, 2vw, 38px) !important;
+    column-gap:clamp(34px, 3.2vw, 58px) !important;
     height:120px !important;
     padding:0 clamp(20px, 3vw, 48px) !important;
     box-sizing:border-box;
@@ -35,7 +35,7 @@
     right:auto !important;
     display:flex;
     align-items:center;
-    gap:clamp(20px, 2vw, 38px) !important;
+    gap:clamp(34px, 3.2vw, 58px) !important;
   }
 
   .navbar .menu-left{
@@ -76,7 +76,7 @@
     justify-self:center;
     display:flex;
     align-items:center;
-    gap:clamp(20px, 2vw, 38px) !important;
+    gap:clamp(34px, 3.2vw, 58px) !important;
   }
 }
 
