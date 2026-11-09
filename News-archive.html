@@ -638,7 +638,7 @@
   </style>
 
   <link rel="stylesheet" href="footer.css?v=15">
-  <link rel="stylesheet" href="mobile.css?v=5">
+  <link rel="stylesheet" href="mobile.css?v=7">
 </head>
 
 <body>
@@ -650,6 +650,7 @@
 <div class="menu-left">
   <a href="./">Home</a>
   <a href="products.html">Products</a>
+  <a href="markets.html">Markets</a>
 </div>
 
 <a href="./" class="logo">
@@ -809,8 +810,8 @@
 
       const navigation = document.querySelectorAll(".navbar .menu-left > a, .navbar .menu-right > a, .navbar .nav-item > a");
       const labels = isFaroese
-        ? ["Heim", "Vørur", "Um okkara virkir", "Samband"]
-        : ["Home", "Products", "About our facilities", "Contact"];
+        ? ["Heim", "Vørur", "Marknaðir", "Um okkara virkir", "Samband"]
+        : ["Home", "Products", "Markets", "About our facilities", "Contact"];
       navigation.forEach((link, index) => link.textContent = labels[index]);
 
       archiveCards.forEach((card, index) => {
