@@ -144,80 +144,6 @@
       display:block;
     }
 
-    /* CATALOG INTRO */
-
-    .catalog-hero{
-      width:min(1180px, calc(100% - 48px));
-      margin:44px auto 28px;
-      padding:46px 52px;
-      border:1px solid #e2eef4;
-      border-radius:26px;
-      background:
-        radial-gradient(circle at 92% 12%, rgba(116,180,207,.22), transparent 28%),
-        linear-gradient(135deg, #f2f9fc 0%, #fff 62%);
-      text-align:left;
-      box-shadow:0 24px 60px rgba(37,86,108,.08);
-    }
-
-    .catalog-eyebrow{
-      margin:0 0 12px;
-      color:#3e728c;
-      font-size:13px;
-      font-weight:800;
-      letter-spacing:.16em;
-      text-transform:uppercase;
-    }
-
-    .page-title{
-      margin:0;
-      max-width:760px;
-      color:var(--ink);
-      font-size:52px;
-      line-height:1.02;
-      letter-spacing:-.035em;
-    }
-
-    .catalog-intro{
-      max-width:720px;
-      margin:18px 0 0;
-      color:#456477;
-      font-size:20px;
-      line-height:1.55;
-    }
-
-    .catalog-actions{
-      display:flex;
-      flex-wrap:wrap;
-      gap:12px;
-      margin-top:26px;
-    }
-
-    .catalog-action{
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      min-height:46px;
-      padding:0 22px;
-      border:2px solid var(--navy);
-      border-radius:999px;
-      color:var(--navy);
-      font-size:16px;
-      font-weight:800;
-      text-decoration:none;
-    }
-
-    .catalog-action.primary{
-      background:var(--navy);
-      color:white;
-    }
-
-    .catalog-action:hover,
-    .catalog-action:focus-visible{
-      border-color:var(--navy-soft);
-      background:var(--navy-soft);
-      color:white;
-    }
-
     .catalog-section{
       width:100%;
     }
@@ -229,7 +155,7 @@
       gap:24px;
       width:min(1300px, calc(100% - 80px));
       margin:0 auto;
-      padding:18px 0 4px;
+      padding:52px 0 4px;
       text-align:left;
     }
 
@@ -413,8 +339,7 @@
     .product-card-trigger:focus-visible,
     .product-filters button:focus-visible,
     .close-btn:focus-visible,
-    .modal-inquiry:focus-visible,
-    .catalog-action:focus-visible{
+    .modal-inquiry:focus-visible{
       outline:3px solid #4d94b4;
       outline-offset:4px;
     }
@@ -1072,28 +997,9 @@
         padding-right:0 !important;
       }
 
-      .catalog-hero{
-        width:calc(100% - 28px);
-        margin-top:22px;
-        padding:32px 24px;
-        border-radius:20px;
-      }
-
-      .page-title{
-        font-size:40px;
-      }
-
-      .catalog-intro{
-        font-size:17px;
-      }
-
-      .catalog-action{
-        width:100%;
-      }
-
       .catalog-toolbar{
         width:calc(100% - 32px);
-        padding-top:10px;
+        padding-top:32px;
       }
 
       .catalog-toolbar h2{
@@ -1334,16 +1240,7 @@
   <!-- PRODUCTS -->
 
   <main id="main-content">
-    <section class="catalog-hero" aria-labelledby="catalog-title">
-      <p class="catalog-eyebrow">From the Faroe Islands</p>
-      <h1 class="page-title" id="catalog-title">Explore our seafood range</h1>
-      <p class="catalog-intro">Explore our range of wild-caught seafood, available in salted, light-salted, frozen and IQF formats. Select a species to view cuts, sizes, grades and packaging.</p>
-      <div class="catalog-actions">
-        <a class="catalog-action primary" href="contact.html#sales-team">Send an inquiry</a>
-        <a class="catalog-action" href="certifications.html">View certifications</a>
-      </div>
-    </section>
-
+    <h1 class="visually-hidden">PRODUCTS</h1>
     <section class="catalog-section" aria-labelledby="product-range-title">
       <div class="catalog-toolbar">
         <div>
