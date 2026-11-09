@@ -737,7 +737,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
 
   <script>
-    const map = L.map('map').setView([61.5795, -6.8750], 12);
+    const map = L.map('map');
 
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
       attribution: '&copy; OpenStreetMap contributors',
@@ -762,17 +762,31 @@
       className:'map-label'
     });
 
-    const LABEL_ZOOM = 11;
+    const marker3 = L.marker([61.472747, -6.807699]).addTo(map)
+      .bindPopup('<strong>Defa</strong>');
+
+    marker3.bindTooltip('Defa', {
+      direction:'right',
+      offset:[10, 0],
+      className:'map-label'
+    });
+
+    const markers = [marker1, marker2, marker3];
+
+    map.fitBounds(L.featureGroup(markers).getBounds(), {
+      padding:[36, 36],
+      maxZoom:11
+    });
+
+    const LABEL_ZOOM = 10;
 
     function updateTooltips(){
       const z = map.getZoom();
 
       if(z >= LABEL_ZOOM){
-        marker1.openTooltip();
-        marker2.openTooltip();
+        markers.forEach(marker => marker.openTooltip());
       } else {
-        marker1.closeTooltip();
-        marker2.closeTooltip();
+        markers.forEach(marker => marker.closeTooltip());
       }
     }
 
