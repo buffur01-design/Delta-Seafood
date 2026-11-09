@@ -1910,16 +1910,44 @@
       });
     }
 
-    function decorateWeightRows(container){
+    function decorateProductRows(container){
       const weightPattern = /\d[\d.,]*(?:\s*[-–]\s*\d[\d.,]*)?\+?\s*(?:gr|g|kg|kilo|oz)\+?/i;
+      const standaloneWeightPattern = /^\s*[+-]?\d[\d.,]*(?:\s*[-–]\s*[+-]?\d[\d.,]*)?\+?\s*(?:gr|g|kg|kilo|oz)\+?\s*\.?\s*$/i;
+      const tailPattern = /\b(?:tail|tails|halar|hala)\b/i;
 
-      container.querySelectorAll(".cod-section p, .cod-section li").forEach(row => {
-        const text = row.textContent.trim();
-        const isPackaging = Boolean(row.closest(".cod-packaging"));
+      container.querySelectorAll(".cod-section").forEach(section => {
+        const heading = section.querySelector("h2")?.textContent || "";
+        const isOtherProducts = /other products|aðrar vørur/i.test(heading);
 
-        if(!isPackaging && weightPattern.test(text)){
-          row.classList.add("product-weight-row");
-        }
+        section.querySelectorAll("p, li").forEach(row => {
+          const text = row.textContent.trim();
+          const isPackaging = Boolean(row.closest(".cod-packaging"));
+
+          if(!isPackaging && (weightPattern.test(text) || isOtherProducts)){
+            row.classList.add("product-weight-row");
+          }
+        });
+
+        section.querySelectorAll("h3, p, li").forEach(label => {
+          const text = label.textContent.trim();
+
+          if(label.closest(".cod-packaging") || !tailPattern.test(text)) return;
+
+          label.classList.add("product-weight-row");
+
+          if(label.matches("h3")){
+            label.closest(".cod-column")?.querySelectorAll("p").forEach(size => {
+              size.classList.remove("product-weight-row");
+            });
+            return;
+          }
+
+          let nextRow = label.nextElementSibling;
+          while(nextRow && standaloneWeightPattern.test(nextRow.textContent.trim())){
+            nextRow.classList.remove("product-weight-row");
+            nextRow = nextRow.nextElementSibling;
+          }
+        });
       });
     }
 
@@ -1994,7 +2022,7 @@
         modalText.innerHTML = modalDescription ? createProductPanels(modalDescription) : "";
         createPackagingPanels(modalText);
         window.translateDeltaSubtree?.(modalText);
-        decorateWeightRows(modalText);
+        decorateProductRows(modalText);
         modalInquiry.setAttribute(
           "aria-label",
           isFaroese() ? `Send fyrispurning um ${title}` : `Send inquiry about ${title}`
