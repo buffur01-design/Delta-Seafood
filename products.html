@@ -237,6 +237,14 @@
       cursor:pointer;
     }
 
+    .product-image-trigger{
+      flex:0 0 auto;
+      padding:0;
+      border-radius:14px;
+      background:transparent;
+      appearance:none;
+    }
+
     .product-card:hover,
     .product-card:focus-within{
       transform:translateY(-4px);
@@ -1261,9 +1269,9 @@
       <div class="gallery" id="productGallery">
 
     <article class="product-card" data-formats="salted frozen">
-      <div class="image-box">
+      <button class="image-box product-card-trigger product-image-trigger" type="button" aria-haspopup="dialog" aria-controls="productModal" aria-label="View specifications for Cod">
         <img src="cod.png" width="1600" height="1000" alt="Cod" data-alt-en="Cod" data-alt-fo="Toskur" decoding="async" fetchpriority="high">
-      </div>
+      </button>
 
       <div class="product-details">
         <h3 class="title">Cod</h3>
@@ -1345,9 +1353,9 @@
     </article>
 
     <article class="product-card" data-formats="salted">
-      <div class="image-box">
+      <button class="image-box product-card-trigger product-image-trigger" type="button" aria-haspopup="dialog" aria-controls="productModal" aria-label="View specifications for Ling">
         <img src="ling.png" width="1181" height="709" alt="Ling" data-alt-en="Ling" data-alt-fo="Longa" decoding="async">
-      </div>
+      </button>
 
       <div class="product-details">
         <h3 class="title">Ling</h3>
@@ -1377,9 +1385,9 @@
     </article>
 
     <article class="product-card" data-formats="salted">
-      <div class="image-box">
+      <button class="image-box product-card-trigger product-image-trigger" type="button" aria-haspopup="dialog" aria-controls="productModal" aria-label="View specifications for Tusk">
         <img src="tusk.png" width="1181" height="709" alt="Tusk" data-alt-en="Tusk" data-alt-fo="Brosma" loading="lazy" decoding="async">
-      </div>
+      </button>
 
       <div class="product-details">
         <h3 class="title">Tusk</h3>
@@ -1410,9 +1418,9 @@
     </article>
 
     <article class="product-card" data-formats="frozen iqf">
-      <div class="image-box">
+      <button class="image-box product-card-trigger product-image-trigger" type="button" aria-haspopup="dialog" aria-controls="productModal" aria-label="View specifications for Greenland Halibut">
         <img src="greenland-halibut.png" width="1181" height="354" alt="Greenland Halibut" data-alt-en="Greenland Halibut" data-alt-fo="Svartkalvi" loading="lazy" decoding="async">
-      </div>
+      </button>
 
       <div class="product-details">
         <h3 class="title">Greenland Halibut</h3>
@@ -1458,9 +1466,9 @@
     </article>
 
     <article class="product-card" data-formats="salted frozen iqf">
-      <div class="image-box">
+      <button class="image-box product-card-trigger product-image-trigger" type="button" aria-haspopup="dialog" aria-controls="productModal" aria-label="View specifications for Saithe">
         <img src="saithe.png" width="1600" height="1000" alt="Saithe" data-alt-en="Saithe" data-alt-fo="Upsi" loading="lazy" decoding="async">
-      </div>
+      </button>
 
       <div class="product-details">
         <h3 class="title">Saithe</h3>
@@ -1523,9 +1531,9 @@
     </article>
 
     <article class="product-card" data-formats="salted frozen">
-      <div class="image-box">
+      <button class="image-box product-card-trigger product-image-trigger" type="button" aria-haspopup="dialog" aria-controls="productModal" aria-label="View specifications for Haddock">
         <img src="haddock.png" width="1600" height="1000" alt="Haddock" data-alt-en="Haddock" data-alt-fo="Hýsa" loading="lazy" decoding="async">
-      </div>
+      </button>
 
       <div class="product-details">
         <h3 class="title">Haddock</h3>
@@ -1555,9 +1563,9 @@
     </article>
 
     <article class="product-card" data-formats="salted frozen">
-      <div class="image-box">
+      <button class="image-box product-card-trigger product-image-trigger" type="button" aria-haspopup="dialog" aria-controls="productModal" aria-label="View specifications for Blue Ling">
         <img src="blue-ling.png" width="1600" height="1000" alt="Blue Ling" data-alt-en="Blue Ling" data-alt-fo="Blálonga" loading="lazy" decoding="async">
-      </div>
+      </button>
 
       <div class="product-details">
         <h3 class="title">Blue Ling</h3>
@@ -1591,9 +1599,9 @@
     </article>
 
     <article class="product-card" data-formats="frozen">
-      <div class="image-box">
+      <button class="image-box product-card-trigger product-image-trigger" type="button" aria-haspopup="dialog" aria-controls="productModal" aria-label="View specifications for Whiting">
         <img src="whiting.png" width="1600" height="1000" alt="Whiting" data-alt-en="Whiting" data-alt-fo="Hvítingur" loading="lazy" decoding="async">
-      </div>
+      </button>
 
       <div class="product-details">
         <h3 class="title">Whiting</h3>
