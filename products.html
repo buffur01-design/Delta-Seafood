@@ -1830,11 +1830,26 @@
     const modalSubtitle = document.getElementById("modalSubtitle");
     const modalImage = document.getElementById("modalImage");
     const modalText = document.getElementById("modalText");
+    const modalBox = modal.querySelector(".modal-box");
+    const modalInquiry = document.getElementById("modalInquiry");
     const closeBtn = document.querySelector(".close-btn");
+    const filterStatus = document.querySelector(".filter-status");
+    let lastFocusedElement = null;
+    let previousBodyOverflow = "";
+
+    function isFaroese(){
+      return document.documentElement.lang === "fo";
+    }
 
     function closeModal(){
+      if(modal.hidden) return;
       modal.classList.remove("active");
-      document.body.style.overflow = "auto";
+      modal.hidden = true;
+      document.body.style.overflow = previousBodyOverflow;
+
+      if(lastFocusedElement && document.contains(lastFocusedElement)){
+        lastFocusedElement.focus();
+      }
     }
 
     function categoryPriority(heading){
@@ -2025,15 +2040,18 @@
       return grid.outerHTML;
     }
 
-    document.querySelectorAll(".product-card").forEach(card => {
-      card.addEventListener("click", () => {
+    document.querySelectorAll(".product-card-trigger").forEach(trigger => {
+      trigger.addEventListener("click", () => {
+        const card = trigger.closest(".product-card");
         const title = card.querySelector(".title").innerText;
         const subtitle = card.querySelector(".subtitle").innerText;
         const image = card.querySelector("img").src;
         const imageAlt = card.querySelector("img").alt;
         const modalDescription = card.querySelector(".modal-description");
 
-        modal.querySelector(".modal-box").classList.add("product-detail-modal");
+        lastFocusedElement = trigger;
+        previousBodyOverflow = document.body.style.overflow;
+        modalBox.classList.add("product-detail-modal");
         modalTitle.innerText = title;
         modalSubtitle.innerText = subtitle;
         modalImage.src = image;
@@ -2041,9 +2059,37 @@
         modalText.innerHTML = modalDescription ? createProductPanels(modalDescription) : "";
         createPackagingPanels(modalText);
         window.translateDeltaSubtree?.(modalText);
+        modalInquiry.setAttribute(
+          "aria-label",
+          isFaroese() ? `Send fyrispurning um ${title}` : `Send inquiry about ${title}`
+        );
 
+        modal.hidden = false;
         modal.classList.add("active");
         document.body.style.overflow = "hidden";
+        closeBtn.focus();
+      });
+    });
+
+    document.querySelectorAll(".product-filters button").forEach(button => {
+      button.addEventListener("click", () => {
+        const filter = button.dataset.filter;
+        let visibleCount = 0;
+
+        document.querySelectorAll(".product-filters button").forEach(filterButton => {
+          filterButton.setAttribute("aria-pressed", String(filterButton === button));
+        });
+
+        document.querySelectorAll(".product-card").forEach(card => {
+          const formats = card.dataset.formats.split(/\s+/);
+          const visible = filter === "all" || formats.includes(filter);
+          card.hidden = !visible;
+          if(visible) visibleCount += 1;
+        });
+
+        filterStatus.textContent = isFaroese()
+          ? `${visibleCount} vørur vístar`
+          : `${visibleCount} products shown`;
       });
     });
 
@@ -2059,8 +2105,32 @@
     });
 
     document.addEventListener("keydown", function(e){
-      if(e.key === "Escape"){
+      if(e.key === "Escape" && !modal.hidden){
         closeModal();
+        return;
+      }
+
+      if(e.key === "Tab" && !modal.hidden){
+        const focusable = [...modalBox.querySelectorAll(
+          'a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])'
+        )].filter(element => !element.hidden && element.getAttribute("aria-hidden") !== "true");
+
+        if(!focusable.length){
+          e.preventDefault();
+          modalBox.focus();
+          return;
+        }
+
+        const first = focusable[0];
+        const last = focusable[focusable.length - 1];
+
+        if(e.shiftKey && (document.activeElement === first || !modalBox.contains(document.activeElement))){
+          e.preventDefault();
+          last.focus();
+        }else if(!e.shiftKey && document.activeElement === last){
+          e.preventDefault();
+          first.focus();
+        }
       }
     });
   </script>
