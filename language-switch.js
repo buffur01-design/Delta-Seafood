@@ -7,6 +7,8 @@
     switcher = document.createElement("div");
     switcher.className = "site-language-switcher";
     switcher.setAttribute("aria-label", "Choose language");
+    switcher.dataset.ariaLabelEn = "Choose language";
+    switcher.dataset.ariaLabelFo = "Vel mál";
     switcher.innerHTML = `
       <button type="button" data-lang="en">EN</button>
       <button type="button" data-lang="fo">FO</button>
@@ -107,6 +109,33 @@
 
     window.translateDeltaSubtree = translateSubtree;
     translateSubtree(document.body);
+
+    document.querySelectorAll("[data-aria-label-en][data-aria-label-fo]").forEach(element => {
+      element.setAttribute(
+        "aria-label",
+        language === "fo" ? element.dataset.ariaLabelFo : element.dataset.ariaLabelEn
+      );
+    });
+
+    document.querySelectorAll("[data-alt-en][data-alt-fo]").forEach(image => {
+      image.alt = language === "fo" ? image.dataset.altFo : image.dataset.altEn;
+    });
+
+    document.querySelectorAll("[data-content-en][data-content-fo]").forEach(element => {
+      element.setAttribute(
+        "content",
+        language === "fo" ? element.dataset.contentFo : element.dataset.contentEn
+      );
+    });
+
+    document.querySelectorAll(".product-card-trigger").forEach(trigger => {
+      const title = trigger.closest(".product-card")?.querySelector(".title")?.textContent.trim();
+      if(!title) return;
+      trigger.setAttribute(
+        "aria-label",
+        language === "fo" ? `Sí vørulýsing fyri ${title}` : `View specifications for ${title}`
+      );
+    });
 
     const translatedTitle = translationByMatch.get(document.title);
     if(translatedTitle) document.title = translatedTitle[language];
