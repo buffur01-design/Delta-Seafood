@@ -1914,6 +1914,7 @@
       const weightPattern = /\d[\d.,]*(?:\s*[-–]\s*\d[\d.,]*)?\+?\s*(?:gr|g|kg|kilo|oz)\+?/i;
       const standaloneWeightPattern = /^\s*[+-]?\d[\d.,]*(?:\s*[-–]\s*[+-]?\d[\d.,]*)?\+?\s*(?:gr|g|kg|kilo|oz)\+?\s*\.?\s*$/i;
       const tailPattern = /\b(?:tail|tails|halar|hala)\b/i;
+      const highlightedDetailPattern = /^(?:back\s*bone\s*in|við ryggbeini)$/i;
 
       container.querySelectorAll(".cod-section").forEach(section => {
         const heading = section.querySelector("h2")?.textContent || "";
@@ -1923,7 +1924,7 @@
           const text = row.textContent.trim();
           const isPackaging = Boolean(row.closest(".cod-packaging"));
 
-          if(!isPackaging && (weightPattern.test(text) || isOtherProducts)){
+          if(!isPackaging && (weightPattern.test(text) || isOtherProducts || highlightedDetailPattern.test(text))){
             row.classList.add("product-weight-row");
           }
         });
