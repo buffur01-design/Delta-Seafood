@@ -9,6 +9,7 @@ const pageTranslations = [
   { match: "Our markets", en: "Our markets", fo: "Marknaðir okkara" },
   { match: "Explore where we have sold our seafood", en: "Explore where we have sold our seafood", fo: "Kanna, hvar vit hava selt fiskavørur okkara" },
   { match: "Start with the continent markers, then zoom in to reveal individual countries. Select a country from the vertical list or choose a logo pin on the map.", en: "Start with the continent markers, then zoom in to reveal individual countries. Select a country from the vertical list or choose a logo pin on the map.", fo: "Byrja við merkjunum fyri heimspartar og zooma síðani inn fyri at síggja einstøk lond. Vel eitt land úr loddrætta listanum ella eitt búmerki á kortinum." },
+  { match: "Start with the continent markers, then zoom in and select a Delta Seafood logo pin to view each country.", en: "Start with the continent markers, then zoom in and select a Delta Seafood logo pin to view each country.", fo: "Byrja við merkjunum fyri heimspartar, zooma síðani inn og vel eitt Delta Seafood-búmerki fyri at síggja hvørt land." },
   { match: "Country list", en: "Country list", fo: "Landalisti" },
   { match: "Markets by country", en: "Markets by country", fo: "Marknaðir eftir landi" },
   { match: "Select a country to move the map directly to its Delta Seafood pin.", en: "Select a country to move the map directly to its Delta Seafood pin.", fo: "Vel eitt land fyri at flyta kortið beinleiðis til Delta Seafood-merkið." },

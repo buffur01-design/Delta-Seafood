@@ -45,9 +45,8 @@
   ];
 
   const mapElement = document.getElementById("marketMap");
-  const listElement = document.getElementById("marketCountryList");
   const levelElement = document.getElementById("marketMapLevel");
-  if(!mapElement || !listElement) return;
+  if(!mapElement) return;
 
   const language = document.documentElement.lang === "fo" ? "fo" : "en";
   const labels = language === "fo"
@@ -55,67 +54,18 @@
         country:"Marknaðarland",
         continents:"Vísir heimspartar — zooma inn fyri at síggja lond",
         countries:"Vísir lond — vel eitt Delta Seafood-búmerki",
-        unavailable:"Kortið kundi ikki lesast inn. Londini síggjast framvegis í listanum.",
-        open:"Vís"
+        unavailable:"Kortið kundi ikki lesast inn."
       }
     : {
         country:"Market country",
         continents:"Showing continents — zoom in to see countries",
         countries:"Showing countries — select a Delta Seafood pin",
-        unavailable:"The map could not load. The countries remain available in the list.",
-        open:"View"
+        unavailable:"The map could not load."
       };
 
   const logoUrl = encodeURI("Delta búmerki uttan tekst.png");
-  const countryButtons = new Map();
   let map = null;
   let countryMarkers = new Map();
-
-  function setActiveCountry(id){
-    countryButtons.forEach((button, buttonId) => {
-      button.classList.toggle("is-active", buttonId === id);
-      button.setAttribute("aria-pressed", String(buttonId === id));
-    });
-  }
-
-  function focusCountry(country){
-    if(!map) return;
-    setActiveCountry(country.id);
-    map.flyTo(country.coordinates, country.zoom, {duration:.8});
-    map.once("moveend", () => {
-      const marker = countryMarkers.get(country.id);
-      if(marker) marker.openPopup();
-    });
-  }
-
-  function buildCountryList(){
-    MARKET_COUNTRIES.forEach(country => {
-      const item = document.createElement("li");
-      const button = document.createElement("button");
-      const image = document.createElement("img");
-      const name = document.createElement("span");
-      const arrow = document.createElement("span");
-
-      button.type = "button";
-      button.className = "market-country-button";
-      button.setAttribute("aria-pressed", "false");
-      button.setAttribute("aria-label", `${labels.open} ${country.name[language]}`);
-      image.src = logoUrl;
-      image.alt = "";
-      name.textContent = country.name[language];
-      arrow.className = "country-arrow";
-      arrow.setAttribute("aria-hidden", "true");
-      arrow.textContent = "→";
-
-      button.append(image, name, arrow);
-      button.addEventListener("click", () => focusCountry(country));
-      item.appendChild(button);
-      listElement.appendChild(item);
-      countryButtons.set(country.id, button);
-    });
-  }
-
-  buildCountryList();
 
   if(typeof window.L === "undefined"){
     mapElement.classList.add("map-unavailable");
@@ -182,7 +132,6 @@
     });
     marker.bindTooltip(country.name[language], {direction:"top", offset:[0, -45]});
     marker.bindPopup(createPopup(country.name[language], labels.country));
-    marker.on("click", () => setActiveCountry(country.id));
     countryMarkers.set(country.id, marker);
   });
 
@@ -198,7 +147,6 @@
     } else {
       if(map.hasLayer(countryLayer)) map.removeLayer(countryLayer);
       if(!map.hasLayer(continentLayer)) continentLayer.addTo(map);
-      setActiveCountry(null);
     }
     if(levelElement) levelElement.textContent = showCountries ? labels.countries : labels.continents;
   }
