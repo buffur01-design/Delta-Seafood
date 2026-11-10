@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Explore Delta Seafood products and handling for international seafood markets.">
   <title>Markets - Delta Seafood</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
 
   <style>
     *{
@@ -563,7 +564,8 @@
 
   <link rel="stylesheet" href="language-switch.css">
   <link rel="stylesheet" href="footer.css?v=15">
-  <link rel="stylesheet" href="mobile.css?v=10">
+  <link rel="stylesheet" href="mobile.css?v=11">
+  <link rel="stylesheet" href="markets-page.css?v=1">
 </head>
 
 <body>
@@ -594,20 +596,49 @@
     </div>
   </nav>
 
-  <legend class="markets-hero" aria-label="Markets hero section" data-aria-label-en="Markets hero section" data-aria-label-fo="Marknaðir hero partur">
-    <div class="hero-copy">
-      <p class="eyebrow">Markets</p>
-      <h1>Delta Seafood products and handling for international seafood markets</h1>
-      <p>We are proud to supply our products to a wide range of international seafood markets, ensuring that our high-quality seafood reaches customers around the world.</p>
-      <div class="hero-actions">
-        <a href="#product-formats" class="button button-primary">Explore product formats</a>
+  <main id="main-content">
+    <section class="markets-hero" aria-labelledby="markets-title">
+      <div class="hero-copy">
+        <p class="eyebrow">Markets</p>
+        <h1 id="markets-title">Delta Seafood products and handling for international seafood markets</h1>
+        <p>We are proud to supply our products to a wide range of international seafood markets, ensuring that our high-quality seafood reaches customers around the world.</p>
+        <div class="hero-actions">
+          <a href="#market-map" class="button button-primary">Explore our markets</a>
+        </div>
       </div>
-    </div>
+    </section>
 
-    <div class="hero-image">
-      <img src="" alt="Seafood market scene">
-    </div>
+    <section class="market-map-section" id="market-map" aria-labelledby="market-map-heading">
+      <div class="market-map-shell">
+        <header class="market-map-heading">
+          <p class="eyebrow">Our markets</p>
+          <h2 id="market-map-heading">Explore where we have sold our seafood</h2>
+          <p>Start with the continent markers, then zoom in to reveal individual countries. Select a country from the vertical list or choose a logo pin on the map.</p>
+        </header>
 
+        <div class="market-explorer">
+          <aside class="market-country-panel" aria-labelledby="country-list-heading">
+            <span class="panel-kicker">Country list</span>
+            <h3 id="country-list-heading">Markets by country</h3>
+            <p>Select a country to move the map directly to its Delta Seafood pin.</p>
+            <ul class="market-country-list" id="marketCountryList"></ul>
+            <noscript>
+              <ul class="market-country-list">
+                <li>Spain</li>
+                <li>Italy</li>
+                <li>USA</li>
+              </ul>
+            </noscript>
+          </aside>
+
+          <div class="market-map-wrap">
+            <div id="marketMap" role="region" aria-label="Interactive map of Delta Seafood markets" data-aria-label-en="Interactive map of Delta Seafood markets" data-aria-label-fo="Virkið kort yvir marknaðir hjá Delta Seafood"></div>
+            <p class="map-level-note" id="marketMapLevel" aria-live="polite">Showing continents — zoom in to see countries</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
 
   <footer>
     <div class="footer-wrapper">
@@ -661,8 +692,10 @@
     <div class="footer-note">Delta Seafood © 2026. All rights reserved.</div>
   </footer>
 
-  <script src="page-translations.js?v=12"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+  <script src="page-translations.js?v=13"></script>
   <script src="language-switch.js?v=5"></script>
   <script src="mobile-nav.js?v=3"></script>
+  <script src="markets-map.js?v=1"></script>
 </body>
 </html>
