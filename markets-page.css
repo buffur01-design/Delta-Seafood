@@ -132,6 +132,7 @@
 }
 
 .delta-pin-badge{
+  position:relative;
   display:flex;
   align-items:center;
   justify-content:center;
@@ -144,8 +145,15 @@
 }
 
 .delta-pin-badge::after{
-  display:none;
-  content:none;
+  content:"";
+  position:absolute;
+  bottom:-8px;
+  left:50%;
+  display:block;
+  border-top:9px solid #18384a;
+  border-right:6px solid transparent;
+  border-left:6px solid transparent;
+  transform:translateX(-50%);
 }
 
 .delta-pin-badge img{
