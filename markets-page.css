@@ -132,28 +132,20 @@
 }
 
 .delta-pin-badge{
-  position:relative;
   display:flex;
   align-items:center;
   justify-content:center;
-  width:58px;
-  height:42px;
-  padding:6px;
-  border:2px solid #176647;
-  border-radius:14px;
-  background:#fff;
-  box-shadow:0 8px 22px rgba(17,53,71,.28);
+  width:72px;
+  height:44px;
+  padding:0;
+  border:0;
+  background:transparent;
+  filter:drop-shadow(0 4px 4px rgba(17,53,71,.35));
 }
 
 .delta-pin-badge::after{
-  content:"";
-  position:absolute;
-  bottom:-9px;
-  left:50%;
-  border-top:10px solid #176647;
-  border-right:7px solid transparent;
-  border-left:7px solid transparent;
-  transform:translateX(-50%);
+  display:none;
+  content:none;
 }
 
 .delta-pin-badge img{
@@ -164,13 +156,8 @@
 }
 
 .delta-pin-badge.is-continent{
-  width:72px;
-  height:50px;
-  border-color:#18384a;
-}
-
-.delta-pin-badge.is-continent::after{
-  border-top-color:#18384a;
+  width:90px;
+  height:56px;
 }
 
 .market-map-wrap .leaflet-popup-content-wrapper{

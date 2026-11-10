@@ -76,13 +76,13 @@
 
   function createLogoIcon(isContinent){
     const badgeClass = isContinent ? "delta-pin-badge is-continent" : "delta-pin-badge";
-    const size = isContinent ? [72, 60] : [58, 52];
+    const size = isContinent ? [90, 56] : [72, 44];
     return L.divIcon({
       className:"delta-map-icon",
       html:`<span class="${badgeClass}"><img src="${logoUrl}" alt=""></span>`,
       iconSize:size,
-      iconAnchor:[size[0] / 2, size[1]],
-      popupAnchor:[0, -size[1] + 8]
+      iconAnchor:[size[0] / 2, size[1] / 2],
+      popupAnchor:[0, -(size[1] / 2)]
     });
   }
 
