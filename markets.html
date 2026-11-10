@@ -720,11 +720,6 @@
         padding:30px;
       }
 
-      .market-country-list{
-        display:grid;
-        grid-template-columns:repeat(3, minmax(0, 1fr));
-      }
-
       .market-map-wrap,
       #marketMap{
         min-height:540px;
@@ -732,6 +727,11 @@
     }
 
     @media(max-width:620px){
+      body main#main-content{
+        padding-right:0 !important;
+        padding-left:0 !important;
+      }
+
       .hero-copy{
         padding:72px 24px;
       }
@@ -802,7 +802,7 @@
       }
 
       .market-map-section{
-        padding:76px 0;
+        padding:76px 20px;
       }
 
       .market-map-heading{
@@ -810,8 +810,13 @@
       }
 
       .market-map-heading h2{
-        font-size:40px;
+        font-size:clamp(34px, 10vw, 40px);
+        overflow-wrap:anywhere;
         text-wrap:wrap;
+      }
+
+      .market-map-heading > p:not(.eyebrow){
+        overflow-wrap:anywhere;
       }
 
       .market-explorer{

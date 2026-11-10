@@ -161,7 +161,7 @@
   const continentMarkers = MARKET_CONTINENTS.map(continent => {
     const count = MARKET_COUNTRIES.filter(country => country.continent === continent.id).length;
     const detail = language === "fo"
-      ? `${count} marknaðarland${count === 1 ? "" : ""}`
+      ? (count === 1 ? "1 marknaðarland" : `${count} marknaðarlond`)
       : `${count} market ${count === 1 ? "country" : "countries"}`;
     const marker = L.marker(continent.coordinates, {
       icon:createLogoIcon(true),
