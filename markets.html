@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Explore Delta Seafood products and handling for international seafood markets.">
   <title>Markets - Delta Seafood</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
 
   <style>
     *{
@@ -441,241 +440,6 @@
       line-height:1.65;
     }
 
-    .market-map-section{
-      padding:110px 24px;
-      background:#edf6fa;
-    }
-
-    .market-map-shell{
-      width:min(1280px, 100%);
-      margin:0 auto;
-    }
-
-    .market-map-heading{
-      max-width:780px;
-      margin:0 0 46px;
-    }
-
-    .market-map-heading h2{
-      margin:0;
-      color:#18384a;
-      font-size:clamp(42px, 4.8vw, 72px);
-      line-height:1.02;
-      letter-spacing:-.04em;
-      text-wrap:balance;
-    }
-
-    .market-map-heading > p:not(.eyebrow){
-      max-width:720px;
-      margin:24px 0 0;
-      color:#527183;
-      font-size:19px;
-      line-height:1.7;
-    }
-
-    .market-explorer{
-      display:grid;
-      grid-template-columns:300px minmax(0, 1fr);
-      min-height:620px;
-      overflow:hidden;
-      border:1px solid #c7dce6;
-      border-radius:26px;
-      background:#fff;
-      box-shadow:0 24px 70px rgba(25,70,92,.12);
-    }
-
-    .market-country-panel{
-      position:relative;
-      z-index:2;
-      display:flex;
-      flex-direction:column;
-      padding:38px 28px;
-      color:#fff;
-      background:#18384a;
-    }
-
-    .market-country-panel .panel-kicker{
-      color:#9ed6bd;
-      font-size:13px;
-      font-weight:800;
-      letter-spacing:.17em;
-      text-transform:uppercase;
-    }
-
-    .market-country-panel h3{
-      margin:13px 0 12px;
-      font-size:29px;
-      line-height:1.1;
-    }
-
-    .market-country-panel > p{
-      margin:0 0 26px;
-      color:#cfe0e8;
-      font-size:15px;
-      line-height:1.6;
-    }
-
-    .market-country-list{
-      display:flex;
-      flex-direction:column;
-      gap:10px;
-      margin:0;
-      padding:0;
-      list-style:none;
-    }
-
-    .market-country-button{
-      display:grid;
-      grid-template-columns:48px minmax(0, 1fr) auto;
-      gap:12px;
-      align-items:center;
-      width:100%;
-      min-height:62px;
-      padding:9px 11px;
-      border:1px solid rgba(255,255,255,.18);
-      border-radius:13px;
-      color:#fff;
-      background:rgba(255,255,255,.06);
-      font:700 16px Arial, sans-serif;
-      text-align:left;
-      cursor:pointer;
-      transition:background .2s ease, border-color .2s ease, transform .2s ease;
-    }
-
-    .market-country-button:hover,
-    .market-country-button:focus-visible,
-    .market-country-button.is-active{
-      border-color:#9ed6bd;
-      background:rgba(158,214,189,.15);
-      transform:translateX(3px);
-      outline:none;
-    }
-
-    .market-country-button img{
-      width:46px;
-      height:34px;
-      padding:5px;
-      border-radius:8px;
-      background:#fff;
-      object-fit:contain;
-    }
-
-    .market-country-button .country-arrow{
-      color:#9ed6bd;
-      font-size:23px;
-      line-height:1;
-    }
-
-    .market-map-wrap{
-      position:relative;
-      min-width:0;
-      min-height:620px;
-      background:#dcecf2;
-    }
-
-    #marketMap{
-      width:100%;
-      height:100%;
-      min-height:620px;
-    }
-
-    .map-level-note{
-      position:absolute;
-      top:16px;
-      left:50%;
-      z-index:500;
-      margin:0;
-      padding:9px 14px;
-      border:1px solid rgba(24,56,74,.12);
-      border-radius:999px;
-      color:#18384a;
-      background:rgba(255,255,255,.94);
-      box-shadow:0 8px 24px rgba(24,56,74,.13);
-      font-size:13px;
-      font-weight:800;
-      white-space:nowrap;
-      transform:translateX(-50%);
-      pointer-events:none;
-    }
-
-    .map-unavailable{
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      padding:35px;
-      color:#456679;
-      font-size:17px;
-      text-align:center;
-    }
-
-    .delta-map-icon{
-      border:0;
-      background:transparent;
-    }
-
-    .delta-pin-badge{
-      position:relative;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      width:58px;
-      height:42px;
-      padding:6px;
-      border:2px solid #176647;
-      border-radius:14px;
-      background:#fff;
-      box-shadow:0 8px 22px rgba(17,53,71,.28);
-    }
-
-    .delta-pin-badge::after{
-      content:"";
-      position:absolute;
-      bottom:-9px;
-      left:50%;
-      border-top:10px solid #176647;
-      border-right:7px solid transparent;
-      border-left:7px solid transparent;
-      transform:translateX(-50%);
-    }
-
-    .delta-pin-badge img{
-      display:block;
-      width:100%;
-      height:100%;
-      object-fit:contain;
-    }
-
-    .delta-pin-badge.is-continent{
-      width:72px;
-      height:50px;
-      border-color:#18384a;
-    }
-
-    .delta-pin-badge.is-continent::after{
-      border-top-color:#18384a;
-    }
-
-    .market-map-wrap .leaflet-popup-content-wrapper{
-      border-radius:12px;
-      color:#18384a;
-      box-shadow:0 14px 36px rgba(24,56,74,.22);
-    }
-
-    .market-map-wrap .leaflet-popup-content{
-      margin:16px 18px;
-      font:15px/1.5 Arial, sans-serif;
-    }
-
-    .market-map-wrap .leaflet-popup-content strong{
-      display:block;
-      margin-bottom:3px;
-      font-size:17px;
-    }
-
-    .market-map-wrap .leaflet-control-attribution{
-      font-size:10px;
-    }
-
     @media(max-width:1050px){
       .markets-hero{
         grid-template-columns:1fr;
@@ -711,27 +475,9 @@
         min-height:280px;
         border-radius:24px;
       }
-
-      .market-explorer{
-        grid-template-columns:1fr;
-      }
-
-      .market-country-panel{
-        padding:30px;
-      }
-
-      .market-map-wrap,
-      #marketMap{
-        min-height:540px;
-      }
     }
 
     @media(max-width:620px){
-      body main#main-content{
-        padding-right:0 !important;
-        padding-left:0 !important;
-      }
-
       .hero-copy{
         padding:72px 24px;
       }
@@ -800,48 +546,6 @@
         padding:48px 24px;
         border-radius:20px;
       }
-
-      .market-map-section{
-        padding:76px 20px;
-      }
-
-      .market-map-heading{
-        margin-bottom:30px;
-      }
-
-      .market-map-heading h2{
-        font-size:clamp(34px, 10vw, 40px);
-        overflow-wrap:anywhere;
-        text-wrap:wrap;
-      }
-
-      .market-map-heading > p:not(.eyebrow){
-        overflow-wrap:anywhere;
-      }
-
-      .market-explorer{
-        border-radius:18px;
-      }
-
-      .market-country-panel{
-        padding:28px 20px;
-      }
-
-      .market-country-list{
-        display:flex;
-      }
-
-      .market-map-wrap,
-      #marketMap{
-        min-height:480px;
-      }
-
-      .map-level-note{
-        top:12px;
-        max-width:calc(100% - 110px);
-        overflow:hidden;
-        text-overflow:ellipsis;
-      }
     }
 
     @media(prefers-reduced-motion:reduce){
@@ -859,7 +563,7 @@
 
   <link rel="stylesheet" href="language-switch.css">
   <link rel="stylesheet" href="footer.css?v=15">
-  <link rel="stylesheet" href="mobile.css?v=11">
+  <link rel="stylesheet" href="mobile.css?v=10">
 </head>
 
 <body>
@@ -890,54 +594,20 @@
     </div>
   </nav>
 
-  <main id="main-content">
-    <section class="markets-hero" aria-labelledby="markets-title">
-      <div class="hero-copy">
-        <p class="eyebrow">Markets</p>
-        <h1 id="markets-title">Delta Seafood products and handling for international seafood markets</h1>
-        <p>We are proud to supply our products to a wide range of international seafood markets, ensuring that our high-quality seafood reaches customers around the world.</p>
-        <div class="hero-actions">
-          <a href="#market-map" class="button button-primary">Explore our markets</a>
-          <a href="contact.html#sales-team" class="button button-secondary">Contact sales</a>
-        </div>
+  <legend class="markets-hero" aria-label="Markets hero section" data-aria-label-en="Markets hero section" data-aria-label-fo="Marknaðir hero partur">
+    <div class="hero-copy">
+      <p class="eyebrow">Markets</p>
+      <h1>Delta Seafood products and handling for international seafood markets</h1>
+      <p>We are proud to supply our products to a wide range of international seafood markets, ensuring that our high-quality seafood reaches customers around the world.</p>
+      <div class="hero-actions">
+        <a href="#product-formats" class="button button-primary">Explore product formats</a>
       </div>
+    </div>
 
-      <div class="hero-image">
-        <img src="Delta bygningur við skipi.jpg" alt="Delta Seafood facility and vessel">
-      </div>
-    </section>
+    <div class="hero-image">
+      <img src="" alt="Seafood market scene">
+    </div>
 
-    <section class="market-map-section" id="market-map" aria-labelledby="market-map-heading">
-      <div class="market-map-shell">
-        <header class="market-map-heading">
-          <p class="eyebrow">Our markets</p>
-          <h2 id="market-map-heading">Explore where we have sold our seafood</h2>
-          <p>Start with the continent markers, then zoom in to reveal individual countries. Select a country from the vertical list or choose a logo pin on the map.</p>
-        </header>
-
-        <div class="market-explorer">
-          <aside class="market-country-panel" aria-labelledby="country-list-heading">
-            <span class="panel-kicker">Country list</span>
-            <h3 id="country-list-heading">Markets by country</h3>
-            <p>Select a country to move the map directly to its Delta Seafood pin.</p>
-            <ul class="market-country-list" id="marketCountryList"></ul>
-            <noscript>
-              <ul class="market-country-list">
-                <li>Spain</li>
-                <li>Italy</li>
-                <li>USA</li>
-              </ul>
-            </noscript>
-          </aside>
-
-          <div class="market-map-wrap">
-            <div id="marketMap" role="application" aria-label="Interactive map of Delta Seafood markets" data-aria-label-en="Interactive map of Delta Seafood markets" data-aria-label-fo="Virkið kort yvir marknaðir hjá Delta Seafood"></div>
-            <p class="map-level-note" id="marketMapLevel" aria-live="polite">Showing continents — zoom in to see countries</p>
-          </div>
-        </div>
-      </div>
-    </section>
-  </main>
 
   <footer>
     <div class="footer-wrapper">
@@ -991,10 +661,8 @@
     <div class="footer-note">Delta Seafood © 2026. All rights reserved.</div>
   </footer>
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
-  <script src="page-translations.js?v=13"></script>
+  <script src="page-translations.js?v=12"></script>
   <script src="language-switch.js?v=5"></script>
   <script src="mobile-nav.js?v=3"></script>
-  <script src="markets-map.js?v=1"></script>
 </body>
 </html>
