@@ -94,7 +94,7 @@ const pageTranslations = [
   { match: "Send an inquiry", en: "Send an inquiry", fo: "Send fyrispurning" },
   { match: "View certifications", en: "View certifications", fo: "Sí góðkenningar" },
   { match: "Browse by species", en: "Browse by species", fo: "Kanna eftir fiskaslagi" },
-  { match: "Filter the catalogue by processing format.", en: "Filter the catalogue by processing format.", fo: "Síla vøruskránna eftir framleiðsluhátti." },
+  { match: "Filter the catalogue by processing format.", en: "Filter the catalogue by processing format.", fo: "Vøruskrá eftir framleiðsluhátti." },
   { match: "All products", en: "All products", fo: "Allar vørur" },
   { match: "Salted", en: "Salted", fo: "Saltað" },
   { match: "Frozen", en: "Frozen", fo: "Fryst" },
